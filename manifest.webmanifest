@@ -73,5 +73,11 @@
         }
       ]
     }
-  ]
+  ],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "lang": "en",
+  "dir": "ltr"
 }

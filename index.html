@@ -1089,7 +1089,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 .vm-body small{display:block;margin-top:8px;font-size:12px;color:var(--faint)}
 .vm-row{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:11px 0;border-bottom:1px solid var(--line);text-align:left;font-size:14px;font-weight:600;color:inherit}
 .vm-btns{display:flex;flex-direction:column;gap:8px}.vm-btns .btn{width:100%;height:46px;border-radius:14px}
-.btn.danger{color:var(--danger)}
+.btn.danger{background:var(--danger);color:var(--danger-ink);font-weight:800}
 .tour{position:fixed;inset:0;z-index:60;visibility:hidden;opacity:0;transition:opacity .2s ease,visibility 0s linear .2s}
 .tour.open{visibility:visible;opacity:1;transition:opacity .2s ease}
 .tour-hole{position:absolute;border-radius:16px;box-shadow:0 0 0 100vmax rgba(0,0,0,.68),0 0 0 2px var(--accent),0 0 24px var(--accent-glow);transition:left .25s ease,top .25s ease,width .25s ease,height .25s ease}
@@ -1099,11 +1099,51 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 .tour-tip b{font-size:16px;font-weight:800;letter-spacing:-.02em}.tour-tip p{margin:6px 0 12px;font-size:13.5px;line-height:1.5;color:var(--muted)}
 .tour-btns{display:flex;justify-content:space-between;align-items:center}.tour-btns .btn{height:40px;padding:0 20px;border-radius:13px}
 @media(prefers-reduced-motion:reduce){.tour-arrow{animation:none}.tour-hole{transition:none}}
+
+.bk-card{border:1px solid var(--accent-line,rgba(190,140,230,.3));border-radius:18px;padding:14px;margin:6px 0 10px;background:linear-gradient(160deg,rgba(190,120,220,.12),rgba(230,120,160,.05))}
+.bk-top{display:flex;gap:12px;align-items:flex-start}.bk-top b{display:block;font-size:15px}.bk-top small{color:var(--faint);font-size:12px;line-height:1.5}
+.bk-ico{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#e08fc4,#a98be8);color:#1a0b22}
+.bk-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 8px;text-align:center}.bk-stats b{display:block;font-size:20px}.bk-stats small{font-size:11px;color:var(--faint)}
+.bk-meta{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--faint)}
+.bk-bar{height:4px;border-radius:4px;background:rgba(127,127,127,.2);margin:10px 0 6px;overflow:hidden}.bk-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e08fc4,#a98be8);transition:width .25s}
+#exportBtn{width:100%}.qa{padding:0 2px}.bk-status{min-height:16px;font-size:12px;margin:0 0 8px}.bk-status.err{color:var(--danger)}
+
+/* ===== v0.6 essential ===== */
+.mascot{width:54px;height:54px;flex:none;border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transform-origin:50% 90%}
+.mascot svg{width:100%;height:100%;overflow:visible}.mascot .eyes{transform-box:fill-box;transform-origin:50% 50%;animation:mBlink 5.5s infinite}
+.mascot.pop{animation:mPop .7s cubic-bezier(.2,1.4,.4,1)}.mascot.hop{animation:mHop .5s ease}
+@keyframes mBlink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes mPop{0%{transform:scale(.4) rotate(-12deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes mHop{30%{transform:translateY(-8px) scale(.95,1.06)}60%{transform:scale(1.06,.92)}}
+.ptr-ring{transform:rotate(calc(var(--p,0)*200deg)) scale(calc(.6 + .4*var(--p,0)))}
+.ptr-ring:before{content:"";position:absolute;inset:-4px;border-radius:46% 54% 52% 48%/52% 46% 54% 48%;background:radial-gradient(circle,rgba(224,143,196,.4),transparent 70%);opacity:var(--p,0)}
+.ptr[data-state=loading] .ptr-ring:before{animation:ptrBlob 1.6s ease-in-out infinite}.ptr[data-state=done] .ptr-ring{animation:mHop .45s ease}
+@keyframes ptrBlob{50%{border-radius:54% 46% 48% 52%/46% 54% 46% 54%;transform:scale(1.15)}}
+.pref-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 2px;font-size:13px;flex-wrap:wrap}
+.seg-mini{display:flex;gap:4px;padding:3px;border-radius:12px;background:rgba(127,127,127,.14)}.seg-mini button{border:0;background:none;color:inherit;font:inherit;font-size:12px;font-weight:700;padding:6px 10px;border-radius:9px}
+.seg-mini button.on{background:linear-gradient(135deg,#e08fc4,#a98be8);color:#1a0b22}
+#selNotesBtn,#selDelBtn{margin-left:auto;margin-right:8px}
+#msBar{position:fixed;z-index:39;left:50%;bottom:calc(var(--safe-b,0px) + 14px);width:min(calc(100% - 24px),420px);transform:translate3d(-50%,160%,0);transition:transform .28s cubic-bezier(.2,.9,.3,1);background:var(--sheet);border:1px solid var(--line-strong);border-radius:20px;padding:10px 12px;box-shadow:0 14px 40px -12px rgba(0,0,0,.6)}
+#msBar.open{transform:translate3d(-50%,0,0)}body.ms-on .bottom-nav{visibility:hidden}
+.ms-top{display:flex;align-items:center;gap:6px;margin-bottom:8px}.ms-top b{flex:1;font-size:13.5px}
+.ms-acts{display:flex;gap:8px}.ms-act{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;height:42px;border-radius:13px;border:1px solid var(--line-strong);background:none;color:inherit;font:inherit;font-weight:700;font-size:13px}
+.ms-act .ic{width:17px;height:17px}.ms-act.danger{background:var(--danger);color:var(--danger-ink);border-color:transparent;font-weight:800}.ms-act:disabled{opacity:.4}
+body.ms-on #notesGrid [data-note],body.ms-on #deletedList [data-deleted]{position:relative}
+body.ms-on #notesGrid [data-note]:after,body.ms-on #deletedList [data-deleted]:after{content:"";position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:2px solid var(--line-strong);transition:all .18s}
+body.ms-on .sel{outline:2px solid #c48be0;outline-offset:-2px}
+body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 12.5 4 4 8-9' fill='none' stroke='%231a0b22' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat!important;border-color:transparent!important;transform:scale(1.08)}
+.wn{position:fixed;inset:0;z-index:52;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.72);opacity:0;visibility:hidden;transition:opacity .25s}.wn.open{opacity:1;visibility:visible}
+.wn-card{position:relative;width:min(100%,400px);max-height:92vh;overflow:auto;border-radius:26px;padding:24px 20px 18px;background:var(--sheet);border:1px solid var(--line-strong);text-align:center}
+.wn-logo{border-radius:18px;animation:mPop .6s cubic-bezier(.2,1.4,.4,1)}.wn-k{display:block;margin:10px 0 2px;letter-spacing:.2em;color:#c48be0;font-weight:800;font-size:11px}.wn-card h2{margin:0 0 14px;font-size:21px}
+.wn ul{list-style:none;margin:0 0 16px;padding:0;text-align:left}.wn li{display:flex;gap:12px;padding:9px 0;font-size:12.5px;line-height:1.45;color:var(--faint);opacity:0;animation:wnIn .5s calc(.25s + var(--i)*.12s) forwards}
+.wn li b{display:block;color:inherit;filter:none;font-size:14px;color:var(--text,inherit)}.wn li .ic{flex:none;width:34px;height:34px;padding:8px;border-radius:11px;background:linear-gradient(135deg,#e08fc4,#a98be8);color:#1a0b22}
+.wn .btn{width:100%}.wn-mark{display:block;margin-top:10px;font-size:10px;letter-spacing:.4em;opacity:.35}
+@keyframes wnIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><path d="M6.5 3.5h7.6L18.5 8v11.5a1.5 1.5 0 0 1-1.5 1.5H6.5A1.5 1.5 0 0 1 5 19.5v-14A1.5 1.5 0 0 1 6.5 3.5zM14 3.7V8.5h4.4M8.5 12.5h7M8.5 16h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M11.3 2.9a1.1 1.1 0 0 1 1.4 0l8 6.9c.2.2.3.5.3.8V19a2.2 2.2 0 0 1-2.2 2.2h-4.3v-5.5c0-.6-.5-1-1-1h-3c-.6 0-1 .4-1 1v5.5H5.2A2.2 2.2 0 0 1 3 19v-8.4c0-.3.1-.6.3-.8z"/></symbol>
 <symbol id="i-library" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.5 2.5h9a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-13a3 3 0 0 1 3-3zM8.4 7.4a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 11.2a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 15a.85.85 0 0 0 0 1.7h4.2a.85.85 0 0 0 0-1.7z"/></symbol>
 <symbol id="i-note" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.5 2.5h9a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-13a3 3 0 0 1 3-3zM8.4 7.4a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 11.2a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 15a.85.85 0 0 0 0 1.7h4.2a.85.85 0 0 0 0-1.7z"/></symbol>
@@ -1157,7 +1197,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 
     <div class="hero">
       <div class="hero-greeting">
-        <span class="wave-wrap"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
+        <button type="button" class="mascot" id="mascot" aria-label="Voidy, the VOID character"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3b9dc"/><stop offset="1" stop-color="#b69af2"/></linearGradient></defs><path d="M14 8h26l12 12v34a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="url(#mg)"/><path d="M40 8v9a3 3 0 0 0 3 3h9z" fill="#8f73d6"/><g class="eyes" fill="#2a1240"><ellipse cx="24" cy="34" rx="3.2" ry="4"/><ellipse cx="38" cy="34" rx="3.2" ry="4"/></g><circle cx="19" cy="42" r="3" fill="#e2569680"/><circle cx="43" cy="42" r="3" fill="#e2569680"/><path class="mouth" d="M27 43q4 4 8 0" fill="none" stroke="#2a1240" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         <div class="greeting-text">
           <span class="kicker" id="homeGreeting">GOOD MORNING</span>
           <strong id="homeName">Welcome back.</strong>
@@ -1191,9 +1231,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 
     <div class="qa" id="qaRow">
       <button type="button" class="qa-btn" id="qcBtn"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg>Quick capture</button>
-      <button type="button" class="qa-btn" id="dailyBtn"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg>Today</button>
     </div>
-    <div class="recent-wrap" id="remWrap" hidden><div class="recent-head"><h2>Reminders</h2></div><div id="remList"></div></div>
     <div class="recent-wrap" id="pinWrap" hidden><div class="recent-head"><h2>Quick access</h2></div><div class="qchips" id="pinList"></div></div>
     <div class="recent-wrap" id="recentWrap" hidden>
       <div class="recent-head">
@@ -1208,7 +1246,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
   <section class="screen" id="notesScreen" aria-hidden="true">
     <div class="screen-head">
       <button class="back" data-close="notesScreen" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg></button>
-      <strong>Notes</strong>
+      <strong>Notes</strong><button type="button" class="text-btn" id="selNotesBtn">Select</button>
       <div class="hsearch" id="hsearch" role="search">
         <label class="search">
           <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
@@ -1283,26 +1321,28 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
         <button class="theme-opt" data-theme-pick="light" role="radio" aria-checked="false"><span class="tsw"><i></i></span><span class="tname">Light</span><svg class="ic tck" aria-hidden="true"><use href="#i-check"/></svg></button>
       </div>
 
-      <h3 class="group">Privacy &amp; help</h3>
-      <button class="list-row" id="privacyBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="row-body"><b>Privacy</b><small>How VOID treats your notes</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <button class="list-row" id="introBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span><span class="row-body"><b>Introduction</b><small>Replay the welcome tour</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <h3 class="group">Notes preferences</h3>
+      <div class="pref-row"><span>Sort notes by</span><div class="seg-mini" id="prefSort"><button type="button" data-sort="updated">Edited</button><button type="button" data-sort="created">Created</button><button type="button" data-sort="alpha">A–Z</button></div></div>
+      <div class="pref-row"><span>New note category</span><div class="seg-mini" id="prefCat"><button type="button" data-dc="">None</button><button type="button" data-dc="personal">Personal</button><button type="button" data-dc="ideas">Ideas</button><button type="button" data-dc="work">Projects</button></div></div>
 
-      <button class="list-row" id="installBtn" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Install VOID</b><small id="installSub">Add VOID to your home screen</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <h3 class="group">Storage &amp; Local Backup</h3>
+      <div class="bk-card" id="bkCard">
+        <div class="bk-top"><span class="bk-ico"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><div><b>Local backup</b><small>A file saved on this device. VOID never uploads your notes, and this is not a cloud backup.</small></div></div>
+        <div class="bk-stats"><div><b id="bkNotes">0</b><small>Notes</small></div><div><b id="bkFolders">0</b><small>Folders</small></div><div><b id="bkDeleted">0</b><small>Deleted</small></div></div>
+        <div class="bk-meta"><span id="bkUsage">Estimating…</span><span id="bkLast">Not exported yet</span></div>
+        <div class="bk-bar" aria-hidden="true"><i id="bkFill"></i></div>
+        <p class="bk-status" id="bkStatus" role="status"></p>
+        <button class="btn primary" id="exportBtn" type="button">Export backup</button>
+      </div>
+            <button class="list-row" id="settingsDeletedBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></span><span class="row-body"><b>Recently deleted</b><small>Restore or remove for good</small></span></button>
 
-      <h3 class="group">Help &amp; tools</h3>
-      <button class="list-row" id="helpBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>Tutorials</b><small id="helpBtnSub">Replay any feature guide</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <button class="list-row" id="notifBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></span><span class="row-body"><b>Reminder notifications</b><small id="notifBtnSub">Checking…</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <button class="list-row" id="dailyOpt"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span><span class="row-body"><b>Daily notes</b><small id="dailyOptSub">On</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <h3 class="group">Privacy</h3>
+            <button class="list-row" id="privacyBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="row-body"><b>Privacy</b><small>How VOID treats your notes</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+            <button class="list-row" id="installBtn" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Install VOID</b><small id="installSub">Add VOID to your home screen</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
 
-      <h3 class="group">Backup &amp; Restore</h3>
-      <button class="list-row" id="exportBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Export backup</b><small>Save your notes as a file</small></span></button>
-      <button class="list-row" id="importBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-upload"/></svg></span><span class="row-body"><b>Import backup</b><small>Bring notes back from a file</small></span></button>
-      <input type="file" id="importFile" accept="application/json" hidden>
-      <button class="list-row" id="settingsDeletedBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></span><span class="row-body"><b>Recently deleted</b><small>Restore or remove for good</small></span></button>
-
-      <h3 class="group">About</h3>
-      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.6</b><small>A calm place to write</small></span></div>
-      <p style="font-size:12px;color:var(--faint);line-height:1.6;margin-top:14px">Notes stay on this device. Export a backup every now and then.</p>
+      <h3 class="group">About VOID</h3>
+      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.6</b><small>The Essential Experience</small></span></button>
+      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.6</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
     </div>
   </section>
 
@@ -1336,7 +1376,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
   <section class="screen" id="deletedScreen" aria-hidden="true">
     <div class="screen-head">
       <button class="back" data-close="deletedScreen" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg></button>
-      <strong>Recently deleted</strong>
+      <strong>Recently deleted</strong><button type="button" class="text-btn" id="selDelBtn">Select</button>
     </div>
     <div class="screen-content">
       <h1 class="page-title">Recently deleted</h1>
@@ -1356,7 +1396,6 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
       <div class="head-right">
         <span id="saveState" data-state="editing">EDITING</span>
         <button class="icon-btn" id="focusBtn" aria-label="Focus mode"><svg class="ic" aria-hidden="true"><use href="#i-focus"/></svg></button>
-        <button class="icon-btn" id="remindBtn" aria-label="Reminder"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
         <button class="icon-btn" id="organizeBtn" aria-label="Category, folder and tags" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg></button>
         <button class="icon-btn on" id="formatToggle" aria-label="Formatting toolbar" aria-pressed="true">Aa</button>
         <button class="icon-btn danger" id="deleteNote" aria-label="Delete note" hidden><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>
@@ -1456,6 +1495,14 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
   </div>
 
   <!-- ============ PULL TO REFRESH ============ -->
+  <div class="wn" id="wn" role="dialog" aria-modal="true" aria-labelledby="wnT" aria-hidden="true"><div class="wn-card">
+  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID 0.6</small><h2 id="wnT">The Essential Experience</h2>
+  <ul><li style="--i:0"><svg class="ic"><use href="#i-download"/></svg><span><b>Local backup</b>Export a verified JSON file. Nothing leaves your device.</span></li>
+  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Select multiple notes</b>Delete, recover or remove for good in one go.</span></li>
+  <li style="--i:2"><svg class="ic"><use href="#i-logo"/></svg><span><b>New icon and Voidy</b>A notepad identity and a friendly face on Home.</span></li>
+  <li style="--i:3"><svg class="ic"><use href="#i-spark"/></svg><span><b>Lighter by design</b>Reminders, Daily notes and Import are gone. Faster, calmer, readable delete labels.</span></li></ul>
+  <button type="button" class="btn primary" id="wnGo">Continue</button><span class="wn-mark">VOID</span></div></div>
+
   <div class="ptr" id="ptr" data-state="pull" aria-hidden="true">
     <div class="ptr-pill">
       <span class="ptr-ring">
@@ -1480,14 +1527,14 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
   </div>
 
   <div class="install-card" id="installCard" role="dialog" aria-label="Install VOID" hidden>
-    <img src="data:image/png;base64,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" alt="" width="46" height="46">
+    <img src="icon-192.png" alt="" width="46" height="46">
     <div class="ic-body"><b>Take VOID with you.</b><span>Install it to your device's app launcher and open it like any app.</span></div>
     <button type="button" class="ic-x" id="installDismiss" aria-label="Dismiss"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
     <button type="button" class="btn primary ic-go" id="installGo">Install VOID</button>
   </div>
   <div class="guide" id="installGuide" role="dialog" aria-modal="true" aria-labelledby="guideTitle" aria-hidden="true">
     <div class="guide-card">
-      <img src="data:image/png;base64,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" alt="" width="52" height="52">
+      <img src="icon-192.png" alt="" width="52" height="52">
       <h3 id="guideTitle">Install VOID</h3>
       <ol id="guideSteps"></ol>
       <p id="guideNote"></p>
@@ -1589,7 +1636,7 @@ function loadPrefs() {
     let t = p && p.theme;
     if (t === 'obsidian' || t === 'aurora' || t === 'paper') t = (t === 'paper') ? 'light' : 'dark';
     prefs.theme = (t === 'dark' || t === 'light') ? t : 'dark';
-    prefs.sort = ['updated','created','alpha'].includes(p.sort) ? p.sort : 'updated';
+    prefs.sort = ['updated','created','alpha'].includes(p.sort) ? p.sort : 'updated'; prefs.defCat = ['personal','ideas','work'].includes(p.defCat) ? p.defCat : '';
   } catch { prefs.theme = 'dark'; prefs.sort = 'updated'; }
 }
 function savePrefs() {
@@ -1977,7 +2024,7 @@ function openEditor(n, originEl) {
   $('#editorHeading').textContent = n ? 'Edit note' : 'New note';
   $('#noteTitle').value = n ? (n.title || '') : '';
   $('#noteBody').value = n ? (n.body || '') : '';
-  setCategory(n ? catOf(n) : '');
+  setCategory(n ? catOf(n) : (prefs.defCat || ''));
   paintPin(n ? !!n.pinned : false);
   paintFolders();
   paintTags();
@@ -2246,6 +2293,7 @@ function openNoteActionMenu(note, el) {
   openActionMenu({
     title: n.title || 'Untitled',
     items: [
+      { icon: 'check', label: 'Select', aria: 'Select notes', onClick: () => { closeActionMenu(); window.__ms('notes', n.id); } },
       { icon: 'pencil', label: 'Edit', aria: 'Edit note', onClick: () => openEditor(n, el) },
       { icon: n.pinned ? 'pin' : 'pin-o', label: n.pinned ? 'Unpin' : 'Pin', aria: n.pinned ? 'Unpin note' : 'Pin note', active: n.pinned, onClick: () => togglePin(n.id) },
       { icon: 'trash', label: 'Delete', aria: 'Move to Recently Deleted', danger: true, onClick: () => softDelete(n.id, el) }
@@ -2257,6 +2305,7 @@ function openDeletedActionMenu(n, el) {
   openActionMenu({
     title: n.title || 'Untitled note',
     items: [
+      { icon: 'check', label: 'Select', aria: 'Select notes', onClick: () => { closeActionMenu(); window.__ms('deleted', n.id); } },
       { icon: 'restore', label: 'Restore', aria: 'Restore note', onClick: () => { closeActionMenu(); restoreDeleted(n.id); } },
       { icon: 'trash', label: 'Delete forever', aria: 'Delete permanently', danger: true, onClick: () => { closeActionMenu(); confirmPermanentDelete(n.id); } }
     ]
@@ -2656,67 +2705,6 @@ $('#themes').addEventListener('click', e => {
   if (b) setTheme(b.dataset.themePick);
 });
 
-// Export
-$('#exportBtn').onclick = () => {
-  try {
-    const blob = new Blob([JSON.stringify({ app: 'VOID', version: 3, notes, deleted, folders }, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'void-notes-backup.json';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 4000);
-    toast('Backup exported');
-  } catch { toast('Could not export', 'warn'); }
-};
-
-// Import
-$('#importBtn').onclick = () => $('#importFile').click();
-$('#importFile').onchange = async e => {
-  const f = e.target.files[0];
-  if (!f) return;
-  try {
-    const data = JSON.parse(await f.text());
-    const incoming = Array.isArray(data) ? data : data.notes;
-    if (!Array.isArray(incoming)) throw Error();
-    const incomingDeleted = Array.isArray(data.deleted) ? data.deleted : [];
-    const incomingFolders = Array.isArray(data.folders) ? data.folders : [];
-    const prevNotes = notes, prevDeleted = deleted, prevFolders = folders;
-    const map = new Map(notes.map(n => [n.id, n]));
-    let count = 0;
-    incoming.forEach(n => {
-      if (n && typeof n === 'object') {
-        const id = n.id || uid();
-        map.set(id, ensureNoteFields({ ...n, id }));
-        count++;
-      }
-    });
-    const delMap = new Map(deleted.map(n => [n.id, n]));
-    incomingDeleted.forEach(n => {
-      if (n && typeof n === 'object' && n.id && !map.has(n.id)) {
-        delMap.set(n.id, ensureNoteFields({ ...n, deletedAt: n.deletedAt || Date.now() }));
-      }
-    });
-    notes = [...map.values()];
-    deleted = [...delMap.values()];
-    const fset = new Set([...folders, ...incomingFolders]);
-    notes.forEach(n => { if (n.folder) fset.add(n.folder); });
-    folders = [...fset].filter(Boolean).sort();
-    if (!persistNotes() || !persistDeleted() || !persistFolders()) {
-      notes = prevNotes; deleted = prevDeleted; folders = prevFolders;
-      persistNotes(); persistDeleted(); persistFolders();
-      toast('Could not save import', 'warn');
-      e.target.value = '';
-      return;
-    }
-    renderNotes(); renderFolders(); renderDeleted(); paintHome();
-    toast(`Imported ${count} note${count === 1 ? '' : 's'}`);
-  } catch { toast('Could not read backup', 'warn'); }
-  e.target.value = '';
-};
-
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden && dirty && $('#editorScreen').classList.contains('open')) saveEditor({ closeAfter: false, silent: true });
-});
 
 // Before unload
 window.addEventListener('beforeunload', e => {
@@ -2789,7 +2777,6 @@ $('#sheetBody').addEventListener('keydown', e => {
 $('#privacyBtn').onclick = () => openScreen('privacyScreen');
 $('#privacyBack').onclick = () => openScreen('settingsScreen');
 $('#privacyBackup').onclick = () => openScreen('settingsScreen');
-$('#introBtn').onclick = () => openOnboarding(true);
 
 /* ============ ONBOARDING ============ */
 const ONB_KEY = 'void.onboarded.v1';
@@ -2861,7 +2848,7 @@ function onbFinish() {
   document.documentElement.classList.remove('onb-open');
   const a = document.activeElement;
   if (a && a.blur) a.blur();
-  if (!onbReplay) { closeAllScreens(); paintHome(); $('#introBtn').hidden = true; setTimeout(() => window.__autoTour && window.__autoTour('create'), 900); }
+  if (!onbReplay) { closeAllScreens(); paintHome(); setTimeout(() => window.__autoTour && window.__autoTour('create'), 900); }
 }
 $('#obNext').onclick = () => { if (onbIndex >= ONB_SLIDES.length - 1) onbFinish(); else onbGo(onbIndex + 1); };
 $('#obBack').onclick = () => onbGo(onbIndex - 1);
@@ -2956,7 +2943,7 @@ function refreshFromStorage() {
   function paint(d) {
     const p = Math.min(1, d / THRESH);
     el.style.setProperty('--y', (d * 0.9) + 'px');
-    el.style.opacity = Math.min(1, d / 28);
+    el.style.opacity = Math.min(1, d / 28); el.style.setProperty('--p', p.toFixed(3));
     arc.style.strokeDashoffset = CIRC * (1 - p);
     setState(p >= 1 ? 'ready' : 'pull', p >= 1 ? 'Release to refresh' : 'Pull to refresh');
   }
@@ -2968,7 +2955,7 @@ function refreshFromStorage() {
       if (busy) return;
       el.classList.remove('settle');
       setState('pull', 'Pull to refresh');
-      arc.style.strokeDashoffset = CIRC;
+      arc.style.strokeDashoffset = CIRC; el.style.setProperty('--p', 0);
     }, 480);
   }
   async function run() {
@@ -3147,102 +3134,8 @@ function refreshFromStorage() {
   const pill = $('#netPill'); let pt;
   const net = (txt, off) => { pill.textContent = txt; pill.classList.toggle('off', off); pill.classList.add('show'); clearTimeout(pt); if (!off) pt = setTimeout(() => pill.classList.remove('show'), 2200); };
   addEventListener('offline', () => net('Offline · everything saves on this device', true));
-  addEventListener('online', () => { net('Back online', false); checkReminders(); navigator.serviceWorker && navigator.serviceWorker.getRegistration().then(r => r && r.update().catch(() => {})); });
+  addEventListener('online', () => { net('Back online', false); navigator.serviceWorker && navigator.serviceWorker.getRegistration().then(r => r && r.update().catch(() => {})); });
   if (!navigator.onLine) net('Offline · everything saves on this device', true);
-
-  /* ---- reminders (own key; notes schema untouched) ---- */
-  const RK = 'void.reminders.v1';
-  let rems = J(RK, []); if (!Array.isArray(rems)) rems = [];
-  const saveRems = () => { if (!W(RK, rems)) toast("Couldn't save reminder", 'warn'); };
-  const notifState = () => !('Notification' in window) ? 'unsupported' : Notification.permission;
-  let rt = null;
-  function scheduleNext() {
-    clearTimeout(rt);
-    const next = rems.filter(r => !r.done && !r.fired).sort((a, b) => a.at - b.at)[0];
-    if (next) rt = setTimeout(checkReminders, Math.min(Math.max(next.at - Date.now(), 0), 2147e6) + 50);   // one timer, only while the page is alive
-  }
-  async function fire(r) {
-    const n = noteOf(r.noteId);
-    toast('Reminder: ' + tt(n));
-    if (notifState() !== 'granted') return;
-    const o = { body: ((n && n.body) || '').slice(0, 100) || 'Tap to open this note.', tag: 'void-rem-' + r.id, icon: 'icon-192.png', badge: 'icon-192.png', data: { noteId: r.noteId } };
-    try { const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration(); if (reg) await reg.showNotification('VOID · ' + tt(n), o); else new Notification('VOID · ' + tt(n), o); } catch {}
-  }
-  function checkReminders() {
-    const now = Date.now(); let any = false;
-    rems.forEach(r => { if (!r.done && !r.fired && r.at <= now) { r.fired = true; any = true; fire(r); } });
-    if (any) { saveRems(); paintExtras(); }
-    scheduleNext();
-  }
-  function hint() {
-    const st = notifState();
-    return st === 'unsupported' ? 'This browser can’t show notifications. The reminder will still appear inside VOID.'
-      : st === 'denied' ? 'Notifications are blocked for this site, so the reminder will appear inside VOID only. You can allow them in your browser’s site settings.'
-      : st === 'default' ? 'To be alerted with a notification, turn on Reminder notifications in Settings. Until then the reminder shows inside VOID.'
-      : 'You’ll get a notification while VOID is open or running in the background. VOID can’t wake a fully closed app, so a reminder due then appears the next time you open it.';
-  }
-  function remModal(noteId, ex) {
-    const n = noteOf(noteId); if (!n) return;
-    const d = new Date(ex ? ex.at : Date.now() + 36e5); d.setSeconds(0, 0);
-    const local = new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
-    const due = ex && ex.fired && !ex.done;
-    const btns = [{ label: ex ? 'Update reminder' : 'Set reminder', primary: true, fn: () => {
-      const v = $('#remAt').value, at = v ? new Date(v).getTime() : NaN;
-      if (!at || at <= Date.now()) { toast('Pick a time in the future', 'warn'); return false; }
-      rems = rems.filter(r => r.noteId !== noteId);
-      rems.push({ id: ex ? ex.id : uid(), noteId, at, done: false, fired: false });
-      saveRems(); scheduleNext(); paintExtras(); toast('Reminder set for ' + when(at));
-    } }];
-    if (ex) { btns.push({ label: 'Open note', fn: () => { openEditor(n, null); } });
-      if (due) btns.push({ label: 'Dismiss', fn: () => { ex.done = true; saveRems(); paintExtras(); } });
-      btns.push({ label: 'Delete reminder', danger: true, fn: () => { rems = rems.filter(r => r.id !== ex.id); saveRems(); scheduleNext(); paintExtras(); toast('Reminder deleted'); } }); }
-    btns.push({ label: 'Cancel' });
-    modal({ title: 'Reminder', html: `<b>${safe(tt(n))}</b><input type="datetime-local" id="remAt" value="${local}"><div class="chips"><button type="button" data-q="3600000">In 1 hour</button><button type="button" data-q="tonight">This evening</button><button type="button" data-q="tomorrow">Tomorrow 9:00</button></div><small>${hint()}</small>`, buttons: btns,
-      onOpen: () => $('#vmBody').querySelectorAll('[data-q]').forEach(b => b.onclick = () => {
-        const q = b.dataset.q, t = new Date();
-        if (q === 'tonight') { t.setHours(20, 0, 0, 0); if (t <= Date.now()) t.setDate(t.getDate() + 1); } else if (q === 'tomorrow') { t.setDate(t.getDate() + 1); t.setHours(9, 0, 0, 0); } else t.setTime(Date.now() + +q);
-        $('#remAt').value = new Date(t.getTime() - t.getTimezoneOffset() * 6e4).toISOString().slice(0, 16); }) });
-  }
-  $('#remindBtn').onclick = () => {
-    if (!editingId || !noteOf(editingId)) { toast('Write something first, then set a reminder'); return; }
-    remModal(editingId, rems.find(r => r.noteId === editingId && !r.done));
-  };
-  $('#remList').addEventListener('click', e => { const b = e.target.closest('[data-rid]'); if (!b) return; const r = rems.find(x => x.id === b.dataset.rid); if (r) remModal(r.noteId, r); });
-  $('#pinList').addEventListener('click', e => { const b = e.target.closest('[data-nid]'); const n = b && noteOf(b.dataset.nid); if (n) openEditor(n, null); });
-
-  async function notifTap() {
-    const st = notifState();
-    if (st === 'unsupported') return modal({ title: 'Notifications unavailable', html: 'This browser doesn’t support notifications. Reminders still work inside VOID.', buttons: [{ label: 'OK', primary: true }] });
-    if (st === 'denied') return modal({ title: 'Notifications blocked', html: 'Allow notifications for this site in your browser’s site settings, then come back. Reminders still appear inside VOID.', buttons: [{ label: 'OK', primary: true }] });
-    if (st === 'default') { try { await Notification.requestPermission(); } catch {} paintNotif(); toast(notifState() === 'granted' ? 'Notifications on' : 'Notifications not enabled'); return; }
-    modal({ title: 'Notifications are on', html: 'VOID shows reminder notifications while it is open or running in the background. A fully closed app can’t be woken without a push server, which VOID doesn’t use, so those reminders wait for you inside VOID.', buttons: [{ label: 'Send test notification', primary: true, fn: () => { fire({ id: 'test', noteId: '' }); } }, { label: 'Close' }] });
-  }
-  function paintNotif() { const st = notifState(); $('#notifBtnSub').textContent = st === 'granted' ? 'On · tap for details' : st === 'denied' ? 'Blocked in browser settings' : st === 'unsupported' ? 'Not supported here' : 'Tap to turn on'; }
-  $('#notifBtn').onclick = notifTap;
-
-  /* ---- daily notes ---- */
-  const DK = 'void.daily.v1', OK = 'void.opt.v1';
-  let daily = J(DK, {}) || {}, opt = Object.assign({ daily: true }, J(OK, {}) || {});
-  const dkey = d => { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-  function openDaily(key) {
-    key = key || dkey(); let n = noteOf(daily[key]);
-    if (!n) {
-      const d = new Date(key + 'T12:00:00'), now = Date.now();
-      n = ensureNoteFields({ id: uid(), title: 'Daily · ' + d.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' }), body: '', tags: ['daily'], created: now, updated: now });
-      notes.unshift(n); if (!persistNotes()) { notes.shift(); toast("Couldn't save", 'warn'); return; }
-      daily[key] = n.id; W(DK, daily); refresh();
-    }
-    openEditor(n, null);
-  }
-  $('#dailyBtn').onclick = () => openDaily();
-  function prevDaily() {
-    const keys = Object.keys(daily).filter(k => noteOf(daily[k])).sort().reverse();
-    modal({ title: 'Daily notes', html: keys.length ? keys.map(k => `<button type="button" class="vm-row" data-dk="${k}"><span>${safe(tt(noteOf(daily[k])))}</span></button>`).join('') : 'No daily notes yet. Tap Today to start one.', buttons: [{ label: 'Close' }],
-      onOpen: () => $('#vmBody').querySelectorAll('[data-dk]').forEach(b => b.onclick = () => { closeModal(); openDaily(b.dataset.dk); }) });
-  }
-  $('#dailyOpt').onclick = () => modal({ title: 'Daily notes', html: 'A dated note for each day, created only when you tap Today. Nothing is added automatically.', buttons: [
-    { label: opt.daily ? 'Turn off' : 'Turn on', primary: true, fn: () => { opt.daily = !opt.daily; W(OK, opt); paintExtras(); } },
-    { label: 'Previous daily notes', fn: () => { setTimeout(prevDaily, 50); } }, { label: 'Close' }] });
 
   /* ---- quick capture ---- */
   function capture() {
@@ -3259,11 +3152,6 @@ function refreshFromStorage() {
 
   /* ---- home extras ---- */
   function paintExtras() {
-    $('#dailyBtn').hidden = !opt.daily;
-    $('#dailyOptSub').textContent = opt.daily ? 'On' : 'Off';
-    const up = rems.filter(r => !r.done && noteOf(r.noteId)).sort((a, b) => a.at - b.at).slice(0, 3);
-    $('#remWrap').hidden = !up.length;
-    $('#remList').innerHTML = up.map(r => { const d = r.fired; return `<button type="button" class="rem-row${d ? ' due' : ''}" data-rid="${r.id}">${ic('bell')}<span><b>${safe(tt(noteOf(r.noteId)))}</b><small>${d ? 'Due · ' : ''}${when(r.at)}</small></span></button>`; }).join('');
     const pins = notes.filter(n => n.pinned).slice(0, 6);
     $('#pinWrap').hidden = !pins.length;
     $('#pinList').innerHTML = pins.map(n => `<button type="button" data-nid="${safe(n.id)}">${safe(tt(n))}</button>`).join('');
@@ -3278,8 +3166,7 @@ function refreshFromStorage() {
     folders: { label: 'Create folders', steps: [{ sel: '#newFolderBtn', t: 'Make a folder', x: 'Group related notes in folders, then pick the folder inside any note.' }], enter() { openScreen('foldersScreen'); } },
     tags: { label: 'Use tags', steps: [{ sel: '#organizeBtn', t: 'Category, folder and tags', x: 'Open this panel to file a note and add tags to find it faster.' }], enter() { openEditor(null, null); } },
     pin: { label: 'Pin notes', need: () => notes.length > 0, steps: [{ sel: '#notesGrid .note-card', t: 'Pin with a long press', x: 'Press and hold a note for quick actions like Pin, so it stays at the top.' }], enter() { openLibrary(); } },
-    backup: { label: 'Backup & Restore', steps: [{ sel: '#exportBtn', t: 'Export a backup', x: 'Save all your notes to a file you keep.' }, { sel: '#importBtn', t: 'Restore later', x: 'Import that file to bring your notes back on this or another device.' }], enter() { openScreen('settingsScreen'); } },
-    reminder: { label: 'Set a reminder', steps: [{ sel: '#remindBtn', t: 'Remind me', x: 'Pick a date and time for a note. Reminders show inside VOID, and as notifications if you turn them on.' }], enter() { openEditor(null, null); } }
+    backup: { label: 'Local backup', steps: [{ sel: '#exportBtn', t: 'Export a backup', x: 'Save all your notes to a file on this device.' }], enter() { openScreen('settingsScreen'); } },
   };
   const tour = $('#tour'); let tOpen = false;
   function startTour(id) {
@@ -3305,16 +3192,14 @@ function refreshFromStorage() {
   }
   function autoTour(ids) {
     ids = [].concat(ids);
-    if (autoShown || tOpen || $('#onboard').classList.contains('open')) return;
+    if (autoShown || tOpen || $('#onboard').classList.contains('open') || $('#wn').classList.contains('open')) return;
     const id = ids.find(k => !tours[k] && (!TUTS[k].need || TUTS[k].need()));
     if (!id) return; autoShown = true;
-    setTimeout(() => { if (!tOpen) startTour(id); }, 800);
+    setTimeout(() => { if (!tOpen && !$('#wn').classList.contains('open')) startTour(id); }, 800);
   }
   window.__autoTour = autoTour;
-  const SC = { notesScreen: ['search', 'pin'], foldersScreen: ['folders'], settingsScreen: ['backup'], editorScreen: ['tags', 'reminder'] };
+  const SC = { notesScreen: ['search', 'pin'], foldersScreen: ['folders'], settingsScreen: ['backup'], editorScreen: ['tags'] };
   Object.keys(SC).forEach(id => { const el = $('#' + id); let was = false; new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) autoTour(SC[id]); was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] }); });
-  $('#helpBtn').onclick = () => modal({ title: 'Tutorials', html: Object.keys(TUTS).map(k => `<button type="button" class="vm-row" data-t="${k}"><span>${TUTS[k].label}</span><span>${tours[k] ? 'Replay' : 'Show'}</span></button>`).join(''), buttons: [{ label: 'Close' }],
-    onOpen: () => $('#vmBody').querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const k = b.dataset.t; closeModal(); TUTS[k].enter(); setTimeout(() => startTour(k), 750); }) });
 
   /* ---- deep links: shortcuts + notification taps ---- */
   function openById(id) { const n = noteOf(id); if (n) openEditor(n, null); }
@@ -3329,11 +3214,127 @@ function refreshFromStorage() {
     else if (a === 'search') { openLibrary(); setTimeout(() => $('#searchBtn').click(), 350); }
   }
   navigator.serviceWorker && navigator.serviceWorker.addEventListener('message', e => { if (e.data && e.data.type === 'open-note') openById(e.data.id); });
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) checkReminders(); });
 
-  if (hasOnboarded()) $('#introBtn').hidden = true;
-  paintNotif(); paintExtras(); checkReminders();
+  if (hasOnboarded())
+  paintExtras();
   setTimeout(() => { handleLink(); if (hasOnboarded() && !notes.length && !anyTabOpen()) autoTour('create'); }, 600);
+})();
+
+/* ============ Storage & Local Backup (v0.6) ============ */
+(() => {
+  const LK = 'void.lastExport.v1', nap = () => new Promise(r => setTimeout(r, 60));
+  const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+  async function paint() {
+    $('#bkNotes').textContent = notes.length; $('#bkFolders').textContent = folders.length; $('#bkDeleted').textContent = deleted.length;
+    let own = 0; try { own = new Blob([localStorage.getItem(KEY) || '']).size; } catch {}
+    let txt = 'Notes data: about ' + fmt(own) + ' (estimate)';
+    try { const e = navigator.storage && navigator.storage.estimate && await navigator.storage.estimate(); if (e && e.quota) txt += ' · browser quota may differ'; } catch {}
+    $('#bkUsage').textContent = txt;
+    let t = null; try { t = localStorage.getItem(LK); } catch {}
+    $('#bkLast').textContent = t ? 'Last export ' + new Date(+t).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : 'Not exported yet';
+  }
+  const set = (p, m, err) => { $('#bkFill').style.width = p + '%'; const e = $('#bkStatus'); e.textContent = m; e.classList.toggle('err', !!err); };
+  let busy = false;
+  $('#exportBtn').onclick = async () => {
+    if (busy) return; busy = true; const btn = $('#exportBtn'); btn.disabled = true;
+    try {
+      set(15, 'Collecting notes…'); await nap();
+      const now = new Date();
+      const data = { app: 'VOID', format: 'void-backup', formatVersion: 1, exportedAt: now.toISOString(), counts: { notes: notes.length, deleted: deleted.length, folders: folders.length }, notes, deleted, folders };
+      set(40, 'Encoding…'); await nap();
+      const json = JSON.stringify(data, null, 2);
+      set(65, 'Verifying…'); await nap();
+      const back = JSON.parse(json);
+      const ids = a => a.map(n => n.id).join('|');
+      if (back.notes.length !== notes.length || back.deleted.length !== deleted.length || back.folders.length !== folders.length || ids(back.notes) !== ids(notes)) throw new Error('verify');
+      set(85, 'Saving file…'); await nap();
+      const d = now.toISOString().slice(0, 10), url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+      const a = document.createElement('a'); a.href = url; a.download = `VOID-backup-${d}.json`; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      try { localStorage.setItem(LK, String(Date.now())); } catch {}
+      set(100, `Exported ${notes.length} note${notes.length === 1 ? '' : 's'}, verified. Your notes were not changed.`); toast('Backup exported');
+    } catch { set(0, 'Export failed. Nothing was changed.', true); toast('Could not export', 'warn'); }
+    btn.disabled = false; busy = false; paint();
+  };
+  const el = $('#settingsScreen'); let was = false;
+  new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) { set(0, ''); paint(); } was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] });
+})();
+
+/* ============ v0.6 essential: select, What's New, prefs, mascot ============ */
+(() => {
+  const MS = { on: false, v: '', ids: new Set() };
+  const SEL = v => v === 'notes' ? '#notesGrid [data-note]' : '#deletedList [data-deleted]';
+  const idOf = e => e.dataset.note || e.dataset.deleted;
+  const bar = document.createElement('div'); bar.id = 'msBar';
+  bar.innerHTML = '<div class="ms-top"><b id="msCount">0 selected</b><button type="button" class="text-btn" id="msAll">Select all</button><button type="button" class="text-btn" id="msCancel">Cancel</button></div><div class="ms-acts" id="msActs"></div>';
+  ($('#app') || document.body).appendChild(bar);
+  const items = () => [...document.querySelectorAll(SEL(MS.v))];
+  const plural = n => n + ' note' + (n === 1 ? '' : 's');
+  function mark() { items().forEach(e => e.classList.toggle('sel', MS.ids.has(idOf(e)))); const n = MS.ids.size; $('#msCount').textContent = n + ' selected'; $('#msAll').textContent = n && n === items().length ? 'Clear' : 'Select all'; bar.querySelectorAll('.ms-act').forEach(b => b.disabled = !n); }
+  function start(v, id) {
+    MS.on = true; MS.v = v; MS.ids = new Set(id ? [id] : []);
+    $('#msActs').innerHTML = v === 'notes'
+      ? `<button type="button" class="ms-act danger" data-a="del">${ic('trash')}Delete</button>`
+      : `<button type="button" class="ms-act" data-a="rec">${ic('restore')}Recover</button><button type="button" class="ms-act danger" data-a="perm">${ic('trash')}Delete forever</button>`;
+    document.body.classList.add('ms-on'); bar.classList.add('open'); mark();
+  }
+  function stop() { MS.on = false; MS.ids.clear(); document.body.classList.remove('ms-on'); bar.classList.remove('open'); document.querySelectorAll('.sel').forEach(e => e.classList.remove('sel')); }
+  window.__ms = start;
+  const finish = (msg, k) => { renderNotes(); renderFolders(); paintHome(); renderDeleted(); stop(); toast(msg, k); };
+  function bulk(a) {
+    const ids = new Set(MS.ids); if (!ids.size) return;
+    const pn = notes, pd = deleted, fail = m => { notes = pn; deleted = pd; persistNotes(); persistDeleted(); toast(m, 'warn'); };
+    if (a === 'del') {
+      const mv = notes.filter(n => ids.has(n.id)), t = Date.now();
+      notes = notes.filter(n => !ids.has(n.id)); deleted = [...mv.map(n => ({ ...n, deletedAt: t })), ...deleted.filter(d => !ids.has(d.id))];
+      if (!persistNotes() || !persistDeleted()) return fail("Couldn't delete. Nothing was changed.");
+      finish(plural(mv.length) + ' moved to Recently deleted', 'danger');
+    } else if (a === 'rec') {
+      const have = new Set(notes.map(n => n.id)), rec = deleted.filter(d => ids.has(d.id) && !have.has(d.id));
+      notes = [...rec.map(({ deletedAt, ...r }) => ensureNoteFields(r)), ...notes]; deleted = deleted.filter(d => !rec.includes(d));
+      if (!persistNotes() || !persistDeleted()) return fail('Could not recover. Nothing was changed.');
+      finish(plural(rec.length) + ' recovered');
+    } else {
+      const n = deleted.filter(d => ids.has(d.id)).length;
+      openSheet({ title: 'Delete forever?', text: `${plural(n)} will be permanently deleted and can't be recovered. The other ${deleted.length - n} deleted note${deleted.length - n === 1 ? '' : 's'} stay.`, icon: 'trash', confirmLabel: 'Delete ' + n + ' forever', cancelLabel: 'Keep', danger: true,
+        onConfirm: () => { const p = deleted; deleted = deleted.filter(d => !ids.has(d.id)); if (!persistDeleted()) { deleted = p; closeSheet(); return toast('Could not delete', 'warn'); } closeSheet(); finish(plural(n) + ' permanently deleted', 'danger'); } });
+    }
+  }
+  bar.addEventListener('click', e => {
+    if (e.target.closest('#msCancel')) return stop();
+    if (e.target.closest('#msAll')) { const all = items(); if (MS.ids.size === all.length) MS.ids.clear(); else all.forEach(x => MS.ids.add(idOf(x))); return mark(); }
+    const b = e.target.closest('[data-a]'); if (b && !b.disabled) bulk(b.dataset.a);
+  });
+  document.addEventListener('click', e => { if (!MS.on) return; const t = e.target.closest(SEL(MS.v)); if (!t) return; e.preventDefault(); e.stopImmediatePropagation(); const id = idOf(t); MS.ids.has(id) ? MS.ids.delete(id) : MS.ids.add(id); mark(); }, true);
+  document.addEventListener('pointerdown', e => { if (MS.on && e.target.closest('#notesGrid,#deletedList')) e.stopPropagation(); }, true);
+  $('#selNotesBtn').onclick = () => notes.length ? start('notes') : toast('No notes to select');
+  $('#selDelBtn').onclick = () => deleted.length ? start('deleted') : toast('Nothing deleted');
+  ['notesGrid', 'deletedList'].forEach(i => new MutationObserver(() => { if (MS.on) mark(); }).observe($('#' + i), { childList: true }));
+  ['notesScreen', 'deletedScreen'].forEach(i => new MutationObserver(() => { if (MS.on && !$('#' + i).classList.contains('open')) stop(); }).observe($('#' + i), { attributes: true, attributeFilter: ['class'] }));
+
+  /* preferences */
+  function paintPrefs() { document.querySelectorAll('#prefSort [data-sort]').forEach(b => b.classList.toggle('on', b.dataset.sort === prefs.sort)); document.querySelectorAll('#prefCat [data-dc]').forEach(b => b.classList.toggle('on', b.dataset.dc === (prefs.defCat || ''))); }
+  $('#prefSort').onclick = e => { const b = e.target.closest('[data-sort]'); if (!b) return; prefs.sort = b.dataset.sort; savePrefs(); renderNotes(); paintPrefs(); };
+  $('#prefCat').onclick = e => { const b = e.target.closest('[data-dc]'); if (!b) return; prefs.defCat = b.dataset.dc; savePrefs(); paintPrefs(); };
+  paintPrefs();
+
+  /* What's New: shown once per release, entry in Settings for 24h */
+  const WK = 'void.whatsnew.v1', REL = '0.6', DAY = 864e5, wn = $('#wn');
+  let rec = null; try { rec = JSON.parse(localStorage.getItem(WK)); } catch {}
+  const saveRec = () => { try { localStorage.setItem(WK, JSON.stringify(rec)); } catch {} };
+  const paintRow = () => { const live = rec && rec.id === REL && rec.at && Date.now() - rec.at < DAY; $('#wnRow').hidden = !live; };
+  const openWn = () => { wn.classList.add('open'); wn.setAttribute('aria-hidden', 'false'); setTimeout(() => $('#wnGo').focus({ preventScroll: true }), 80); };
+  $('#wnGo').onclick = () => { wn.classList.remove('open'); wn.setAttribute('aria-hidden', 'true'); };
+  $('#wnRow').onclick = openWn;
+  if (!rec || rec.id !== REL) {
+    if (hasOnboarded()) { rec = { id: REL, at: Date.now() }; saveRec(); setTimeout(() => { if (!document.querySelector('#tour.open') && !$('#onboard').classList.contains('open')) openWn(); }, 900); }
+    else { rec = { id: REL, at: 0 }; saveRec(); }
+  }
+  paintRow(); const sEl = $('#settingsScreen'); new MutationObserver(() => { if (sEl.classList.contains('open')) { paintRow(); paintPrefs(); } }).observe(sEl, { attributes: true, attributeFilter: ['class'] });
+
+  /* mascot */
+  const m = $('#mascot'); m.classList.add('pop'); m.addEventListener('animationend', () => m.classList.remove('pop', 'hop'));
+  m.onclick = () => { m.classList.remove('hop'); void m.offsetWidth; m.classList.add('hop'); };
 })();
 
 // Init indicator

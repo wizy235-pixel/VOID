@@ -1,5 +1,5 @@
-/* VOID service worker v2. App shell only. Notes live in localStorage and are never touched here. */
-const CACHE = 'void-shell-v2';
+/* VOID service worker v3. App shell only. Notes live in localStorage and are never touched here. */
+const CACHE = 'void-shell-v3';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png'];
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 self.addEventListener('install', e => {
@@ -30,15 +30,5 @@ self.addEventListener('fetch', e => {
   e.respondWith(caches.match(req, { ignoreSearch: true }).then(hit => {
     const net = fetch(req).then(r => { if (r.ok) { const cp = r.clone(); caches.open(CACHE).then(c => c.put(req, cp)); } return r; }).catch(() => hit);
     return hit || net;
-  }));
-});
-self.addEventListener('notificationclick', e => {
-  e.notification.close();
-  const id = e.notification.data && e.notification.data.noteId;
-  const target = new URL('./' + (id ? '?note=' + encodeURIComponent(id) : ''), self.registration.scope).href;
-  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(cs => {
-    const c = cs[0];
-    if (c) { c.postMessage({ type: 'open-note', id }); return c.focus(); }
-    return self.clients.openWindow(target);
   }));
 });
