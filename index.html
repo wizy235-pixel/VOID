@@ -1173,6 +1173,44 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .list-row,.note-card{border-color:var(--line)}
 :root[data-theme=dark] .sheet,:root[data-theme=dark] .net-pill{background-color:#0a0a0e}
 .btn:active{transform:scale(.97)}
+
+/* ===== v0.8: notes list, selection, attachments ===== */
+.notes-grid{border-radius:14px;box-shadow:none;background:var(--surface);border:1px solid var(--line)}
+.note-card{display:flex;align-items:center;padding:10px 16px 10px 16px;min-height:0}
+.note-card+.note-card:before{left:16px;right:0;background:var(--line)}
+.nc-main{flex:1;min-width:0;display:block}
+.note-title{font-size:15.5px;font-weight:650;letter-spacing:-.015em;line-height:1.3}
+.note-preview{display:block;-webkit-line-clamp:unset;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;margin-top:2px;font-size:13.5px;line-height:1.4;color:var(--muted)}
+.nc-date{font-weight:500;color:var(--faint);margin-right:8px}
+.nc-meta{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:11.5px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc-meta .dot-c{width:6px;height:6px;border-radius:50%;background:var(--c);flex:none}
+.nc-clip{width:13px;height:13px;color:var(--faint);flex:none}
+.pin-mark{width:13px;height:13px}
+.nc-chk{flex:none;width:0;height:20px;margin-right:0;opacity:0;border-radius:50%;border:1.6px solid var(--line-strong);transition:width .2s ease,margin .2s ease,opacity .2s ease,background .15s}
+body.ms-on .note-card .nc-chk{width:20px;margin-right:12px;opacity:1}
+.note-card.sel .nc-chk{background:var(--accent);border-color:var(--accent)}
+.note-card.sel .nc-chk:after{content:"";display:block;width:5px;height:9px;border:solid #1a0b22;border-width:0 2px 2px 0;transform:translate(6px,2px) rotate(45deg)}
+body.ms-on #notesGrid [data-note]:after{display:none}
+body.ms-on .sel{outline:none;background:var(--accent-soft)}
+#msBar{position:static;transform:none;width:auto;background:none;border:0;padding:0;box-shadow:none}
+.ms-top{position:fixed;z-index:39;left:0;right:0;top:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:0;padding:calc(var(--safe-t,0px) + 8px) 14px 8px;background:var(--bg);border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .25s cubic-bezier(.2,.9,.3,1)}
+.ms-top b{text-align:center;font-size:14.5px}.ms-top #msAll{justify-self:end}.ms-top #msCancel{justify-self:start}
+.ms-acts{position:fixed;z-index:39;left:0;right:0;bottom:0;padding:8px 14px calc(var(--safe-b,0px) + 10px);background:var(--bg);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s cubic-bezier(.2,.9,.3,1)}
+#msBar.open .ms-top,#msBar.open .ms-acts{transform:none}
+.ms-act{height:44px;border-radius:12px}
+body.ms-on #notesGrid,body.ms-on #deletedList{margin-bottom:84px}
+.att-btn{background:linear-gradient(135deg,#e08fc4,#a98be8)!important;color:#1a0b22!important;border-radius:12px!important}
+.att-area{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}.att-area::-webkit-scrollbar{display:none}
+.att-tile{position:relative;flex:none;width:96px;height:96px;border-radius:12px;overflow:hidden;background:var(--surface-3,var(--surface));border:1px solid var(--line);animation:icPop .3s ease}
+.att-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.att-k{position:absolute;left:6px;bottom:6px;padding:2px 7px;border-radius:9px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;font-weight:700}
+.att-x{position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.62);color:#fff;display:grid;place-items:center;border:0}.att-x .ic{width:12px;height:12px}
+.att-tile.busy{display:grid;place-items:center}.att-spin{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--line-strong);border-top-color:var(--accent);animation:ptrSpin .8s linear infinite}
+.att-q{display:flex;gap:6px;margin:4px 0 8px}.att-q button{flex:1;height:36px;border-radius:10px;border:1px solid var(--line);font-weight:700;font-size:13px;color:var(--muted)}.att-q button.on{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-line)}
+.att-view{position:fixed;inset:0;z-index:70;background:#000;display:flex;flex-direction:column}
+.att-view .bar{display:flex;justify-content:space-between;padding:calc(var(--safe-t,0px) + 8px) 12px 8px}.att-view .bar button{color:#fff;font-weight:700;height:40px;padding:0 14px}
+.att-view .stage{flex:1;min-height:0;display:grid;place-items:center}.att-view img,.att-view video{max-width:100%;max-height:100%}
+@media(prefers-reduced-motion:reduce){.att-tile,.att-spin{animation:none}.nc-chk,.ms-top,.ms-acts{transition:none}}
 </style>
 </head>
 <body><div class="splash" id="splash" aria-hidden="true"><img src="icon-192.png" alt="" width="84" height="84"></div>
@@ -1366,7 +1404,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
         <div class="bk-meta"><span id="bkUsage">Measuring…</span></div>
         <div class="bk-bar" aria-hidden="true"><i id="bkFill"></i></div>
         <p class="bk-status" id="bkStatus" role="status"></p>
-        <small id="bkLarge"></small>
+        <small id="bkLarge"></small><small id="bkMedia"></small>
         <button class="btn" id="clearDeletedBtn" type="button">Clear deleted notes…</button>
       </div>
             <button class="list-row" id="settingsDeletedBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></span><span class="row-body"><b>Recently deleted</b><small>Restore or remove for good</small></span></button>
@@ -1376,9 +1414,9 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
             <button class="list-row" id="installBtn" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Install VOID</b><small id="installSub">Add VOID to your home screen</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
 
       <h3 class="group">About VOID</h3>
-      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.7</b><small>Faster, steadier, clearer</small></span></button>
+      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.8</b><small>Notes, media and storage</small></span></button>
       <button class="list-row" id="tipsRow"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>Feature tips</b><small>Replay a short walkthrough</small></span></button>
-      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.7</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
+      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.8</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
     </div>
   </section>
 
@@ -1403,8 +1441,6 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
       <p class="group pv-in" style="--d:3">How storage works</p>
       <div class="pv-row pv-in" style="--d:4"><span class="row-tile" data-cat="ideas"><svg class="ic" aria-hidden="true"><use href="#i-device"/></svg></span><div><b>Saved on this device</b><small>Notes are stored in this browser's local storage on your device. They are not automatically backed up online.</small></div></div>
       <div class="pv-row pv-in" style="--d:5"><span class="row-tile" data-cat="personal"><svg class="ic" aria-hidden="true"><use href="#i-block"/></svg></span><div><b>Not used for ads</b><small>Your note content isn't used for advertising or sold to advertisers.</small></div></div>
-      <div class="pv-row pv-in" style="--d:6"><span class="row-tile" data-cat="work"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><div><b>Back up when you like</b><small>Clearing this browser's site data can remove your notes, so export a backup now and then.</small></div></div>
-      <button class="btn primary pv-in" id="privacyBackup" style="--d:7;width:100%;height:52px;margin-top:8px"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>Open Backup &amp; Restore</button>
     </div>
   </section>
 
@@ -1465,6 +1501,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
     </div>
 
     <div class="format-bar" id="formatBar" hidden>
+      <button data-act="attach" class="att-btn" aria-label="Add photos or videos"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a3 3 0 0 1 3-3h6M20 12v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V8M4 17l4.5-4.5a1.6 1.6 0 0 1 2.2 0L16 18M18 3v6M15 6h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button data-act="undo" aria-label="Undo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button data-act="redo" aria-label="Redo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button data-act="dup" aria-label="Duplicate note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h10v10H9zM5 15V5h10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1535,12 +1572,11 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
   <!-- ============ PULL TO REFRESH ============ -->
   <div class="wn" id="wn" role="dialog" aria-modal="true" aria-labelledby="wnT" aria-hidden="true"><div class="wn-card">
-  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID Mobile · 0.7</small><h2 id="wnT">Faster, steadier, clearer</h2>
-  <ul><li style="--i:0"><svg class="ic"><use href="#i-info"/></svg><span><b>Feature tips that point correctly</b>Each tip finds its real control, and you can replay them from Settings.</span></li>
-  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Steadier offline</b>A small status pill that fades out. It never blocks writing or navigation.</span></li>
-  <li style="--i:2"><svg class="ic"><use href="#i-spark"/></svg><span><b>Quicker startup</b>VOID opens from the saved copy and updates quietly in the background.</span></li>
-  <li style="--i:3"><svg class="ic"><use href="#i-trash"/></svg><span><b>Storage on this device</b>See what VOID stores and clear deleted notes, with confirmation.</span></li>
-  <li style="--i:4"><svg class="ic"><use href="#i-logo"/></svg><span><b>Pull to refresh, fixed</b>The icon now stays upright, with clear done and failed states.</span></li></ul>
+  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID Mobile · 0.8</small><h2 id="wnT">A calmer Notes page</h2>
+  <ul><li style="--i:0"><svg class="ic"><use href="#i-note"/></svg><span><b>Compact notes list</b>Slim rows with a title, date and preview.</span></li>
+  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Touch and hold to select</b>A clean top bar and an action bar. Select all, deselect all, pin or delete.</span></li>
+  <li style="--i:2"><svg class="ic"><use href="#i-spark"/></svg><span><b>Photos and videos</b>Attach media to notes. Choose Original, HD or Standard for photos.</span></li>
+  <li style="--i:3"><svg class="ic"><use href="#i-trash"/></svg><span><b>Real permanent delete</b>Deleting for good now removes the note and its attachment files.</span></li></ul>
   <button type="button" class="btn primary" id="wnGo">Continue</button><span class="wn-mark">VOID</span></div></div>
 
   <div class="ptr" id="ptr" data-state="pull" aria-hidden="true">
@@ -1918,19 +1954,21 @@ function renderNotes(animate = false) {
   updateNotesMeta(items.length);
 }
 
+const CLIP = '<svg class="ic nc-clip" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 11-8.5 8.5a5 5 0 0 1-7-7L13 4a3.3 3.3 0 0 1 4.7 4.7L9.2 17.2a1.7 1.7 0 0 1-2.4-2.4L14 7.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+function shortDate(t) {
+  const d = new Date(t), now = new Date(), day = 864e5, diff = (new Date(now.getFullYear(), now.getMonth(), now.getDate()) - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / day;
+  if (diff <= 0) return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  if (diff === 1) return 'Yesterday';
+  if (diff < 7) return d.toLocaleDateString([], { weekday: 'short' });
+  return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: d.getFullYear() === now.getFullYear() ? undefined : '2-digit' });
+}
 function card(n, i) {
-  const c = catOf(n);
-  const t = n.updated || n.created;
-  const bits = c ? [CATS[c].label] : [];
-  if (n.folder) bits.push(n.folder);
-  n.tags.slice(0, 2).forEach(x => bits.push('#' + x));
-  bits.push(timeAgo(t));
-  const preview = String(n.body || '').replace(/\s+/g, ' ').slice(0, 220);
-  return `<button class="note-card${n.pinned ? ' pinned' : ''}${n.id === freshId ? ' fresh' : ''}" data-note="${safe(n.id)}" data-cat="${c}" style="--i:${Math.min(i, 8)}">
-    <span class="note-head"><span class="note-title">${safe(n.title || 'Untitled')}</span>${n.pinned ? ic('pin', 'pin-mark') : ''}</span>
-    <span class="note-preview">${safe(preview || 'No text yet')}</span>
-    <span class="note-date"><i class="dot-c"></i><span class="meta-t">${safe(bits.join(' · '))}</span></span>
-  </button>`;
+  const c = catOf(n), t = n.updated || n.created, na = (n.att || []).length;
+  const preview = String(n.body || '').replace(/\s+/g, ' ').slice(0, 140);
+  const meta = []; if (n.folder) meta.push(n.folder); n.tags.slice(0, 2).forEach(x => meta.push('#' + x));
+  return `<button class="note-card${n.pinned ? ' pinned' : ''}${n.id === freshId ? ' fresh' : ''}" data-note="${safe(n.id)}" data-cat="${c}" style="--i:${Math.min(i, 8)}"><span class="nc-chk" aria-hidden="true"></span><span class="nc-main">
+    <span class="note-head"><span class="note-title">${safe(n.title || 'Untitled')}</span>${n.pinned ? ic('pin', 'pin-mark') : ''}${na ? CLIP : ''}</span>
+    <span class="note-preview"><b class="nc-date">${safe(shortDate(t))}</b>${safe(preview || 'No text yet')}</span>${meta.length ? `<span class="nc-meta"><i class="dot-c"></i>${safe(meta.join(' · '))}</span>` : ''}</span></button>`;
 }
 
 function updateNotesMeta(count) {
@@ -2153,7 +2191,7 @@ function saveEditor(opts = {}) {
   const body = $('#noteBody').value.trim();
   const btn = $('#saveNote');
 
-  if (!title && !body) {
+  if (!title && !body && !(window.__att && window.__att.list().length)) {
     if (!silent) {
       toast('Add a title or some text first', 'warn');
       btn.classList.remove('shake');
@@ -2177,13 +2215,13 @@ function saveEditor(opts = {}) {
   let id;
 
   if (existing) {
-    Object.assign(existing, { title, body, category: cat, folder, tags, pinned: editingNote ? !!editingNote.pinned : existing.pinned, updated: now });
+    Object.assign(existing, { title, body, category: cat, folder, tags, pinned: editingNote ? !!editingNote.pinned : existing.pinned, att: window.__att ? window.__att.list() : (existing.att || []), updated: now });
     id = existing.id;
   } else {
     id = uid();
     notes.unshift(ensureNoteFields({
       id, title, body, category: cat, folder, tags,
-      pinned: !!(editingNote && editingNote.pinned), favorite: false, archived: false,
+      pinned: !!(editingNote && editingNote.pinned), favorite: false, archived: false, att: window.__att ? window.__att.list() : [],
       created: now, updated: now
     }));
   }
@@ -2300,7 +2338,7 @@ function confirmPermanentDelete(id) {
       if (!persistDeleted()) { deleted = prev; closeSheet(); toast('Could not delete', 'warn'); return; }
       closeSheet();
       toast('Permanently deleted', 'danger');
-      renderDeleted();
+      renderDeleted(); window.__mediaGC && window.__mediaGC();
     }
   });
 }
@@ -2374,13 +2412,7 @@ function lpStart(e) {
     if (menuTarget) menuTarget.classList.remove('menu-selected');
     menuTarget = lp.el;
     lp.el.classList.add('menu-selected');
-    if (lp.el.hasAttribute('data-note')) {
-      const n = notes.find(x => x.id === lp.el.dataset.note);
-      if (n) openNoteActionMenu(n, lp.el);
-    } else if (lp.el.hasAttribute('data-deleted')) {
-      const n = deleted.find(x => x.id === lp.el.dataset.deleted);
-      if (n) openDeletedActionMenu(n, lp.el);
-    }
+    if (window.__ms) window.__ms(lp.el.hasAttribute('data-note') ? 'notes' : 'deleted', lp.el.dataset.note || lp.el.dataset.deleted);
   }, LONG_PRESS_MS);
 }
 function lpMove(e) {
@@ -2817,7 +2849,6 @@ $('#sheetBody').addEventListener('keydown', e => {
 /* ============ PRIVACY + HELP ENTRIES ============ */
 $('#privacyBtn').onclick = () => openScreen('privacyScreen');
 $('#privacyBack').onclick = () => openScreen('settingsScreen');
-$('#privacyBackup').onclick = () => openScreen('settingsScreen');
 
 /* ============ ONBOARDING ============ */
 const ONB_KEY = 'void.onboarded.v1';
@@ -3292,9 +3323,12 @@ function refreshFromStorage() {
     const st = $('#bkStatus'); st.textContent = warn; st.classList.toggle('err', !!warn);
     const big = notes.map(n => ({ n, b: ((n.title || '').length + (n.body || '').length) * 2 })).filter(x => x.b > 20480).sort((a, b) => b.b - a.b).slice(0, 3);
     $('#bkLarge').textContent = big.length ? 'Largest notes: ' + big.map(x => (x.n.title || 'Untitled') + ' (' + fmt(x.b) + ')').join(', ') : 'No unusually large notes.';
+    const A = [...notes, ...deleted].flatMap(n => n.att || []), ph = A.filter(a => a.kind === 'image'), vd = A.filter(a => a.kind === 'video'), sz = x => x.reduce((t, a) => t + (a.size || 0), 0), dm = deleted.reduce((t, n) => t + (n.att || []).length, 0), top = A.slice().sort((a, b) => (b.size || 0) - (a.size || 0))[0];
+    $('#bkMedia').textContent = `Photos: ${ph.length} (${fmt(sz(ph))}) · Videos: ${vd.length} (${fmt(sz(vd))}) · ${dm} in Recently Deleted` + (top ? ` · Largest: ${top.name} (${fmt(top.size)})` : '');
   }
+  window.__stPaint = paint;
   $('#clearDeletedBtn').onclick = () => { if (!deleted.length) return; const c = deleted.length;
-    window.__vmodal && window.__vmodal({ title: 'Clear deleted notes?', html: c + (c === 1 ? ' note' : ' notes') + ' will be removed for good. This cannot be undone.', buttons: [{ label: 'Remove for good', danger: true, fn: () => { const keep = deleted.slice(); deleted.length = 0; if (!persistDeleted()) { keep.forEach(x => deleted.push(x)); toast('Could not clear. Nothing was changed.', 'warn'); return; } try { renderDeleted(); } catch {} paint(); toast('Deleted notes cleared'); } }, { label: 'Keep them' }] }); };
+    window.__vmodal && window.__vmodal({ title: 'Clear deleted notes?', html: c + (c === 1 ? ' note' : ' notes') + ' will be removed for good. This cannot be undone.', buttons: [{ label: 'Remove for good', danger: true, fn: () => { const keep = deleted.slice(); deleted.length = 0; if (!persistDeleted()) { keep.forEach(x => deleted.push(x)); toast('Could not clear. Nothing was changed.', 'warn'); return; } try { renderDeleted(); } catch {} window.__mediaGC && window.__mediaGC(); paint(); toast('Deleted notes cleared'); } }, { label: 'Keep them' }] }); };
   const el = $('#settingsScreen'); let was = false;
   new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) paint(); was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] });
 })();
@@ -3305,15 +3339,15 @@ function refreshFromStorage() {
   const SEL = v => v === 'notes' ? '#notesGrid [data-note]' : '#deletedList [data-deleted]';
   const idOf = e => e.dataset.note || e.dataset.deleted;
   const bar = document.createElement('div'); bar.id = 'msBar';
-  bar.innerHTML = '<div class="ms-top"><b id="msCount">0 selected</b><button type="button" class="text-btn" id="msAll">Select all</button><button type="button" class="text-btn" id="msCancel">Cancel</button></div><div class="ms-acts" id="msActs"></div>';
+  bar.innerHTML = '<div class="ms-top"><button type="button" class="text-btn" id="msCancel">Cancel</button><b id="msCount">0 selected</b><button type="button" class="text-btn" id="msAll">Select all</button></div><div class="ms-acts" id="msActs"></div>';
   ($('#app') || document.body).appendChild(bar);
   const items = () => [...document.querySelectorAll(SEL(MS.v))];
   const plural = n => n + ' note' + (n === 1 ? '' : 's');
-  function mark() { items().forEach(e => e.classList.toggle('sel', MS.ids.has(idOf(e)))); const n = MS.ids.size; $('#msCount').textContent = n + ' selected'; $('#msAll').textContent = n && n === items().length ? 'Clear' : 'Select all'; bar.querySelectorAll('.ms-act').forEach(b => b.disabled = !n); }
+  function mark() { items().forEach(e => e.classList.toggle('sel', MS.ids.has(idOf(e)))); const n = MS.ids.size; $('#msCount').textContent = n + ' selected'; $('#msAll').textContent = n && n === items().length ? 'Deselect all' : 'Select all'; bar.querySelectorAll('.ms-act').forEach(b => b.disabled = !n); }
   function start(v, id) {
     MS.on = true; MS.v = v; MS.ids = new Set(id ? [id] : []);
     $('#msActs').innerHTML = v === 'notes'
-      ? `<button type="button" class="ms-act danger" data-a="del">${ic('trash')}Delete</button>`
+      ? `<button type="button" class="ms-act" data-a="pin">${ic('pin')}Pin</button><button type="button" class="ms-act danger" data-a="del">${ic('trash')}Delete</button>`
       : `<button type="button" class="ms-act" data-a="rec">${ic('restore')}Recover</button><button type="button" class="ms-act danger" data-a="perm">${ic('trash')}Delete forever</button>`;
     document.body.classList.add('ms-on'); bar.classList.add('open'); mark();
   }
@@ -3328,6 +3362,10 @@ function refreshFromStorage() {
       notes = notes.filter(n => !ids.has(n.id)); deleted = [...mv.map(n => ({ ...n, deletedAt: t })), ...deleted.filter(d => !ids.has(d.id))];
       if (!persistNotes() || !persistDeleted()) return fail("Couldn't delete. Nothing was changed.");
       finish(plural(mv.length) + ' moved to Recently deleted', 'danger');
+    } else if (a === 'pin') {
+      const sel = notes.filter(n => ids.has(n.id)), v = !sel.every(n => n.pinned); notes = notes.map(n => ids.has(n.id) ? { ...n, pinned: v } : n);
+      if (!persistNotes()) return fail("Couldn't update. Nothing was changed.");
+      finish(plural(sel.length) + (v ? ' pinned' : ' unpinned'));
     } else if (a === 'rec') {
       const have = new Set(notes.map(n => n.id)), rec = deleted.filter(d => ids.has(d.id) && !have.has(d.id));
       notes = [...rec.map(({ deletedAt, ...r }) => ensureNoteFields(r)), ...notes]; deleted = deleted.filter(d => !rec.includes(d));
@@ -3336,7 +3374,7 @@ function refreshFromStorage() {
     } else {
       const n = deleted.filter(d => ids.has(d.id)).length;
       openSheet({ title: 'Delete forever?', text: `${plural(n)} will be permanently deleted and can't be recovered. The other ${deleted.length - n} deleted note${deleted.length - n === 1 ? '' : 's'} stay.`, icon: 'trash', confirmLabel: 'Delete ' + n + ' forever', cancelLabel: 'Keep', danger: true,
-        onConfirm: () => { const p = deleted; deleted = deleted.filter(d => !ids.has(d.id)); if (!persistDeleted()) { deleted = p; closeSheet(); return toast('Could not delete', 'warn'); } closeSheet(); finish(plural(n) + ' permanently deleted', 'danger'); } });
+        onConfirm: () => { const p = deleted; deleted = deleted.filter(d => !ids.has(d.id)); if (!persistDeleted()) { deleted = p; closeSheet(); return toast('Could not delete', 'warn'); } closeSheet(); window.__mediaGC && window.__mediaGC(); finish(plural(n) + ' permanently deleted', 'danger'); } });
     }
   }
   bar.addEventListener('click', e => {
@@ -3358,7 +3396,7 @@ function refreshFromStorage() {
   paintPrefs();
 
   /* What's New: shown once per release, entry in Settings for 24h */
-  const WK = 'void.whatsnew.v1', REL = '0.7', DAY = 864e5, wn = $('#wn');
+  const WK = 'void.whatsnew.v1', REL = '0.8', DAY = 864e5, wn = $('#wn');
   let rec = null; try { rec = JSON.parse(localStorage.getItem(WK)); } catch {}
   const saveRec = () => { try { localStorage.setItem(WK, JSON.stringify(rec)); } catch {} };
   const paintRow = () => { const live = rec && rec.id === REL && rec.at && Date.now() - rec.at < DAY; $('#wnRow').hidden = !live; };
@@ -3423,7 +3461,7 @@ syncNav();
   ta.addEventListener('input', e => { if (e.isTrusted === false) return; clearTimeout(tm); tm = setTimeout(snap, 450); });
   bar.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    if (b.dataset.act) { e.stopPropagation(); e.preventDefault(); if (b.dataset.act === 'undo') go(-1); else if (b.dataset.act === 'redo') go(1); else dup(); return; }
+    if (b.dataset.act) { e.stopPropagation(); e.preventDefault(); if (b.dataset.act === 'undo') go(-1); else if (b.dataset.act === 'redo') go(1); else if (b.dataset.act === 'dup') dup(); else window.__att && window.__att.attach(); return; }
     setTimeout(snap, 30);
   }, true);
   bar.addEventListener('pointerdown', e => { if (e.target.closest('button')) e.preventDefault(); });
@@ -3436,6 +3474,109 @@ syncNav();
   }
   const ed = $('#editorScreen'); let was = false;
   new MutationObserver(() => { const on = ed.classList.contains('open'); if (on && !was) setTimeout(reset, 0); was = on; }).observe(ed, { attributes: true, attributeFilter: ['class'] });
+})();
+
+
+/* ============ v0.8: attachments (IndexedDB) ============ */
+(() => {
+  const ST = 'blobs', QK = 'void.attq.v1', LIM = { hd: 2560, standard: 1280 };
+  let db = null, cur = [], busy = 0, urls = [], q = 'original';
+  try { q = localStorage.getItem(QK) || 'original'; } catch {}
+  const open = () => db ? Promise.resolve(db) : new Promise((res, rej) => { const r = indexedDB.open('void.media.v1', 1); r.onupgradeneeded = () => r.result.createObjectStore(ST, { keyPath: 'id' }); r.onsuccess = () => { db = r.result; res(db); }; r.onerror = () => rej(r.error); });
+  const tx = (m, f) => open().then(d => new Promise((res, rej) => { const t = d.transaction(ST, m); let out; const rq = f(t.objectStore(ST)); if (rq) rq.onsuccess = () => out = rq.result; t.oncomplete = () => res(out); t.onerror = t.onabort = () => rej(t.error); }));
+  const put = r => tx('readwrite', s => s.put(r)), get = id => tx('readonly', s => s.get(id)), del = id => tx('readwrite', s => s.delete(id)), keys = () => tx('readonly', s => s.getAllKeys());
+  const fmt = b => b < 1048576 ? (b / 1024).toFixed(0) + ' KB' : b < 1073741824 ? (b / 1048576).toFixed(1) + ' MB' : (b / 1073741824).toFixed(2) + ' GB';
+  window.__mediaGC = async () => {
+    try { const ref = new Set([...notes, ...deleted].flatMap(n => (n.att || []).map(a => a.id))); cur.forEach(a => ref.add(a.id)); const ks = await keys(); await Promise.all(ks.filter(k => !ref.has(k)).map(del)); }
+    catch { toast('Could not remove some attachment files. Try again from Storage.', 'warn'); }
+    window.__stPaint && window.__stPaint();
+  };
+  const jpeg = (c, qual) => new Promise(r => c.toBlob(r, 'image/jpeg', qual));
+  const thumbOf = async (src, w, h) => { const sc = Math.min(1, 220 / Math.max(w, h, 1)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * sc)); c.height = Math.max(1, Math.round(h * sc)); c.getContext('2d').drawImage(src, 0, 0, c.width, c.height); return jpeg(c, .72); };
+  async function addImage(file, mode) {
+    const bm = await createImageBitmap(file), w0 = bm.width, h0 = bm.height, thumb = await thumbOf(bm, w0, h0);
+    let blob = file, w = w0, h = h0;
+    const max = LIM[mode];
+    if (max && file.type !== 'image/gif' && file.type !== 'image/svg+xml') {
+      const sc = Math.min(1, max / Math.max(w0, h0));
+      if (sc < 1 || mode === 'standard') { w = Math.round(w0 * sc); h = Math.round(h0 * sc); const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(bm, 0, 0, w, h); const o = await jpeg(c, mode === 'hd' ? .92 : .8); if (o && o.size < file.size) blob = o; else { w = w0; h = h0; } }
+    }
+    bm.close && bm.close();
+    return { blob, thumb, w, h };
+  }
+  const vinfo = file => new Promise(res => { const v = document.createElement('video'), u = URL.createObjectURL(file); let done = false; v.muted = true; v.preload = 'metadata'; v.playsInline = true;
+    const fin = (o) => { if (done) return; done = true; URL.revokeObjectURL(u); res(o); };
+    v.onloadeddata = () => { v.currentTime = Math.min(.1, (v.duration || 1) / 2); };
+    v.onseeked = async () => { try { const t = await thumbOf(v, v.videoWidth, v.videoHeight); fin({ thumb: t, w: v.videoWidth, h: v.videoHeight, dur: v.duration }); } catch { fin({ thumb: null }); } };
+    v.onerror = () => fin({ err: true }); setTimeout(() => fin({ thumb: null }), 7000); v.src = u; });
+  async function addFiles(list, kind) {
+    try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch {}
+    for (const f of list) {
+      if (!f.type.startsWith(kind + '/')) { toast('“' + f.name + '” isn’t a supported ' + kind, 'warn'); continue; }
+      try {
+        const e = navigator.storage && navigator.storage.estimate ? await navigator.storage.estimate() : null;
+        if (e && e.quota && f.size > (e.quota - (e.usage || 0)) * .9) { toast('“' + f.name + '” is too large. About ' + fmt(Math.max(0, e.quota - (e.usage || 0))) + ' is free in this browser.', 'warn'); continue; }
+      } catch {}
+      busy++; render();
+      try {
+        let r; if (kind === 'image') r = await addImage(f, q); else { r = await vinfo(f); if (r.err) { toast('This browser can’t play “' + f.name + '”', 'warn'); busy--; render(); continue; } r.blob = f; }
+        const id = uid(); await put({ id, blob: r.blob, thumb: r.thumb || null, type: r.blob.type || f.type, name: f.name });
+        cur.push({ id, kind, name: f.name, size: r.blob.size, orig: f.size, type: r.blob.type || f.type, w: r.w || 0, h: r.h || 0, dur: r.dur || 0, mode: kind === 'image' ? q : 'original' });
+        $('#noteBody').dispatchEvent(new Event('input', { bubbles: true }));
+      } catch (err) { toast(err && err.name === 'QuotaExceededError' ? 'Browser storage is full. Free space in Storage and try again.' : 'Couldn’t add “' + f.name + '”', 'warn'); }
+      busy--; render();
+    }
+  }
+  const area = document.createElement('div'); area.id = 'attArea'; area.className = 'att-area'; area.hidden = true; $('#noteBody').before(area);
+  const durT = d => d ? Math.floor(d / 60) + ':' + String(Math.floor(d % 60)).padStart(2, '0') : '';
+  const urlOf = b => { const u = URL.createObjectURL(b); urls.push(u); return u; };
+  function render() {
+    area.hidden = !cur.length && !busy;
+    area.innerHTML = cur.map((a, i) => `<div class="att-tile" data-i="${i}"><img alt="" data-id="${a.id}">${a.kind === 'video' ? `<span class="att-k">▶ ${durT(a.dur)}</span>` : ''}<button type="button" class="att-x" data-x="${i}" aria-label="Remove attachment">${ic('x')}</button></div>`).join('') + (busy ? '<div class="att-tile busy"><i class="att-spin"></i></div>' : '');
+    area.querySelectorAll('img').forEach(async im => { try { const r = await get(im.dataset.id); if (r) im.src = urlOf(r.thumb || r.blob); } catch {} });
+  }
+  area.addEventListener('click', e => {
+    const x = e.target.closest('[data-x]'); if (x) { cur.splice(+x.dataset.x, 1); render(); $('#noteBody').dispatchEvent(new Event('input', { bubbles: true })); return; }
+    const t = e.target.closest('[data-i]'); if (t) view(cur[+t.dataset.i]);
+  });
+  async function view(a) {
+    const r = await get(a.id).catch(() => null); if (!r) { toast('This attachment file is missing', 'warn'); return; }
+    const u = URL.createObjectURL(r.blob), v = document.createElement('div'); v.className = 'att-view';
+    v.innerHTML = '<div class="bar"><button type="button" data-c>Close</button><button type="button" data-s>Share</button></div><div class="stage"></div>';
+    const m = document.createElement(a.kind === 'video' ? 'video' : 'img'); m.src = u; if (a.kind === 'video') { m.controls = true; m.playsInline = true; }
+    v.querySelector('.stage').appendChild(m); document.body.appendChild(v);
+    const close = () => { try { m.pause && m.pause(); } catch {} URL.revokeObjectURL(u); v.remove(); };
+    v.querySelector('[data-c]').onclick = close; v.querySelector('[data-s]').onclick = () => share(a, r.blob);
+  }
+  async function doShare(a, blob, mode) {
+    try {
+      if (a.kind === 'image' && mode !== 'original') { const bm = await createImageBitmap(blob), sc = Math.min(1, LIM[mode] / Math.max(bm.width, bm.height)); if (sc < 1 || mode === 'standard') { const c = document.createElement('canvas'); c.width = Math.round(bm.width * sc); c.height = Math.round(bm.height * sc); c.getContext('2d').drawImage(bm, 0, 0, c.width, c.height); const o = await jpeg(c, mode === 'hd' ? .92 : .75); if (o && o.size < blob.size) blob = o; } bm.close && bm.close(); }
+      const f = new File([blob], a.name, { type: blob.type });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); }
+      else { const u = URL.createObjectURL(f), l = document.createElement('a'); l.href = u; l.download = a.name; document.body.appendChild(l); l.click(); l.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); toast('Sharing files isn’t available here. Saved as a download instead.'); }
+    } catch (e) { if (!e || e.name !== 'AbortError') toast('Couldn’t share this file', 'warn'); }
+  }
+  function share(a, blob) {
+    if (a.kind === 'video') { window.__vmodal({ title: 'Share video', html: 'Videos are shared as the original file (' + fmt(blob.size) + '). Other apps may compress them after sharing.', buttons: [{ label: 'Share', primary: true, fn: () => { doShare(a, blob, 'original'); } }, { label: 'Cancel' }] }); return; }
+    window.__vmodal({ title: 'Share photo', html: 'Standard uses less data. HD and Original use more mobile data and storage. Other apps may still compress photos after sharing.', buttons: [{ label: 'Standard · smaller file', fn: () => { doShare(a, blob, 'standard'); } }, { label: 'HD · higher quality', fn: () => { doShare(a, blob, 'hd'); } }, { label: 'Original · ' + fmt(blob.size), primary: true, fn: () => { doShare(a, blob, 'original'); } }, { label: 'Cancel' }] });
+  }
+  const mk = acc => { const i = document.createElement('input'); i.type = 'file'; i.accept = acc; i.multiple = true; i.hidden = true; document.body.appendChild(i); return i; };
+  const pi = mk('image/*'), vi = mk('video/*');
+  pi.onchange = () => { const l = [...pi.files]; pi.value = ''; addFiles(l, 'image'); };
+  vi.onchange = () => { const l = [...vi.files]; vi.value = ''; addFiles(l, 'video'); };
+  function menu() {
+    window.__vmodal({ title: 'Add to note', html: '<div class="att-q" id="attQ"><button type="button" data-q="original">Original</button><button type="button" data-q="hd">HD</button><button type="button" data-q="standard">Standard</button></div><small>Photos — Original keeps the full file. HD limits very large photos to 2560 px at high quality. Standard (1280 px) saves the most space. Videos are always kept as the original file. Everything stays on this device.</small>', buttons: [{ label: 'Photos', primary: true, fn: () => { pi.click(); } }, { label: 'Videos', fn: () => { vi.click(); } }, { label: 'Cancel' }],
+      onOpen: () => { const b = [...document.querySelectorAll('#attQ button')], paint = () => b.forEach(x => x.classList.toggle('on', x.dataset.q === q)); paint(); b.forEach(x => x.onclick = () => { q = x.dataset.q; try { localStorage.setItem(QK, q); } catch {} paint(); }); } });
+  }
+  window.__att = { list: () => cur.map(a => ({ ...a })), attach: menu };
+  const ed = $('#editorScreen'); let was = false;
+  new MutationObserver(() => {
+    const on = ed.classList.contains('open');
+    if (on && !was) { cur = (editingNote && editingNote.att ? editingNote.att : []).map(a => ({ ...a })); render(); }
+    if (!on && was) { urls.forEach(u => URL.revokeObjectURL(u)); urls = []; setTimeout(() => { if (!ed.classList.contains('open')) { cur = []; area.innerHTML = ''; area.hidden = true; window.__mediaGC(); } }, 1500); }
+    was = on;
+  }).observe(ed, { attributes: true, attributeFilter: ['class'] });
+  (window.requestIdleCallback || (f => setTimeout(f, 3000)))(() => { if (!ed.classList.contains('open')) window.__mediaGC(); });
 })();
 
 })();
