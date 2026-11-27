@@ -24,7 +24,7 @@ try{
 }catch(e){}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
 <style>
 /* ============ TOKENS ============ */
 :root{
@@ -300,7 +300,7 @@ header{
 .create-btn:after{
   content:"";position:absolute;inset:-2px;border-radius:22px;z-index:-2;
   background:var(--grad);
-  filter:blur(16px);opacity:.55;
+  filter:blur(12px);opacity:.55;
   animation:pulseGlow 3.2s ease-in-out infinite;
 }
 @keyframes pulseGlow{
@@ -362,7 +362,7 @@ header{
   display:flex;align-items:center;gap:10px;
   padding:calc(var(--safe-t) + 12px) 14px 12px;
   background:var(--glass);border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);
 }
 .screen-head strong{font-size:15px;font-weight:800;letter-spacing:-.02em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .head-right{margin-left:auto;display:flex;align-items:center;gap:8px}
@@ -487,8 +487,8 @@ header{
   border:1px solid var(--nav-line);
   border-radius:28px;
   box-shadow:var(--nav-shadow);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(12px) saturate(180%);
+  backdrop-filter:blur(12px) saturate(180%);
   transition:transform .5s var(--spring),opacity .3s ease;
   will-change:transform,opacity;
 }
@@ -553,7 +553,7 @@ body.editor-open .bottom-nav{
   flex:none;display:flex;align-items:center;gap:10px;
   padding:calc(var(--safe-t) + 12px) 14px 12px;
   background:var(--glass);border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);
   z-index:3;
   transition:transform .4s var(--ease),opacity .3s ease;
 }
@@ -658,7 +658,7 @@ body.editor-open .bottom-nav{
   background:var(--glass);
   border-top:1px solid var(--line);
   overflow-x:auto;scrollbar-width:none;
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
 }
 .format-bar::-webkit-scrollbar{display:none}
 .format-bar button{
@@ -674,7 +674,7 @@ body.editor-open .bottom-nav{
   flex:none;
   padding:10px var(--px) calc(10px + var(--safe-b));
   background:var(--glass);border-top:1px solid var(--line);
-  -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);
   z-index:2;
   transition:transform .4s var(--ease),opacity .3s ease;
 }
@@ -728,7 +728,7 @@ body.editor-open .bottom-nav{
   box-shadow:var(--sh-2);
   transform:translateY(120%) scale(.94);
   transition:transform .5s var(--spring);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(12px) saturate(180%);
 }
 .action-menu.open .action-card{transform:none}
 .action-head{margin-bottom:14px;padding:0 2px}
@@ -774,7 +774,7 @@ body.editor-open .bottom-nav{
   box-shadow:var(--sh-2);
   transform:translateY(108%);visibility:hidden;
   transition:transform .42s var(--ease),visibility 0s linear .42s;
-  -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);
 }
 .sheet:after{content:"";position:absolute;left:-1px;right:-1px;top:100%;height:80px;background:var(--sheet)}
 .sheet.open{transform:none;visibility:visible;transition:transform .62s var(--spring),visibility 0s}
@@ -836,7 +836,7 @@ body.editor-open .bottom-nav{
 /* ============ v0.5 REFINEMENTS ============ */
 .screen-head,.editor-top,.editor-foot,.format-bar{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}
 .sheet,.action-card{-webkit-backdrop-filter:none;backdrop-filter:none}
-.bottom-nav{-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
+.bottom-nav{-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}
 .create-btn:after,.add-btn:before,.wave-wrap:before{display:none}
 .wave-wrap{color:var(--accent)}
 .wave-wrap .ic{width:28px;height:28px}
@@ -918,7 +918,7 @@ html,body{overscroll-behavior-y:contain}
 .pv-shield:before{inset:-14px;border-radius:44px}
 .pv-shield:after{inset:-28px;border-radius:54px;border-color:var(--rose-line);animation-delay:.7s}
 @keyframes pvPulse{0%,100%{transform:scale(.97);opacity:.25}50%{transform:scale(1.03);opacity:.65}}
-.pv-card{position:relative;border-radius:24px 24px 24px 8px;padding:22px 20px;margin-top:22px;background:linear-gradient(160deg,var(--card-top),var(--card-bot));border:1px solid var(--glass-line);box-shadow:var(--sh-1),inset 0 1px 0 var(--hl);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:hidden;isolation:isolate}
+.pv-card{position:relative;border-radius:24px 24px 24px 8px;padding:22px 20px;margin-top:22px;background:linear-gradient(160deg,var(--card-top),var(--card-bot));border:1px solid var(--glass-line);box-shadow:var(--sh-1),inset 0 1px 0 var(--hl);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);overflow:hidden;isolation:isolate}
 .pv-card:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(90% 70% at 100% 0%,var(--rose-soft),transparent 65%),radial-gradient(80% 60% at 0% 100%,var(--accent-soft),transparent 65%)}
 .pv-card h2{font-size:21px;font-weight:800;letter-spacing:-.04em;margin:0 0 12px}
 .pv-card p{font-size:14.5px;line-height:1.65;color:var(--muted);margin:0 0 12px}
@@ -1071,8 +1071,8 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 @media(prefers-reduced-motion:reduce){.oa-orbit,.oa-caret,.oa-pill{animation:none!important}.hsearch,.install-card,.guide-card{transition-duration:.01s!important;animation:none!important}}
 
 /* ===== v0.6.2: offline, tours, reminders ===== */
-.net-pill{position:fixed;z-index:55;left:50%;top:calc(var(--safe-t) + 8px);transform:translate3d(-50%,-70px,0);padding:7px 14px;border-radius:16px;font-size:12px;font-weight:700;background:var(--sheet);border:1px solid var(--glass-line);color:var(--muted);box-shadow:var(--sh-2);transition:transform .3s var(--spring-soft);pointer-events:none;white-space:nowrap}
-.net-pill.show{transform:translate3d(-50%,0,0)}.net-pill.off{color:var(--rose);border-color:var(--rose-line)}
+.net-pill{pointer-events:none;position:fixed;z-index:55;left:50%;top:calc(var(--safe-t) + 8px);transform:translate3d(-50%,-70px,0);padding:7px 14px;border-radius:16px;font-size:12px;font-weight:700;background:var(--sheet);border:1px solid var(--glass-line);color:var(--muted);box-shadow:var(--sh-2);transition:transform .3s var(--spring-soft);pointer-events:none;white-space:nowrap}
+.net-pill.show{transform:translate3d(-50%,0,0)}.net-dot{position:fixed;z-index:20;right:10px;top:calc(var(--safe-t) + 10px);width:7px;height:7px;border-radius:50%;background:var(--rose);opacity:0;pointer-events:none;transition:opacity .3s}body.is-offline .net-dot{opacity:.8}.net-pill.off{color:var(--rose);border-color:var(--rose-line)}
 .qa{display:flex;gap:10px;margin-top:10px}
 .qa-btn{flex:1;height:46px;border-radius:15px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;font-weight:700;background:var(--surface);border:1px solid var(--line);box-shadow:inset 0 1px 0 var(--hl)}
 .qa-btn .ic{width:17px;height:17px;color:var(--accent)}.qa-btn:active{transform:scale(.97)}
@@ -1103,7 +1103,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 .bk-card{border:1px solid var(--accent-line,rgba(190,140,230,.3));border-radius:18px;padding:14px;margin:6px 0 10px;background:linear-gradient(160deg,rgba(190,120,220,.12),rgba(230,120,160,.05))}
 .bk-top{display:flex;gap:12px;align-items:flex-start}.bk-top b{display:block;font-size:15px}.bk-top small{color:var(--faint);font-size:12px;line-height:1.5}
 .bk-ico{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#e08fc4,#a98be8);color:#1a0b22}
-.bk-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 8px;text-align:center}.bk-stats b{display:block;font-size:20px}.bk-stats small{font-size:11px;color:var(--faint)}
+.bk-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 8px;text-align:center}.bk-stats b{display:block;font-size:20px}.bk-stats small{font-size:11px;color:var(--faint)}
 .bk-meta{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--faint)}
 .bk-bar{height:4px;border-radius:4px;background:rgba(127,127,127,.2);margin:10px 0 6px;overflow:hidden}.bk-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e08fc4,#a98be8);transition:width .25s}
 #exportBtn{width:100%}.qa{padding:0 2px}.bk-status{min-height:16px;font-size:12px;margin:0 0 8px}.bk-status.err{color:var(--danger)}
@@ -1115,7 +1115,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 @keyframes mBlink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
 @keyframes mPop{0%{transform:scale(.4) rotate(-12deg);opacity:0}100%{transform:none;opacity:1}}
 @keyframes mHop{30%{transform:translateY(-8px) scale(.95,1.06)}60%{transform:scale(1.06,.92)}}
-.ptr-ring{transform:rotate(calc(var(--p,0)*200deg)) scale(calc(.6 + .4*var(--p,0)))}
+.ptr-ring{transform:scale(calc(.6 + .4*var(--p,0)))}.ptr:not([data-state=loading]) .ptr-spin{transform:rotate(calc(var(--p,0)*270deg))}.ptr-dot{transform:none}.ptr[data-state=error] .ic-logo{color:var(--danger)}@media(prefers-reduced-motion:reduce){.ptr[data-state=loading] .ptr-spin{animation:none}.ptr.settle{transition:opacity .2s}.ptr-ring:before{animation:none!important}}
 .ptr-ring:before{content:"";position:absolute;inset:-4px;border-radius:46% 54% 52% 48%/52% 46% 54% 48%;background:radial-gradient(circle,rgba(224,143,196,.4),transparent 70%);opacity:var(--p,0)}
 .ptr[data-state=loading] .ptr-ring:before{animation:ptrBlob 1.6s ease-in-out infinite}.ptr[data-state=done] .ptr-ring{animation:mHop .45s ease}
 @keyframes ptrBlob{50%{border-radius:54% 46% 48% 52%/46% 54% 46% 54%;transform:scale(1.15)}}
@@ -1139,9 +1139,43 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
 .wn li b{display:block;color:inherit;filter:none;font-size:14px;color:var(--text,inherit)}.wn li .ic{flex:none;width:34px;height:34px;padding:8px;border-radius:11px;background:linear-gradient(135deg,#e08fc4,#a98be8);color:#1a0b22}
 .wn .btn{width:100%}.wn-mark{display:block;margin-top:10px;font-size:10px;letter-spacing:.4em;opacity:.35}
 @keyframes wnIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ===== v0.7: splash, install hero, mascot, icon motion ===== */
+.splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#040406;animation:spOut .3s ease 1.1s forwards}
+.splash img{width:84px;height:84px;border-radius:22px;animation:spIn .45s cubic-bezier(.2,1.2,.4,1) both}
+.splash.out{opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
+@keyframes spIn{from{opacity:0;transform:scale(.8)}}@keyframes spOut{to{opacity:0;visibility:hidden}}
+#installCard{display:none!important}
+.ih{position:fixed;inset:0;z-index:58;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(var(--safe-t) + 24px) 28px calc(var(--safe-b) + 24px);text-align:center;color:#f4eefc;background:radial-gradient(120% 70% at 50% 0,#2e1759 0,#040406 60%),#040406}
+.ih.open{display:flex;animation:spIn .35s ease both}
+.ih img{width:112px;height:112px;border-radius:28px;box-shadow:0 18px 50px rgba(150,90,230,.35);animation:ihFloat 4s ease-in-out infinite}
+@keyframes ihFloat{50%{transform:translateY(-7px) rotate(-1.5deg)}}
+.ih h2{margin:6px 0 0;font-size:26px;font-weight:800;letter-spacing:-.03em}.ih p{margin:0;max-width:300px;font-size:14.5px;line-height:1.55;color:#b9aed0}
+.ih ul{list-style:none;margin:6px 0 10px;padding:0;display:grid;gap:8px;font-size:13.5px;color:#d9cff0}.ih li:before{content:"";display:inline-block;width:6px;height:6px;margin-right:9px;border-radius:50%;background:#e08fc4;vertical-align:middle}
+.ih .btn{width:100%;max-width:320px;height:50px;border-radius:16px}.ih .text-btn{color:#b9aed0;height:40px}
+.ih-state{min-height:20px;font-size:13px;color:#e8c9f2}
+.mascot svg{animation:mIdle 4.2s ease-in-out infinite}
+@keyframes mIdle{50%{transform:translateY(-2px) rotate(-1.2deg)}}
+.mascot .eyes{transition:transform .25s ease}.mascot .mouth{transition:d .25s ease}
+.mascot.x-wink .eyes{transform:scaleY(.25)}.mascot.x-sleepy .eyes{transform:scaleY(.4)}.mascot.x-surprised .eyes{transform:scale(1.25)}
+.nav-btn.active .ic{animation:icPop .42s cubic-bezier(.2,1.5,.4,1)}
+@keyframes icPop{0%{transform:scale(.7) rotate(-10deg)}60%{transform:scale(1.15)}}
+.icon-btn .ic,.qa-btn .ic,.row-tile{transition:transform .2s cubic-bezier(.2,1.4,.4,1)}
+.icon-btn:active .ic{transform:scale(.82) rotate(-8deg)}.list-row:active .row-tile{transform:scale(.9) rotate(-4deg)}.qa-btn:active .ic{transform:scale(1.2) rotate(8deg)}
+@media(prefers-reduced-motion:reduce){.mascot svg,.ih img,.nav-btn.active .ic,.splash img{animation:none}.icon-btn:active .ic,.list-row:active .row-tile,.qa-btn:active .ic{transform:none}}
+
+/* ===== v0.7: editor tools, perf, polish ===== */
+.format-bar{overflow-x:auto;scrollbar-width:none}.format-bar::-webkit-scrollbar{display:none}.format-bar button{flex:none}
+.format-bar button[disabled]{opacity:.35}.format-bar [data-act] .ic{width:18px;height:18px}
+.note-card{content-visibility:auto;contain-intrinsic-size:auto 120px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+.list-row,.note-card{border-color:var(--line)}
+:root[data-theme=dark] .sheet,:root[data-theme=dark] .net-pill{background-color:#0a0a0e}
+.btn:active{transform:scale(.97)}
 </style>
 </head>
-<body>
+<body><div class="splash" id="splash" aria-hidden="true"><img src="icon-192.png" alt="" width="84" height="84"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><path d="M6.5 3.5h7.6L18.5 8v11.5a1.5 1.5 0 0 1-1.5 1.5H6.5A1.5 1.5 0 0 1 5 19.5v-14A1.5 1.5 0 0 1 6.5 3.5zM14 3.7V8.5h4.4M8.5 12.5h7M8.5 16h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M11.3 2.9a1.1 1.1 0 0 1 1.4 0l8 6.9c.2.2.3.5.3.8V19a2.2 2.2 0 0 1-2.2 2.2h-4.3v-5.5c0-.6-.5-1-1-1h-3c-.6 0-1 .4-1 1v5.5H5.2A2.2 2.2 0 0 1 3 19v-8.4c0-.3.1-.6.3-.8z"/></symbol>
@@ -1197,7 +1231,7 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
 
     <div class="hero">
       <div class="hero-greeting">
-        <button type="button" class="mascot" id="mascot" aria-label="Voidy, the VOID character"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3b9dc"/><stop offset="1" stop-color="#b69af2"/></linearGradient></defs><path d="M14 8h26l12 12v34a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="url(#mg)"/><path d="M40 8v9a3 3 0 0 0 3 3h9z" fill="#8f73d6"/><g class="eyes" fill="#2a1240"><ellipse cx="24" cy="34" rx="3.2" ry="4"/><ellipse cx="38" cy="34" rx="3.2" ry="4"/></g><circle cx="19" cy="42" r="3" fill="#e2569680"/><circle cx="43" cy="42" r="3" fill="#e2569680"/><path class="mouth" d="M27 43q4 4 8 0" fill="none" stroke="#2a1240" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+        <button type="button" class="mascot" id="mascot" aria-label="Voidy, the VOID character"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3b9dc"/><stop offset="1" stop-color="#b69af2"/></linearGradient></defs><ellipse cx="32" cy="61" rx="17" ry="2.6" fill="#000" opacity=".28"/><path d="M14 8h26l12 12v34a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z" fill="url(#mg)"/><path d="M15 10h12" stroke="#fff" stroke-opacity=".55" stroke-width="2.4" stroke-linecap="round"/><path d="M30 8c-1-5 3-7 5-5" fill="none" stroke="#b69af2" stroke-width="2.2" stroke-linecap="round"/><path d="M40 8v9a3 3 0 0 0 3 3h9z" fill="#8f73d6"/><g class="eyes" fill="#2a1240"><ellipse cx="24" cy="34" rx="3.2" ry="4"/><ellipse cx="38" cy="34" rx="3.2" ry="4"/><circle cx="25" cy="32.6" r="1.1" fill="#fff"/><circle cx="39" cy="32.6" r="1.1" fill="#fff"/></g><circle cx="19" cy="42" r="3" fill="#e2569680"/><circle cx="43" cy="42" r="3" fill="#e2569680"/><path class="mouth" d="M27 43q4 4 8 0" fill="none" stroke="#2a1240" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         <div class="greeting-text">
           <span class="kicker" id="homeGreeting">GOOD MORNING</span>
           <strong id="homeName">Welcome back.</strong>
@@ -1327,12 +1361,13 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
 
       <h3 class="group">Storage &amp; Local Backup</h3>
       <div class="bk-card" id="bkCard">
-        <div class="bk-top"><span class="bk-ico"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><div><b>Local backup</b><small>A file saved on this device. VOID never uploads your notes, and this is not a cloud backup.</small></div></div>
-        <div class="bk-stats"><div><b id="bkNotes">0</b><small>Notes</small></div><div><b id="bkFolders">0</b><small>Folders</small></div><div><b id="bkDeleted">0</b><small>Deleted</small></div></div>
-        <div class="bk-meta"><span id="bkUsage">Estimating…</span><span id="bkLast">Not exported yet</span></div>
+        <div class="bk-top"><span class="bk-ico"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><div><b>On this device</b><small>VOID stores notes in this browser only. Figures below cover VOID’s own data, not your phone’s storage.</small></div></div>
+        <div class="bk-stats"><div><b id="bkNotes">0</b><small>Notes</small></div><div><b id="bkPinned">0</b><small>Pinned</small></div><div><b id="bkFolders">0</b><small>Folders</small></div><div><b id="bkDeleted">0</b><small>Deleted</small></div></div>
+        <div class="bk-meta"><span id="bkUsage">Measuring…</span></div>
         <div class="bk-bar" aria-hidden="true"><i id="bkFill"></i></div>
         <p class="bk-status" id="bkStatus" role="status"></p>
-        <button class="btn primary" id="exportBtn" type="button">Export backup</button>
+        <small id="bkLarge"></small>
+        <button class="btn" id="clearDeletedBtn" type="button">Clear deleted notes…</button>
       </div>
             <button class="list-row" id="settingsDeletedBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></span><span class="row-body"><b>Recently deleted</b><small>Restore or remove for good</small></span></button>
 
@@ -1341,8 +1376,9 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
             <button class="list-row" id="installBtn" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Install VOID</b><small id="installSub">Add VOID to your home screen</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
 
       <h3 class="group">About VOID</h3>
-      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.6</b><small>The Essential Experience</small></span></button>
-      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.6</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
+      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.7</b><small>Faster, steadier, clearer</small></span></button>
+      <button class="list-row" id="tipsRow"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>Feature tips</b><small>Replay a short walkthrough</small></span></button>
+      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.7</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
     </div>
   </section>
 
@@ -1380,7 +1416,7 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
     </div>
     <div class="screen-content">
       <h1 class="page-title">Recently deleted</h1>
-      <p class="page-sub">Notes are removed for good after 30 days. Tap one to restore it or delete it now.</p>
+      <p class="page-sub">Deleted notes stay here until you remove them. Tap one to restore it or delete it for good.</p>
       <div id="deletedList"></div>
     </div>
   </section>
@@ -1429,6 +1465,9 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
     </div>
 
     <div class="format-bar" id="formatBar" hidden>
+      <button data-act="undo" aria-label="Undo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button data-act="redo" aria-label="Redo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button data-act="dup" aria-label="Duplicate note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h10v10H9zM5 15V5h10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button data-fmt="h1" aria-label="Heading 1">H1</button>
       <button data-fmt="h2" aria-label="Heading 2">H2</button>
       <button data-fmt="b" aria-label="Bold"><b>B</b></button>
@@ -1496,11 +1535,12 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
 
   <!-- ============ PULL TO REFRESH ============ -->
   <div class="wn" id="wn" role="dialog" aria-modal="true" aria-labelledby="wnT" aria-hidden="true"><div class="wn-card">
-  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID 0.6</small><h2 id="wnT">The Essential Experience</h2>
-  <ul><li style="--i:0"><svg class="ic"><use href="#i-download"/></svg><span><b>Local backup</b>Export a verified JSON file. Nothing leaves your device.</span></li>
-  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Select multiple notes</b>Delete, recover or remove for good in one go.</span></li>
-  <li style="--i:2"><svg class="ic"><use href="#i-logo"/></svg><span><b>New icon and Voidy</b>A notepad identity and a friendly face on Home.</span></li>
-  <li style="--i:3"><svg class="ic"><use href="#i-spark"/></svg><span><b>Lighter by design</b>Reminders, Daily notes and Import are gone. Faster, calmer, readable delete labels.</span></li></ul>
+  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID Mobile · 0.7</small><h2 id="wnT">Faster, steadier, clearer</h2>
+  <ul><li style="--i:0"><svg class="ic"><use href="#i-info"/></svg><span><b>Feature tips that point correctly</b>Each tip finds its real control, and you can replay them from Settings.</span></li>
+  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Steadier offline</b>A small status pill that fades out. It never blocks writing or navigation.</span></li>
+  <li style="--i:2"><svg class="ic"><use href="#i-spark"/></svg><span><b>Quicker startup</b>VOID opens from the saved copy and updates quietly in the background.</span></li>
+  <li style="--i:3"><svg class="ic"><use href="#i-trash"/></svg><span><b>Storage on this device</b>See what VOID stores and clear deleted notes, with confirmation.</span></li>
+  <li style="--i:4"><svg class="ic"><use href="#i-logo"/></svg><span><b>Pull to refresh, fixed</b>The icon now stays upright, with clear done and failed states.</span></li></ul>
   <button type="button" class="btn primary" id="wnGo">Continue</button><span class="wn-mark">VOID</span></div></div>
 
   <div class="ptr" id="ptr" data-state="pull" aria-hidden="true">
@@ -1543,8 +1583,9 @@ body.ms-on .sel:after{background:#c48be0 url("data:image/svg+xml,%3Csvg xmlns='h
   </div>
 
   <div class="guide" id="vModal" role="dialog" aria-modal="true" aria-labelledby="vmTitle" aria-hidden="true"><div class="guide-card vm"><h3 id="vmTitle"></h3><div class="vm-body" id="vmBody"></div><div class="vm-btns" id="vmBtns"></div></div></div>
+  <div class="ih" id="installHero" role="dialog" aria-modal="true" aria-labelledby="ihT"><img src="icon-512.png" alt="" width="112" height="112"><h2 id="ihT">Welcome to VOID</h2><p>A calm notepad that lives on your home screen.</p><ul><li>Opens full screen, like an app</li><li>Works with no connection</li><li>Notes stay on this device</li></ul><div class="ih-state" id="ihState" role="status"></div><button class="btn primary" id="ihGo" type="button">Install VOID</button><button class="text-btn" id="ihNo" type="button">Not now</button></div>
   <div class="tour" id="tour" aria-hidden="true"><div class="tour-hole" id="tHole"></div><svg class="tour-arrow" id="tArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 14h5v7h6v-7h5z" fill="currentColor"/></svg><div class="tour-tip" id="tTip" role="dialog" aria-live="polite"><b id="tTitle"></b><p id="tText"></p><div class="tour-btns"><button type="button" class="text-btn" id="tSkip">Skip</button><button type="button" class="btn primary" id="tNext">Next</button></div></div></div>
-  <div class="net-pill" id="netPill" role="status" aria-live="polite"></div>
+  <div class="net-pill" id="netPill" role="status" aria-live="polite"></div><i class="net-dot" aria-hidden="true"></i>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
@@ -1668,7 +1709,7 @@ function persistFolders() {
 function purgeDeleted() {
   const cutoff = Date.now() - RETENTION_MS;
   const before = deleted.length;
-  deleted = deleted.filter(n => (n.deletedAt || 0) > cutoff);
+  /* v0.7: deleted notes are never removed automatically; clear them from Settings */
   if (deleted.length !== before) persistDeleted();
 }
 
@@ -1938,7 +1979,7 @@ function renderDeleted() {
   const list = $('#deletedList');
   if (!list) return;
   if (!deleted.length) {
-    list.innerHTML = `<div class="empty">${ic('trash')}Nothing deleted<br>Removed notes stay here for 30 days.</div>`;
+    list.innerHTML = `<div class="empty">${ic('trash')}Nothing deleted<br>Removed notes stay here until you clear them.</div>`;
     deletedHtml = '';
   } else {
     const sorted = [...deleted].sort((a,b) => (b.deletedAt || 0) - (a.deletedAt || 0));
@@ -3061,6 +3102,7 @@ function refreshFromStorage() {
   function maybeShowCard() {
     if (installed || standalone() || dismissed() || !canPrompt()) return;
     if ($('#onboard').classList.contains('open')) { setTimeout(maybeShowCard, 3000); return; }
+    if (deferred && window.__showHero) { window.__showHero(); return; }
     $('#installGo').textContent = deferred ? 'Install VOID' : 'Show me how';
     $('#installCard').hidden = false;
   }
@@ -3084,13 +3126,14 @@ function refreshFromStorage() {
     try {
       ev.prompt();
       const { outcome } = await ev.userChoice;
-      if (outcome === 'accepted') toast('Installing VOID…');
+      if (outcome === 'accepted') { window.__heroAccepted && window.__heroAccepted(); }
       else { remember(); toast('Maybe later. You can install from Settings.'); }
     } catch { toast('Couldn’t start the install.', 'err'); }
     paint();
   }
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; paint(); setTimeout(maybeShowCard, 2500); });
-  window.addEventListener('appinstalled', () => { installed = true; deferred = null; paint(); toast('VOID is installed.'); });
+  window.addEventListener('appinstalled', () => { installed = true; deferred = null; paint(); window.__heroInstalled && window.__heroInstalled(); toast('VOID is installed.'); });
+  window.__install = install;
   $('#installGo').onclick = install;
   $('#installBtn').onclick = install;
   $('#installDismiss').onclick = () => { remember(); $('#installCard').hidden = true; };
@@ -3127,15 +3170,17 @@ function refreshFromStorage() {
     (o.buttons || []).forEach(b => { const e = document.createElement('button'); e.type = 'button'; e.className = 'btn' + (b.primary ? ' primary' : '') + (b.danger ? ' danger' : ''); e.textContent = b.label; e.onclick = () => { if (b.fn && b.fn() === false) return; closeModal(); }; bt.appendChild(e); });
     g.classList.add('open'); g.setAttribute('aria-hidden', 'false'); if (o.onOpen) o.onOpen();
   }
+  window.__vmodal = modal;
   function closeModal() { const g = $('#vModal'); g.classList.remove('open'); g.setAttribute('aria-hidden', 'true'); }
   $('#vModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 
   /* ---- offline indicator ---- */
   const pill = $('#netPill'); let pt;
-  const net = (txt, off) => { pill.textContent = txt; pill.classList.toggle('off', off); pill.classList.add('show'); clearTimeout(pt); if (!off) pt = setTimeout(() => pill.classList.remove('show'), 2200); };
-  addEventListener('offline', () => net('Offline · everything saves on this device', true));
+  let lastMsg = '';
+  const net = (txt, off) => { document.body.classList.toggle('is-offline', !!off); if (txt === lastMsg && pill.classList.contains('show')) return; lastMsg = txt; pill.textContent = txt; pill.classList.toggle('off', off); pill.classList.add('show'); clearTimeout(pt); pt = setTimeout(() => { pill.classList.remove('show'); lastMsg = ''; }, off ? 3200 : 2000); };
+  addEventListener('offline', () => net('Offline · notes save on this device', true));
   addEventListener('online', () => { net('Back online', false); navigator.serviceWorker && navigator.serviceWorker.getRegistration().then(r => r && r.update().catch(() => {})); });
-  if (!navigator.onLine) net('Offline · everything saves on this device', true);
+  if (!navigator.onLine) net('Offline · notes save on this device', true);
 
   /* ---- quick capture ---- */
   function capture() {
@@ -3160,46 +3205,59 @@ function refreshFromStorage() {
 
   /* ---- contextual tutorials ---- */
   const TK = 'void.tours.v1'; let tours = J(TK, {}) || {}; let autoShown = false;
+  const vis = sel => { const el = document.querySelector(sel); if (!el) return null; const r = el.getBoundingClientRect(); if (r.width < 4 || r.height < 4 || r.bottom < 0 || r.top > innerHeight || r.right < 0 || r.left > innerWidth) return null; const cx = Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2)), cy = Math.min(innerHeight - 1, Math.max(0, r.top + r.height / 2)), top = document.elementFromPoint(cx, cy); return top && (el.contains(top) || top.contains(el)) ? el : null; };
   const TUTS = {
-    create: { label: 'Create a note', steps: [{ sel: '#navCreateBtn', t: 'Start a note', x: 'Tap + to open a blank page and write. Everything saves on this device as you type.' }], enter() { closeAllScreens(); } },
-    search: { label: 'Search notes', steps: [{ sel: '#searchBtn', t: 'Find anything', x: 'Search looks through titles, text and tags as you type.' }], enter() { openLibrary(); } },
-    folders: { label: 'Create folders', steps: [{ sel: '#newFolderBtn', t: 'Make a folder', x: 'Group related notes in folders, then pick the folder inside any note.' }], enter() { openScreen('foldersScreen'); } },
-    tags: { label: 'Use tags', steps: [{ sel: '#organizeBtn', t: 'Category, folder and tags', x: 'Open this panel to file a note and add tags to find it faster.' }], enter() { openEditor(null, null); } },
-    pin: { label: 'Pin notes', need: () => notes.length > 0, steps: [{ sel: '#notesGrid .note-card', t: 'Pin with a long press', x: 'Press and hold a note for quick actions like Pin, so it stays at the top.' }], enter() { openLibrary(); } },
-    backup: { label: 'Local backup', steps: [{ sel: '#exportBtn', t: 'Export a backup', x: 'Save all your notes to a file on this device.' }], enter() { openScreen('settingsScreen'); } },
+    create: { label: 'Create a note', sel: '#navCreateBtn', t: 'Start a note', x: 'Tap the + button to open a blank note. It saves on this device as you type.', enter() { closeAllScreens(); } },
+    search: { label: 'Search notes', sel: '#searchBtn', t: 'Search your notes', x: 'Search matches titles, note text and tags as you type.', enter() { openLibrary(); } },
+    folders: { label: 'Create folders', sel: '#newFolderBtn', t: 'Make a folder', x: 'Create a folder here, then file notes in it from the note’s organize panel.', enter() { openScreen('foldersScreen'); } },
+    tags: { label: 'Folders and tags', sel: '#organizeBtn', t: 'Organize this note', x: 'Open this panel to choose a category or folder and add tags for this note.', enter() { openEditor(null, null); } },
+    pin: { label: 'Pin notes', need: () => notes.length > 0, sel: '#notesGrid .note-card', t: 'Touch and hold a note', x: 'Touch and hold any note for quick actions, including Pin.', enter() { openLibrary(); } },
   };
-  const tour = $('#tour'); let tOpen = false;
-  function startTour(id) {
-    const T = TUTS[id]; if (!T || tOpen) return; let i = 0;
-    const end = () => { tour.classList.remove('open'); tour.setAttribute('aria-hidden', 'true'); tOpen = false; removeEventListener('resize', place); tours[id] = 1; W(TK, tours); };
+  const tour = $('#tour'); let tOpen = false, tCleanup = null;
+  const blocked = () => ['#onboard', '#wn', '#vModal'].some(q => { const e = $(q); return e && e.classList.contains('open'); }) || !!document.querySelector('.sheet.open,.action-menu.open,.picker.open,.scrim.open');
+  function startTour(id, force) {
+    const T = TUTS[id]; if (!T || tOpen) return;
+    if (!force && (blocked() || tours[id])) return;
+    let tries = 0, last = '', raf = 0;
+    const end = (done) => { cancelAnimationFrame(raf); tour.classList.remove('open'); tour.setAttribute('aria-hidden', 'true'); tOpen = false; if (tCleanup) tCleanup(); tCleanup = null; if (done) { tours[id] = 1; W(TK, tours); } };
     const place = () => {
-      const st = T.steps[i], el = document.querySelector(st.sel);
-      if (!el || !el.getBoundingClientRect().width) { end(); return; }
+      const el = vis(T.sel); if (!el) return false;
       const r = el.getBoundingClientRect(), p = 8, h = $('#tHole'), tip = $('#tTip'), ar = $('#tArrow');
       h.style.cssText = `left:${r.left - p}px;top:${r.top - p}px;width:${r.width + 2 * p}px;height:${r.height + 2 * p}px`;
-      $('#tTitle').textContent = st.t; $('#tText').textContent = st.x;
-      const last = i === T.steps.length - 1; $('#tNext').textContent = last ? 'Got it' : 'Next'; $('#tSkip').hidden = last && T.steps.length === 1;
-      const w = Math.min(320, innerWidth - 24); tip.style.width = w + 'px';
-      const th = tip.offsetHeight, below = innerHeight - r.bottom > th + 70;
-      tip.style.left = Math.max(12, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 12)) + 'px';
-      tip.style.top = (below ? r.bottom + p + 36 : r.top - p - 36 - th) + 'px';
-      ar.style.left = (r.left + r.width / 2 - 13) + 'px'; ar.style.top = (below ? r.bottom + p + 6 : r.top - p - 32) + 'px'; ar.style.transform = below ? '' : 'rotate(180deg)';
+      $('#tTitle').textContent = T.t; $('#tText').textContent = T.x; $('#tNext').textContent = 'Got it'; $('#tSkip').hidden = false;
+      const w = Math.min(320, innerWidth - 24); tip.style.width = w + 'px'; const th = tip.offsetHeight;
+      const spaceB = innerHeight - r.bottom - p, spaceA = r.top - p, need = th + 52, below = spaceB >= need || spaceB >= spaceA;
+      const cx = r.left + r.width / 2, ay = below ? r.bottom + p + 4 : r.top - p - 30;
+      let ty = below ? r.bottom + p + 40 : r.top - p - 40 - th; ty = Math.max(12, Math.min(ty, innerHeight - th - 12));
+      tip.style.left = Math.max(12, Math.min(cx - w / 2, innerWidth - w - 12)) + 'px'; tip.style.top = ty + 'px';
+      ar.style.left = Math.max(8, Math.min(cx - 13, innerWidth - 34)) + 'px'; ar.style.top = ay + 'px'; ar.style.transform = below ? '' : 'rotate(180deg)';
+      return true;
     };
-    tOpen = true; tour.classList.add('open'); tour.setAttribute('aria-hidden', 'false'); addEventListener('resize', place);
-    $('#tNext').onclick = () => { if (i >= T.steps.length - 1) end(); else { i++; place(); } };
-    $('#tSkip').onclick = end;
-    place(); setTimeout(() => $('#tNext').focus({ preventScroll: true }), 50);
+    const settle = () => { /* wait for screen transitions: target rect must be stable over two frames */
+      const el = vis(T.sel);
+      if (!el) { if (++tries > 40) { end(false); return; } raf = requestAnimationFrame(settle); return; }
+      const r = el.getBoundingClientRect(), key = [r.left, r.top, r.width, r.height].map(Math.round).join();
+      if (key !== last) { last = key; tries = 0; raf = requestAnimationFrame(settle); return; }
+      if (++tries < 2) { raf = requestAnimationFrame(settle); return; }
+      tOpen = true; tour.classList.add('open'); tour.setAttribute('aria-hidden', 'false');
+      const re = () => { if (tOpen && !place()) end(false); };
+      addEventListener('resize', re); addEventListener('scroll', re, true); const ro = window.ResizeObserver ? new ResizeObserver(re) : null; ro && ro.observe(el);
+      tCleanup = () => { removeEventListener('resize', re); removeEventListener('scroll', re, true); ro && ro.disconnect(); };
+      place(); $('#tNext').onclick = () => end(true); $('#tSkip').onclick = () => end(true); setTimeout(() => $('#tNext').focus({ preventScroll: true }), 50);
+    };
+    settle(); tOpen = tOpen || false;
   }
   function autoTour(ids) {
-    ids = [].concat(ids);
-    if (autoShown || tOpen || $('#onboard').classList.contains('open') || $('#wn').classList.contains('open')) return;
-    const id = ids.find(k => !tours[k] && (!TUTS[k].need || TUTS[k].need()));
-    if (!id) return; autoShown = true;
-    setTimeout(() => { if (!tOpen && !$('#wn').classList.contains('open')) startTour(id); }, 800);
+    ids = [].concat(ids); if (autoShown || tOpen || blocked()) return;
+    const id = ids.find(k => TUTS[k] && !tours[k] && (!TUTS[k].need || TUTS[k].need())); if (!id) return; autoShown = true;
+    setTimeout(() => { if (!tOpen && !blocked()) startTour(id); else autoShown = false; }, 700);
   }
   window.__autoTour = autoTour;
-  const SC = { notesScreen: ['search', 'pin'], foldersScreen: ['folders'], settingsScreen: ['backup'], editorScreen: ['tags'] };
+  const SC = { notesScreen: ['search', 'pin'], foldersScreen: ['folders'], editorScreen: ['tags'] };
   Object.keys(SC).forEach(id => { const el = $('#' + id); let was = false; new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) autoTour(SC[id]); was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] }); });
+  /* replay from Settings → Help */
+  $('#tipsRow').onclick = () => modal({ title: 'Feature tips', html: Object.keys(TUTS).map(k => `<button type="button" class="vm-row" data-tip="${k}"><span>${TUTS[k].label}</span></button>`).join(''), buttons: [{ label: 'Close' }],
+    onOpen: () => document.querySelectorAll('#vmBody [data-tip]').forEach(b => b.onclick = () => { const k = b.dataset.tip; closeModal(); if (TUTS[k].need && !TUTS[k].need()) { toast('Add a note first to see this tip'); return; } closeAllScreens(); TUTS[k].enter(); setTimeout(() => startTour(k, true), 350); }) });
 
   /* ---- deep links: shortcuts + notification taps ---- */
   function openById(id) { const n = noteOf(id); if (n) openEditor(n, null); }
@@ -3220,44 +3278,25 @@ function refreshFromStorage() {
   setTimeout(() => { handleLink(); if (hasOnboarded() && !notes.length && !anyTabOpen()) autoTour('create'); }, 600);
 })();
 
-/* ============ Storage & Local Backup (v0.6) ============ */
+/* ============ Storage center (v0.7) ============ */
 (() => {
-  const LK = 'void.lastExport.v1', nap = () => new Promise(r => setTimeout(r, 60));
   const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+  const size = k => { try { return (localStorage.getItem(k) || '').length * 2; } catch { return 0; } };
   async function paint() {
-    $('#bkNotes').textContent = notes.length; $('#bkFolders').textContent = folders.length; $('#bkDeleted').textContent = deleted.length;
-    let own = 0; try { own = new Blob([localStorage.getItem(KEY) || '']).size; } catch {}
-    let txt = 'Notes data: about ' + fmt(own) + ' (estimate)';
-    try { const e = navigator.storage && navigator.storage.estimate && await navigator.storage.estimate(); if (e && e.quota) txt += ' · browser quota may differ'; } catch {}
-    $('#bkUsage').textContent = txt;
-    let t = null; try { t = localStorage.getItem(LK); } catch {}
-    $('#bkLast').textContent = t ? 'Last export ' + new Date(+t).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : 'Not exported yet';
+    $('#bkNotes').textContent = notes.length; $('#bkPinned').textContent = notes.filter(n => n.pinned).length; $('#bkFolders').textContent = folders.length; $('#bkDeleted').textContent = deleted.length;
+    $('#clearDeletedBtn').disabled = !deleted.length;
+    const own = size(KEY) + size(DELETED_KEY) + size(FOLDERS_KEY); let txt = 'VOID data: about ' + fmt(own) + ' (estimate, 2 bytes per character)';
+    let pct = 0, warn = '';
+    try { const e = navigator.storage && navigator.storage.estimate && await navigator.storage.estimate(); if (e && e.quota) { pct = Math.min(100, (e.usage || 0) / e.quota * 100); txt += ' · Browser reports ' + fmt(e.usage || 0) + ' of ' + fmt(e.quota) + ' used for this site (estimate)'; if (pct > 80) warn = 'Browser storage is almost full. Clear deleted notes or remove large notes.'; } else txt += ' · Quota not reported by this browser'; } catch {}
+    $('#bkUsage').textContent = txt; $('#bkFill').style.width = Math.max(1, pct) + '%';
+    const st = $('#bkStatus'); st.textContent = warn; st.classList.toggle('err', !!warn);
+    const big = notes.map(n => ({ n, b: ((n.title || '').length + (n.body || '').length) * 2 })).filter(x => x.b > 20480).sort((a, b) => b.b - a.b).slice(0, 3);
+    $('#bkLarge').textContent = big.length ? 'Largest notes: ' + big.map(x => (x.n.title || 'Untitled') + ' (' + fmt(x.b) + ')').join(', ') : 'No unusually large notes.';
   }
-  const set = (p, m, err) => { $('#bkFill').style.width = p + '%'; const e = $('#bkStatus'); e.textContent = m; e.classList.toggle('err', !!err); };
-  let busy = false;
-  $('#exportBtn').onclick = async () => {
-    if (busy) return; busy = true; const btn = $('#exportBtn'); btn.disabled = true;
-    try {
-      set(15, 'Collecting notes…'); await nap();
-      const now = new Date();
-      const data = { app: 'VOID', format: 'void-backup', formatVersion: 1, exportedAt: now.toISOString(), counts: { notes: notes.length, deleted: deleted.length, folders: folders.length }, notes, deleted, folders };
-      set(40, 'Encoding…'); await nap();
-      const json = JSON.stringify(data, null, 2);
-      set(65, 'Verifying…'); await nap();
-      const back = JSON.parse(json);
-      const ids = a => a.map(n => n.id).join('|');
-      if (back.notes.length !== notes.length || back.deleted.length !== deleted.length || back.folders.length !== folders.length || ids(back.notes) !== ids(notes)) throw new Error('verify');
-      set(85, 'Saving file…'); await nap();
-      const d = now.toISOString().slice(0, 10), url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
-      const a = document.createElement('a'); a.href = url; a.download = `VOID-backup-${d}.json`; document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 4000);
-      try { localStorage.setItem(LK, String(Date.now())); } catch {}
-      set(100, `Exported ${notes.length} note${notes.length === 1 ? '' : 's'}, verified. Your notes were not changed.`); toast('Backup exported');
-    } catch { set(0, 'Export failed. Nothing was changed.', true); toast('Could not export', 'warn'); }
-    btn.disabled = false; busy = false; paint();
-  };
+  $('#clearDeletedBtn').onclick = () => { if (!deleted.length) return; const c = deleted.length;
+    window.__vmodal && window.__vmodal({ title: 'Clear deleted notes?', html: c + (c === 1 ? ' note' : ' notes') + ' will be removed for good. This cannot be undone.', buttons: [{ label: 'Remove for good', danger: true, fn: () => { const keep = deleted.slice(); deleted.length = 0; if (!persistDeleted()) { keep.forEach(x => deleted.push(x)); toast('Could not clear. Nothing was changed.', 'warn'); return; } try { renderDeleted(); } catch {} paint(); toast('Deleted notes cleared'); } }, { label: 'Keep them' }] }); };
   const el = $('#settingsScreen'); let was = false;
-  new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) { set(0, ''); paint(); } was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) paint(); was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] });
 })();
 
 /* ============ v0.6 essential: select, What's New, prefs, mascot ============ */
@@ -3319,7 +3358,7 @@ function refreshFromStorage() {
   paintPrefs();
 
   /* What's New: shown once per release, entry in Settings for 24h */
-  const WK = 'void.whatsnew.v1', REL = '0.6', DAY = 864e5, wn = $('#wn');
+  const WK = 'void.whatsnew.v1', REL = '0.7', DAY = 864e5, wn = $('#wn');
   let rec = null; try { rec = JSON.parse(localStorage.getItem(WK)); } catch {}
   const saveRec = () => { try { localStorage.setItem(WK, JSON.stringify(rec)); } catch {} };
   const paintRow = () => { const live = rec && rec.id === REL && rec.at && Date.now() - rec.at < DAY; $('#wnRow').hidden = !live; };
@@ -3345,12 +3384,62 @@ window.addEventListener('resize', debounce(initIndicator, 120));
 
 // Initial render
 renderNotes(true);
-renderFolders();
-renderDeleted();
 paintHome();
 syncNav();
+(window.requestIdleCallback || (f => setTimeout(f, 200)))(() => { renderFolders(); renderDeleted(); });
+
+/* ============ v0.7: install hero, splash, mascot life ============ */
+(() => {
+  const h = $('#installHero'), st = $('#ihState'), go = $('#ihGo'), no = $('#ihNo');
+  const close = () => h.classList.remove('open');
+  window.__showHero = () => { if (!document.querySelector('#onboard.open,#wn.open')) h.classList.add('open'); };
+  go.onclick = async () => { go.disabled = true; st.textContent = 'Waiting for your choice…'; await window.__install(); if (!/Installing/.test(st.textContent)) { st.textContent = ''; go.disabled = false; close(); } };
+  window.__heroAccepted = () => { st.textContent = 'Installing… this can take a moment.'; no.hidden = true; };
+  window.__heroInstalled = () => { st.textContent = 'VOID is installed. Open it from your home screen.'; go.hidden = true; no.hidden = false; no.textContent = 'Continue'; };
+  no.onclick = close;
+  if (matchMedia('(display-mode: standalone)').matches) h.remove();
+  /* splash: leaves as soon as the first frame is ready */
+  const sp = $('#splash'); requestAnimationFrame(() => setTimeout(() => { sp.classList.add('out'); setTimeout(() => sp.remove(), 400); }, 350));
+  /* mascot expressions */
+  const m = $('#mascot'), mouth = m.querySelector('.mouth'), eyes = m.querySelector('.eyes');
+  const M = { happy: 'M27 43q4 4 8 0', calm: 'M28 44q3 2 6 0', surprised: 'M29 43q2 4 4 0', sleepy: 'M28 44h6', wink: 'M26 43q5 6 10 0' };
+  let cur = 'happy', t, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function face(k) { cur = k; ['wink', 'sleepy', 'surprised'].forEach(c => m.classList.toggle('x-' + c, c === k)); mouth.setAttribute('d', M[k]); }
+  function idle() { clearTimeout(t); t = setTimeout(() => { if (!document.hidden && !reduce) { const k = ['calm', 'wink', 'happy', 'sleepy'][Math.floor(Math.random() * 4)]; face(k); setTimeout(() => face('happy'), 1100); } idle(); }, 4500 + Math.random() * 3500); }
+  m.addEventListener('click', () => { face('surprised'); setTimeout(() => face('happy'), 700); });
+  document.addEventListener('pointerdown', e => { if (reduce || !m.offsetParent) return; const r = m.getBoundingClientRect(), dx = Math.max(-1, Math.min(1, (e.clientX - r.left - r.width / 2) / 200)), dy = Math.max(-1, Math.min(1, (e.clientY - r.top - r.height / 2) / 300)); eyes.style.translate = (dx * 2) + 'px ' + (dy * 2) + 'px'; setTimeout(() => eyes.style.translate = '', 900); }, { passive: true });
+  if (!reduce) { setTimeout(() => { face('surprised'); setTimeout(() => face('happy'), 600); }, 900); idle(); }
+})();
+
+
+/* ============ v0.7: undo / redo / duplicate ============ */
+(() => {
+  const ta = $('#noteBody'), bar = $('#formatBar'), U = bar.querySelector('[data-act=undo]'), R = bar.querySelector('[data-act=redo]');
+  let hist = [], pos = 0, tm;
+  const snap = () => { const v = ta.value; if (hist[pos] && hist[pos].v === v) return; hist = hist.slice(0, pos + 1); hist.push({ v, a: ta.selectionStart, b: ta.selectionEnd }); if (hist.length > 100) hist.shift(); pos = hist.length - 1; ui(); };
+  const ui = () => { U.disabled = pos <= 0; R.disabled = pos >= hist.length - 1; };
+  const reset = () => { hist = [{ v: ta.value, a: 0, b: 0 }]; pos = 0; ui(); };
+  const go = d => { const p = pos + d; if (p < 0 || p >= hist.length) return; clearTimeout(tm); pos = p; const h = hist[p]; ta.value = h.v; ta.setSelectionRange(h.a, h.b); ta.dispatchEvent(new Event('input', { bubbles: true })); ui(); };
+  ta.addEventListener('input', e => { if (e.isTrusted === false) return; clearTimeout(tm); tm = setTimeout(snap, 450); });
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.act) { e.stopPropagation(); e.preventDefault(); if (b.dataset.act === 'undo') go(-1); else if (b.dataset.act === 'redo') go(1); else dup(); return; }
+    setTimeout(snap, 30);
+  }, true);
+  bar.addEventListener('pointerdown', e => { if (e.target.closest('button')) e.preventDefault(); });
+  function dup() {
+    if (!editingNote) { toast('Save the note first, then duplicate it'); return; }
+    const now = Date.now(), t = ($('#noteTitle').value.trim() || 'Untitled') + ' copy';
+    const n = ensureNoteFields({ ...editingNote, id: uid(), title: t.slice(0, 120), body: ta.value, tags: [...editingTags], pinned: false, created: now, updated: now });
+    notes.unshift(n); if (!persistNotes()) { notes.shift(); toast('Could not duplicate. Nothing was changed.', 'warn'); return; }
+    try { renderNotes(); paintHome(); } catch {} toast('Duplicated as “' + n.title + '”');
+  }
+  const ed = $('#editorScreen'); let was = false;
+  new MutationObserver(() => { const on = ed.classList.contains('open'); if (on && !was) setTimeout(reset, 0); was = on; }).observe(ed, { attributes: true, attributeFilter: ['class'] });
+})();
 
 })();
+
 </script>
 </body>
 </html>

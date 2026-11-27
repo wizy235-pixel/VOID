@@ -2,7 +2,7 @@
   "id": "./",
   "name": "VOID",
   "short_name": "VOID",
-  "description": "A calm, private place to capture and organize your thoughts, notes and ideas.",
+  "description": "A fast, private notepad that works offline. Notes stay on your device.",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
@@ -79,5 +79,9 @@
     "minimal-ui"
   ],
   "lang": "en",
-  "dir": "ltr"
+  "dir": "ltr",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "prefer_related_applications": false
 }
