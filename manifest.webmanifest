@@ -32,5 +32,46 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "New note",
+      "short_name": "New note",
+      "description": "Start writing a new note",
+      "url": "./?action=new",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Open notes",
+      "short_name": "Notes",
+      "description": "Browse all notes",
+      "url": "./?action=notes",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Search notes",
+      "short_name": "Search",
+      "description": "Search your notes",
+      "url": "./?action=search",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }

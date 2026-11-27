@@ -1069,11 +1069,41 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 .ob-slide.active .oa-pill.p1{animation:obFloat 5s ease-in-out infinite}.ob-slide.active .oa-pill.p2{animation:obFloat 6s ease-in-out -2s infinite}
 .ob-slide.s2 .ob-glow{background:radial-gradient(closest-side,var(--rose-soft),transparent 72%)}
 @media(prefers-reduced-motion:reduce){.oa-orbit,.oa-caret,.oa-pill{animation:none!important}.hsearch,.install-card,.guide-card{transition-duration:.01s!important;animation:none!important}}
+
+/* ===== v0.6.2: offline, tours, reminders ===== */
+.net-pill{position:fixed;z-index:55;left:50%;top:calc(var(--safe-t) + 8px);transform:translate3d(-50%,-70px,0);padding:7px 14px;border-radius:16px;font-size:12px;font-weight:700;background:var(--sheet);border:1px solid var(--glass-line);color:var(--muted);box-shadow:var(--sh-2);transition:transform .3s var(--spring-soft);pointer-events:none;white-space:nowrap}
+.net-pill.show{transform:translate3d(-50%,0,0)}.net-pill.off{color:var(--rose);border-color:var(--rose-line)}
+.qa{display:flex;gap:10px;margin-top:10px}
+.qa-btn{flex:1;height:46px;border-radius:15px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;font-weight:700;background:var(--surface);border:1px solid var(--line);box-shadow:inset 0 1px 0 var(--hl)}
+.qa-btn .ic{width:17px;height:17px;color:var(--accent)}.qa-btn:active{transform:scale(.97)}
+.rem-row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line);text-align:left;margin-top:8px}
+.rem-row.due{border-color:var(--rose-line);background:var(--rose-soft)}
+.rem-row .ic{width:20px;height:20px;color:var(--accent);flex:none}.rem-row.due .ic{color:var(--rose)}
+.rem-row span{display:flex;flex-direction:column;min-width:0}.rem-row b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rem-row small{font-size:12px;color:var(--faint)}
+.qchips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.qchips button{flex:none;max-width:160px;height:36px;padding:0 14px;border-radius:18px;font-size:13px;font-weight:700;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vm{max-width:400px}.vm-body{text-align:left;margin-bottom:14px;font-size:14px;line-height:1.55;color:var(--muted)}
+.vm-body textarea,.vm-body input{width:100%;margin:6px 0;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:16px}
+.vm-body textarea{min-height:140px;resize:none}
+.vm-body .chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.vm-body .chips button{height:30px;padding:0 12px;border-radius:15px;font-size:12px;font-weight:700;background:var(--accent-soft);color:var(--accent)}
+.vm-body small{display:block;margin-top:8px;font-size:12px;color:var(--faint)}
+.vm-row{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:11px 0;border-bottom:1px solid var(--line);text-align:left;font-size:14px;font-weight:600;color:inherit}
+.vm-btns{display:flex;flex-direction:column;gap:8px}.vm-btns .btn{width:100%;height:46px;border-radius:14px}
+.btn.danger{color:var(--danger)}
+.tour{position:fixed;inset:0;z-index:60;visibility:hidden;opacity:0;transition:opacity .2s ease,visibility 0s linear .2s}
+.tour.open{visibility:visible;opacity:1;transition:opacity .2s ease}
+.tour-hole{position:absolute;border-radius:16px;box-shadow:0 0 0 100vmax rgba(0,0,0,.68),0 0 0 2px var(--accent),0 0 24px var(--accent-glow);transition:left .25s ease,top .25s ease,width .25s ease,height .25s ease}
+.tour-arrow{position:absolute;width:26px;height:26px;color:var(--accent);animation:tBob 1s ease-in-out infinite}
+@keyframes tBob{50%{margin-top:-8px}}
+.tour-tip{position:absolute;padding:16px;border-radius:20px;background:var(--sheet);border:1px solid var(--glass-line);box-shadow:var(--sh-2)}
+.tour-tip b{font-size:16px;font-weight:800;letter-spacing:-.02em}.tour-tip p{margin:6px 0 12px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.tour-btns{display:flex;justify-content:space-between;align-items:center}.tour-btns .btn{height:40px;padding:0 20px;border-radius:13px}
+@media(prefers-reduced-motion:reduce){.tour-arrow{animation:none}.tour-hole{transition:none}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M9 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="3.4"/></symbol>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M11.3 2.9a1.1 1.1 0 0 1 1.4 0l8 6.9c.2.2.3.5.3.8V19a2.2 2.2 0 0 1-2.2 2.2h-4.3v-5.5c0-.6-.5-1-1-1h-3c-.6 0-1 .4-1 1v5.5H5.2A2.2 2.2 0 0 1 3 19v-8.4c0-.3.1-.6.3-.8z"/></symbol>
 <symbol id="i-library" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.5 2.5h9a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-13a3 3 0 0 1 3-3zM8.4 7.4a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 11.2a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 15a.85.85 0 0 0 0 1.7h4.2a.85.85 0 0 0 0-1.7z"/></symbol>
 <symbol id="i-note" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.5 2.5h9a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-13a3 3 0 0 1 3-3zM8.4 7.4a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 11.2a.85.85 0 0 0 0 1.7h7.2a.85.85 0 0 0 0-1.7zM8.4 15a.85.85 0 0 0 0 1.7h4.2a.85.85 0 0 0 0-1.7z"/></symbol>
@@ -1159,6 +1189,12 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
       </button>
     </div>
 
+    <div class="qa" id="qaRow">
+      <button type="button" class="qa-btn" id="qcBtn"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg>Quick capture</button>
+      <button type="button" class="qa-btn" id="dailyBtn"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg>Today</button>
+    </div>
+    <div class="recent-wrap" id="remWrap" hidden><div class="recent-head"><h2>Reminders</h2></div><div id="remList"></div></div>
+    <div class="recent-wrap" id="pinWrap" hidden><div class="recent-head"><h2>Quick access</h2></div><div class="qchips" id="pinList"></div></div>
     <div class="recent-wrap" id="recentWrap" hidden>
       <div class="recent-head">
         <h2>Continue writing</h2>
@@ -1253,6 +1289,11 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
 
       <button class="list-row" id="installBtn" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Install VOID</b><small id="installSub">Add VOID to your home screen</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
 
+      <h3 class="group">Help &amp; tools</h3>
+      <button class="list-row" id="helpBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>Tutorials</b><small id="helpBtnSub">Replay any feature guide</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <button class="list-row" id="notifBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></span><span class="row-body"><b>Reminder notifications</b><small id="notifBtnSub">Checking…</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <button class="list-row" id="dailyOpt"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span><span class="row-body"><b>Daily notes</b><small id="dailyOptSub">On</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
+
       <h3 class="group">Backup &amp; Restore</h3>
       <button class="list-row" id="exportBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Export backup</b><small>Save your notes as a file</small></span></button>
       <button class="list-row" id="importBtn"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-upload"/></svg></span><span class="row-body"><b>Import backup</b><small>Bring notes back from a file</small></span></button>
@@ -1315,6 +1356,7 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
       <div class="head-right">
         <span id="saveState" data-state="editing">EDITING</span>
         <button class="icon-btn" id="focusBtn" aria-label="Focus mode"><svg class="ic" aria-hidden="true"><use href="#i-focus"/></svg></button>
+        <button class="icon-btn" id="remindBtn" aria-label="Reminder"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
         <button class="icon-btn" id="organizeBtn" aria-label="Category, folder and tags" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg></button>
         <button class="icon-btn on" id="formatToggle" aria-label="Formatting toolbar" aria-pressed="true">Aa</button>
         <button class="icon-btn danger" id="deleteNote" aria-label="Delete note" hidden><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>
@@ -1453,6 +1495,9 @@ body.editor-open .install-card,html.onb-open .install-card{display:none}
     </div>
   </div>
 
+  <div class="guide" id="vModal" role="dialog" aria-modal="true" aria-labelledby="vmTitle" aria-hidden="true"><div class="guide-card vm"><h3 id="vmTitle"></h3><div class="vm-body" id="vmBody"></div><div class="vm-btns" id="vmBtns"></div></div></div>
+  <div class="tour" id="tour" aria-hidden="true"><div class="tour-hole" id="tHole"></div><svg class="tour-arrow" id="tArrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 14h5v7h6v-7h5z" fill="currentColor"/></svg><div class="tour-tip" id="tTip" role="dialog" aria-live="polite"><b id="tTitle"></b><p id="tText"></p><div class="tour-btns"><button type="button" class="text-btn" id="tSkip">Skip</button><button type="button" class="btn primary" id="tNext">Next</button></div></div></div>
+  <div class="net-pill" id="netPill" role="status" aria-live="polite"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
@@ -1695,6 +1740,7 @@ function updateIndicator(btn, animate = true) {
 
 /* ============ HOME ============ */
 function paintHome() {
+  setTimeout(() => window.__paintExtras && window.__paintExtras(), 0);
   const hr = new Date().getHours();
   const greeting = hr < 5 ? 'GOOD NIGHT' : hr < 12 ? 'GOOD MORNING' : hr < 17 ? 'GOOD AFTERNOON' : hr < 21 ? 'GOOD EVENING' : 'GOOD NIGHT';
   const name = hr < 5 ? 'The night is quiet.' : hr < 12 ? 'A fresh page awaits.' : hr < 17 ? 'Your space to think.' : hr < 21 ? 'Slow down. Write.' : 'Rest, or write a little.';
@@ -2815,7 +2861,7 @@ function onbFinish() {
   document.documentElement.classList.remove('onb-open');
   const a = document.activeElement;
   if (a && a.blur) a.blur();
-  if (!onbReplay) { closeAllScreens(); paintHome(); }
+  if (!onbReplay) { closeAllScreens(); paintHome(); $('#introBtn').hidden = true; setTimeout(() => window.__autoTour && window.__autoTour('create'), 900); }
 }
 $('#obNext').onclick = () => { if (onbIndex >= ONB_SLIDES.length - 1) onbFinish(); else onbGo(onbIndex + 1); };
 $('#obBack').onclick = () => onbGo(onbIndex - 1);
@@ -3075,6 +3121,219 @@ function refreshFromStorage() {
       }).catch(() => {});
     });
   }
+})();
+
+
+/* ============ v0.6.2 FEATURES ============ */
+(() => {
+  const J = (k, d) => { try { return JSON.parse(localStorage.getItem(k) || ''); } catch { return d; } };
+  const W = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } };
+  const when = t => new Date(t).toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  const noteOf = id => notes.find(n => n.id === id);
+  const tt = n => (n && n.title) || 'Untitled';
+  const refresh = () => { try { paintHome(); renderNotes(); } catch {} };
+
+  /* ---- generic modal ---- */
+  function modal(o) {
+    const g = $('#vModal'); $('#vmTitle').textContent = o.title; $('#vmBody').innerHTML = o.html || '';
+    const bt = $('#vmBtns'); bt.innerHTML = '';
+    (o.buttons || []).forEach(b => { const e = document.createElement('button'); e.type = 'button'; e.className = 'btn' + (b.primary ? ' primary' : '') + (b.danger ? ' danger' : ''); e.textContent = b.label; e.onclick = () => { if (b.fn && b.fn() === false) return; closeModal(); }; bt.appendChild(e); });
+    g.classList.add('open'); g.setAttribute('aria-hidden', 'false'); if (o.onOpen) o.onOpen();
+  }
+  function closeModal() { const g = $('#vModal'); g.classList.remove('open'); g.setAttribute('aria-hidden', 'true'); }
+  $('#vModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+
+  /* ---- offline indicator ---- */
+  const pill = $('#netPill'); let pt;
+  const net = (txt, off) => { pill.textContent = txt; pill.classList.toggle('off', off); pill.classList.add('show'); clearTimeout(pt); if (!off) pt = setTimeout(() => pill.classList.remove('show'), 2200); };
+  addEventListener('offline', () => net('Offline · everything saves on this device', true));
+  addEventListener('online', () => { net('Back online', false); checkReminders(); navigator.serviceWorker && navigator.serviceWorker.getRegistration().then(r => r && r.update().catch(() => {})); });
+  if (!navigator.onLine) net('Offline · everything saves on this device', true);
+
+  /* ---- reminders (own key; notes schema untouched) ---- */
+  const RK = 'void.reminders.v1';
+  let rems = J(RK, []); if (!Array.isArray(rems)) rems = [];
+  const saveRems = () => { if (!W(RK, rems)) toast("Couldn't save reminder", 'warn'); };
+  const notifState = () => !('Notification' in window) ? 'unsupported' : Notification.permission;
+  let rt = null;
+  function scheduleNext() {
+    clearTimeout(rt);
+    const next = rems.filter(r => !r.done && !r.fired).sort((a, b) => a.at - b.at)[0];
+    if (next) rt = setTimeout(checkReminders, Math.min(Math.max(next.at - Date.now(), 0), 2147e6) + 50);   // one timer, only while the page is alive
+  }
+  async function fire(r) {
+    const n = noteOf(r.noteId);
+    toast('Reminder: ' + tt(n));
+    if (notifState() !== 'granted') return;
+    const o = { body: ((n && n.body) || '').slice(0, 100) || 'Tap to open this note.', tag: 'void-rem-' + r.id, icon: 'icon-192.png', badge: 'icon-192.png', data: { noteId: r.noteId } };
+    try { const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration(); if (reg) await reg.showNotification('VOID · ' + tt(n), o); else new Notification('VOID · ' + tt(n), o); } catch {}
+  }
+  function checkReminders() {
+    const now = Date.now(); let any = false;
+    rems.forEach(r => { if (!r.done && !r.fired && r.at <= now) { r.fired = true; any = true; fire(r); } });
+    if (any) { saveRems(); paintExtras(); }
+    scheduleNext();
+  }
+  function hint() {
+    const st = notifState();
+    return st === 'unsupported' ? 'This browser can’t show notifications. The reminder will still appear inside VOID.'
+      : st === 'denied' ? 'Notifications are blocked for this site, so the reminder will appear inside VOID only. You can allow them in your browser’s site settings.'
+      : st === 'default' ? 'To be alerted with a notification, turn on Reminder notifications in Settings. Until then the reminder shows inside VOID.'
+      : 'You’ll get a notification while VOID is open or running in the background. VOID can’t wake a fully closed app, so a reminder due then appears the next time you open it.';
+  }
+  function remModal(noteId, ex) {
+    const n = noteOf(noteId); if (!n) return;
+    const d = new Date(ex ? ex.at : Date.now() + 36e5); d.setSeconds(0, 0);
+    const local = new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
+    const due = ex && ex.fired && !ex.done;
+    const btns = [{ label: ex ? 'Update reminder' : 'Set reminder', primary: true, fn: () => {
+      const v = $('#remAt').value, at = v ? new Date(v).getTime() : NaN;
+      if (!at || at <= Date.now()) { toast('Pick a time in the future', 'warn'); return false; }
+      rems = rems.filter(r => r.noteId !== noteId);
+      rems.push({ id: ex ? ex.id : uid(), noteId, at, done: false, fired: false });
+      saveRems(); scheduleNext(); paintExtras(); toast('Reminder set for ' + when(at));
+    } }];
+    if (ex) { btns.push({ label: 'Open note', fn: () => { openEditor(n, null); } });
+      if (due) btns.push({ label: 'Dismiss', fn: () => { ex.done = true; saveRems(); paintExtras(); } });
+      btns.push({ label: 'Delete reminder', danger: true, fn: () => { rems = rems.filter(r => r.id !== ex.id); saveRems(); scheduleNext(); paintExtras(); toast('Reminder deleted'); } }); }
+    btns.push({ label: 'Cancel' });
+    modal({ title: 'Reminder', html: `<b>${safe(tt(n))}</b><input type="datetime-local" id="remAt" value="${local}"><div class="chips"><button type="button" data-q="3600000">In 1 hour</button><button type="button" data-q="tonight">This evening</button><button type="button" data-q="tomorrow">Tomorrow 9:00</button></div><small>${hint()}</small>`, buttons: btns,
+      onOpen: () => $('#vmBody').querySelectorAll('[data-q]').forEach(b => b.onclick = () => {
+        const q = b.dataset.q, t = new Date();
+        if (q === 'tonight') { t.setHours(20, 0, 0, 0); if (t <= Date.now()) t.setDate(t.getDate() + 1); } else if (q === 'tomorrow') { t.setDate(t.getDate() + 1); t.setHours(9, 0, 0, 0); } else t.setTime(Date.now() + +q);
+        $('#remAt').value = new Date(t.getTime() - t.getTimezoneOffset() * 6e4).toISOString().slice(0, 16); }) });
+  }
+  $('#remindBtn').onclick = () => {
+    if (!editingId || !noteOf(editingId)) { toast('Write something first, then set a reminder'); return; }
+    remModal(editingId, rems.find(r => r.noteId === editingId && !r.done));
+  };
+  $('#remList').addEventListener('click', e => { const b = e.target.closest('[data-rid]'); if (!b) return; const r = rems.find(x => x.id === b.dataset.rid); if (r) remModal(r.noteId, r); });
+  $('#pinList').addEventListener('click', e => { const b = e.target.closest('[data-nid]'); const n = b && noteOf(b.dataset.nid); if (n) openEditor(n, null); });
+
+  async function notifTap() {
+    const st = notifState();
+    if (st === 'unsupported') return modal({ title: 'Notifications unavailable', html: 'This browser doesn’t support notifications. Reminders still work inside VOID.', buttons: [{ label: 'OK', primary: true }] });
+    if (st === 'denied') return modal({ title: 'Notifications blocked', html: 'Allow notifications for this site in your browser’s site settings, then come back. Reminders still appear inside VOID.', buttons: [{ label: 'OK', primary: true }] });
+    if (st === 'default') { try { await Notification.requestPermission(); } catch {} paintNotif(); toast(notifState() === 'granted' ? 'Notifications on' : 'Notifications not enabled'); return; }
+    modal({ title: 'Notifications are on', html: 'VOID shows reminder notifications while it is open or running in the background. A fully closed app can’t be woken without a push server, which VOID doesn’t use, so those reminders wait for you inside VOID.', buttons: [{ label: 'Send test notification', primary: true, fn: () => { fire({ id: 'test', noteId: '' }); } }, { label: 'Close' }] });
+  }
+  function paintNotif() { const st = notifState(); $('#notifBtnSub').textContent = st === 'granted' ? 'On · tap for details' : st === 'denied' ? 'Blocked in browser settings' : st === 'unsupported' ? 'Not supported here' : 'Tap to turn on'; }
+  $('#notifBtn').onclick = notifTap;
+
+  /* ---- daily notes ---- */
+  const DK = 'void.daily.v1', OK = 'void.opt.v1';
+  let daily = J(DK, {}) || {}, opt = Object.assign({ daily: true }, J(OK, {}) || {});
+  const dkey = d => { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  function openDaily(key) {
+    key = key || dkey(); let n = noteOf(daily[key]);
+    if (!n) {
+      const d = new Date(key + 'T12:00:00'), now = Date.now();
+      n = ensureNoteFields({ id: uid(), title: 'Daily · ' + d.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' }), body: '', tags: ['daily'], created: now, updated: now });
+      notes.unshift(n); if (!persistNotes()) { notes.shift(); toast("Couldn't save", 'warn'); return; }
+      daily[key] = n.id; W(DK, daily); refresh();
+    }
+    openEditor(n, null);
+  }
+  $('#dailyBtn').onclick = () => openDaily();
+  function prevDaily() {
+    const keys = Object.keys(daily).filter(k => noteOf(daily[k])).sort().reverse();
+    modal({ title: 'Daily notes', html: keys.length ? keys.map(k => `<button type="button" class="vm-row" data-dk="${k}"><span>${safe(tt(noteOf(daily[k])))}</span></button>`).join('') : 'No daily notes yet. Tap Today to start one.', buttons: [{ label: 'Close' }],
+      onOpen: () => $('#vmBody').querySelectorAll('[data-dk]').forEach(b => b.onclick = () => { closeModal(); openDaily(b.dataset.dk); }) });
+  }
+  $('#dailyOpt').onclick = () => modal({ title: 'Daily notes', html: 'A dated note for each day, created only when you tap Today. Nothing is added automatically.', buttons: [
+    { label: opt.daily ? 'Turn off' : 'Turn on', primary: true, fn: () => { opt.daily = !opt.daily; W(OK, opt); paintExtras(); } },
+    { label: 'Previous daily notes', fn: () => { setTimeout(prevDaily, 50); } }, { label: 'Close' }] });
+
+  /* ---- quick capture ---- */
+  function capture() {
+    modal({ title: 'Quick capture', html: '<textarea id="qcText" placeholder="What’s on your mind?" autocomplete="off"></textarea><small>Saved as a normal note you can edit later.</small>', buttons: [
+      { label: 'Save note', primary: true, fn: () => {
+        const t = $('#qcText').value.trim(); if (!t) return;
+        const lines = t.split('\n'), now = Date.now();
+        const n = ensureNoteFields({ id: uid(), title: lines[0].slice(0, 60), body: lines.slice(1).join('\n').trim(), tags: [], created: now, updated: now });
+        notes.unshift(n); if (!persistNotes()) { notes.shift(); toast("Couldn't save. Your text is still here.", 'warn'); return false; }
+        freshId = n.id; refresh(); toast('Captured'); } }, { label: 'Discard' }],
+      onOpen: () => setTimeout(() => $('#qcText').focus(), 120) });
+  }
+  $('#qcBtn').onclick = capture;
+
+  /* ---- home extras ---- */
+  function paintExtras() {
+    $('#dailyBtn').hidden = !opt.daily;
+    $('#dailyOptSub').textContent = opt.daily ? 'On' : 'Off';
+    const up = rems.filter(r => !r.done && noteOf(r.noteId)).sort((a, b) => a.at - b.at).slice(0, 3);
+    $('#remWrap').hidden = !up.length;
+    $('#remList').innerHTML = up.map(r => { const d = r.fired; return `<button type="button" class="rem-row${d ? ' due' : ''}" data-rid="${r.id}">${ic('bell')}<span><b>${safe(tt(noteOf(r.noteId)))}</b><small>${d ? 'Due · ' : ''}${when(r.at)}</small></span></button>`; }).join('');
+    const pins = notes.filter(n => n.pinned).slice(0, 6);
+    $('#pinWrap').hidden = !pins.length;
+    $('#pinList').innerHTML = pins.map(n => `<button type="button" data-nid="${safe(n.id)}">${safe(tt(n))}</button>`).join('');
+  }
+  window.__paintExtras = paintExtras;
+
+  /* ---- contextual tutorials ---- */
+  const TK = 'void.tours.v1'; let tours = J(TK, {}) || {}; let autoShown = false;
+  const TUTS = {
+    create: { label: 'Create a note', steps: [{ sel: '#navCreateBtn', t: 'Start a note', x: 'Tap + to open a blank page and write. Everything saves on this device as you type.' }], enter() { closeAllScreens(); } },
+    search: { label: 'Search notes', steps: [{ sel: '#searchBtn', t: 'Find anything', x: 'Search looks through titles, text and tags as you type.' }], enter() { openLibrary(); } },
+    folders: { label: 'Create folders', steps: [{ sel: '#newFolderBtn', t: 'Make a folder', x: 'Group related notes in folders, then pick the folder inside any note.' }], enter() { openScreen('foldersScreen'); } },
+    tags: { label: 'Use tags', steps: [{ sel: '#organizeBtn', t: 'Category, folder and tags', x: 'Open this panel to file a note and add tags to find it faster.' }], enter() { openEditor(null, null); } },
+    pin: { label: 'Pin notes', need: () => notes.length > 0, steps: [{ sel: '#notesGrid .note-card', t: 'Pin with a long press', x: 'Press and hold a note for quick actions like Pin, so it stays at the top.' }], enter() { openLibrary(); } },
+    backup: { label: 'Backup & Restore', steps: [{ sel: '#exportBtn', t: 'Export a backup', x: 'Save all your notes to a file you keep.' }, { sel: '#importBtn', t: 'Restore later', x: 'Import that file to bring your notes back on this or another device.' }], enter() { openScreen('settingsScreen'); } },
+    reminder: { label: 'Set a reminder', steps: [{ sel: '#remindBtn', t: 'Remind me', x: 'Pick a date and time for a note. Reminders show inside VOID, and as notifications if you turn them on.' }], enter() { openEditor(null, null); } }
+  };
+  const tour = $('#tour'); let tOpen = false;
+  function startTour(id) {
+    const T = TUTS[id]; if (!T || tOpen) return; let i = 0;
+    const end = () => { tour.classList.remove('open'); tour.setAttribute('aria-hidden', 'true'); tOpen = false; removeEventListener('resize', place); tours[id] = 1; W(TK, tours); };
+    const place = () => {
+      const st = T.steps[i], el = document.querySelector(st.sel);
+      if (!el || !el.getBoundingClientRect().width) { end(); return; }
+      const r = el.getBoundingClientRect(), p = 8, h = $('#tHole'), tip = $('#tTip'), ar = $('#tArrow');
+      h.style.cssText = `left:${r.left - p}px;top:${r.top - p}px;width:${r.width + 2 * p}px;height:${r.height + 2 * p}px`;
+      $('#tTitle').textContent = st.t; $('#tText').textContent = st.x;
+      const last = i === T.steps.length - 1; $('#tNext').textContent = last ? 'Got it' : 'Next'; $('#tSkip').hidden = last && T.steps.length === 1;
+      const w = Math.min(320, innerWidth - 24); tip.style.width = w + 'px';
+      const th = tip.offsetHeight, below = innerHeight - r.bottom > th + 70;
+      tip.style.left = Math.max(12, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 12)) + 'px';
+      tip.style.top = (below ? r.bottom + p + 36 : r.top - p - 36 - th) + 'px';
+      ar.style.left = (r.left + r.width / 2 - 13) + 'px'; ar.style.top = (below ? r.bottom + p + 6 : r.top - p - 32) + 'px'; ar.style.transform = below ? '' : 'rotate(180deg)';
+    };
+    tOpen = true; tour.classList.add('open'); tour.setAttribute('aria-hidden', 'false'); addEventListener('resize', place);
+    $('#tNext').onclick = () => { if (i >= T.steps.length - 1) end(); else { i++; place(); } };
+    $('#tSkip').onclick = end;
+    place(); setTimeout(() => $('#tNext').focus({ preventScroll: true }), 50);
+  }
+  function autoTour(ids) {
+    ids = [].concat(ids);
+    if (autoShown || tOpen || $('#onboard').classList.contains('open')) return;
+    const id = ids.find(k => !tours[k] && (!TUTS[k].need || TUTS[k].need()));
+    if (!id) return; autoShown = true;
+    setTimeout(() => { if (!tOpen) startTour(id); }, 800);
+  }
+  window.__autoTour = autoTour;
+  const SC = { notesScreen: ['search', 'pin'], foldersScreen: ['folders'], settingsScreen: ['backup'], editorScreen: ['tags', 'reminder'] };
+  Object.keys(SC).forEach(id => { const el = $('#' + id); let was = false; new MutationObserver(() => { const on = el.classList.contains('open'); if (on && !was) autoTour(SC[id]); was = on; }).observe(el, { attributes: true, attributeFilter: ['class'] }); });
+  $('#helpBtn').onclick = () => modal({ title: 'Tutorials', html: Object.keys(TUTS).map(k => `<button type="button" class="vm-row" data-t="${k}"><span>${TUTS[k].label}</span><span>${tours[k] ? 'Replay' : 'Show'}</span></button>`).join(''), buttons: [{ label: 'Close' }],
+    onOpen: () => $('#vmBody').querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const k = b.dataset.t; closeModal(); TUTS[k].enter(); setTimeout(() => startTour(k), 750); }) });
+
+  /* ---- deep links: shortcuts + notification taps ---- */
+  function openById(id) { const n = noteOf(id); if (n) openEditor(n, null); }
+  function handleLink() {
+    const q = new URLSearchParams(location.search), a = q.get('action'), id = q.get('note');
+    if (!a && !id) return;
+    history.replaceState(null, '', location.pathname);
+    if ($('#onboard').classList.contains('open')) return;
+    if (id) openById(id);
+    else if (a === 'new') openEditor(null, null);
+    else if (a === 'notes') openLibrary();
+    else if (a === 'search') { openLibrary(); setTimeout(() => $('#searchBtn').click(), 350); }
+  }
+  navigator.serviceWorker && navigator.serviceWorker.addEventListener('message', e => { if (e.data && e.data.type === 'open-note') openById(e.data.id); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) checkReminders(); });
+
+  if (hasOnboarded()) $('#introBtn').hidden = true;
+  paintNotif(); paintExtras(); checkReminders();
+  setTimeout(() => { handleLink(); if (hasOnboarded() && !notes.length && !anyTabOpen()) autoTour('create'); }, 600);
 })();
 
 // Init indicator
