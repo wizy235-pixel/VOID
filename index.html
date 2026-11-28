@@ -380,7 +380,7 @@ header{
 }
 .search:focus-within{border-color:var(--accent-line);box-shadow:0 0 0 4px var(--accent-soft),inset 0 1px 0 var(--hl)}
 .search .ic{color:var(--muted);width:19px;height:19px}
-.search input{border:0;outline:0;background:transparent;width:100%;min-width:0;font-size:15px;-webkit-appearance:none}
+.search input{border:0;outline:0;background:transparent;width:100%;min-width:0;font-size:16px;-webkit-appearance:none}
 .search input::placeholder{color:var(--faint)}
 .cat-seg.lib-seg{grid-template-columns:repeat(4,1fr);margin:10px 0 0}
 .cat-seg.lib-seg .cat-seg-thumb{width:calc((100% - 8px)/4);transition:transform .5s var(--spring),opacity .2s}
@@ -1211,6 +1211,125 @@ body.ms-on #notesGrid,body.ms-on #deletedList{margin-bottom:84px}
 .att-view .bar{display:flex;justify-content:space-between;padding:calc(var(--safe-t,0px) + 8px) 12px 8px}.att-view .bar button{color:#fff;font-weight:700;height:40px;padding:0 14px}
 .att-view .stage{flex:1;min-height:0;display:grid;place-items:center}.att-view img,.att-view video{max-width:100%;max-height:100%}
 @media(prefers-reduced-motion:reduce){.att-tile,.att-spin{animation:none}.nc-chk,.ms-top,.ms-acts{transition:none}}
+
+/* ===== v0.9: select bars fix, iPhone-style editor, player, polish ===== */
+/* The old rule left a translate on #msBar when open; that moved the fixed bars off-screen. */
+#msBar,#msBar.open{transform:none}
+.ms-top{height:calc(var(--safe-t,0px) + 66px);padding:var(--safe-t,0px) 16px 0;box-sizing:border-box}
+.ms-top .text-btn{font-size:16px;font-weight:600;color:var(--accent);height:44px;padding:0 2px}
+.ms-top #msCount{font-size:16px}
+body.ms-on #deletedList [data-deleted]:after{top:50%;margin-top:-10px;right:14px}
+body.ms-on #deletedList .row-end{opacity:0}
+body.ms-on #deletedList .sel:after{margin-top:-10px}
+.ms-top b{font-weight:700}
+.ms-act span{white-space:nowrap}
+.ms-act:disabled{opacity:.38}
+.toast{z-index:80}.net-pill{z-index:81}
+body.tab-open .mascot svg,body.tab-open .mascot .eyes,body.editor-open .mascot svg{animation-play-state:paused}
+input:not([type=range]):not([type=checkbox]),textarea{touch-action:manipulation}
+.tag-input,.sheet-input,#qcText,.vm-body textarea{font-size:16px!important}
+
+/* --- editor: iPhone Notes style --- */
+.screen.editor{--ed-font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg)}
+.editor-top{padding:calc(var(--safe-t) + 4px) 6px 4px 2px;min-height:calc(var(--safe-t) + 52px);gap:4px;border-bottom:1px solid transparent;background:var(--bg);transition:border-color .2s}
+.editor.scrolled .editor-top{border-bottom-color:var(--line)}
+.ed-back{display:flex;align-items:center;height:44px;padding:0 12px 0 2px;color:var(--accent);font:500 17px var(--ed-font);letter-spacing:-.01em;border-radius:12px}
+.ed-back .ic{width:28px;height:28px;margin-right:-2px}
+.ed-back:active{opacity:.5}
+.ed-done{height:44px;padding:0 10px;color:var(--accent);font:600 17px var(--ed-font);letter-spacing:-.01em}
+.ed-done:active{opacity:.5}
+.ed-more{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--accent);background:var(--surface-3);margin-left:2px}
+.ed-more .ic{width:22px;height:22px}
+.ed-more:active{opacity:.6}
+#saveState{font:500 12px var(--ed-font)!important;color:var(--faint);margin-right:2px}
+.editor-scroll{padding:4px calc(var(--px) + 2px) 24px;font-family:var(--ed-font);scroll-padding-bottom:90px}
+.editor-meta{text-align:center;font:500 12px var(--ed-font)!important;color:var(--faint);margin:6px 0 12px;letter-spacing:0}
+.editor-title{font:700 28px/1.2 var(--ed-font);letter-spacing:-.022em;padding:2px 0 6px;caret-color:var(--accent)}
+.editor-stats{flex:none;text-align:center;font:500 11.5px var(--ed-font)!important;color:var(--faint);margin:0 0 6px;white-space:normal;min-height:0}
+.editor-stats:empty{display:none}
+.editor-body{border-top:0;font:400 17px/1.47 var(--ed-font);letter-spacing:-.011em;padding:8px 0 140px;min-height:55vh;margin-top:0;caret-color:var(--accent);-webkit-text-size-adjust:100%}
+.editor-body::placeholder,.editor-title::placeholder{color:var(--faint);opacity:.8}
+@supports (field-sizing:content){.editor-body{field-sizing:content;height:auto!important}}
+.org-card{display:none;margin:2px 0 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);overflow:hidden;flex:none}
+.editor.organize .org-card{display:block}
+.org-card .row-field{margin:0;padding:10px 14px;gap:12px;flex-wrap:nowrap}
+.org-card .row-field~.row-field{border-top:1px solid var(--line)}
+.org-card .row-field label{width:62px;flex:none}
+.org-card .pick-trigger{flex:1;min-width:0}
+.editor.focus-mode .org-card,.editor.focus-mode .editor-stats{display:none}
+
+/* toolbar that sits right on top of the keyboard */
+.format-bar{display:flex;flex-direction:column;gap:0;padding:0;overflow:visible;background:var(--bg);border-top:1px solid var(--line)}
+.fb-main,.fb-fmt{display:flex;align-items:center}
+.fb-main{gap:2px;padding:4px 8px calc(4px + var(--safe-b))}
+.editor.kb .fb-main{padding-bottom:4px}
+.fb-fmt{gap:6px;padding:8px 12px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.fb-fmt::-webkit-scrollbar{display:none}
+.format-bar .fb-main button{flex:1 1 0;max-width:62px;min-width:40px;height:44px;border:0;background:none;color:var(--accent);border-radius:12px;display:grid;place-items:center;font:600 15px var(--ed-font)}
+.format-bar .fb-main button .ic{width:23px;height:23px}
+.format-bar .fb-main button:active{background:var(--accent-soft);transform:none}
+.format-bar .fb-main button[disabled]{opacity:.32}
+.format-bar .fb-main .fb-aa span{font:600 19px var(--ed-font);letter-spacing:-.02em}
+.format-bar .fb-main .fb-aa.on{background:var(--accent-soft)}
+.format-bar .att-btn{background:none!important;color:var(--accent)!important;border-radius:12px!important}
+.format-bar .fb-fmt button{flex:1 1 0;min-width:0;height:38px;border:0;background:var(--surface-3);color:var(--text);border-radius:10px;font:600 15px var(--ed-font);display:grid;place-items:center}
+.format-bar .fb-fmt button:active{background:var(--accent-soft);color:var(--accent)}
+.fb-kb{display:none!important}
+.editor.kb .fb-kb{display:grid!important}
+.editor.kb .fb-main{gap:0}
+
+/* --- What's New countdown --- */
+.wn-count{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 12px;padding:9px 12px;border-radius:13px;background:var(--accent-soft);border:1px solid var(--accent-line);font-size:12px;color:var(--muted)}
+.wn-count .ic{width:16px;height:16px;color:var(--accent);fill:none}
+.wn-count b{font:600 14px var(--mono);color:var(--text);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+
+/* --- built-in video player --- */
+.vp{position:fixed;inset:0;z-index:70;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,sans-serif;-webkit-user-select:none;user-select:none;touch-action:none;overflow:hidden;animation:vpIn .22s ease both;transition:opacity .18s}
+@keyframes vpIn{from{opacity:0}}
+.vp.out{opacity:0}
+.vp-v{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.vp-hit{position:absolute;inset:0;cursor:pointer}
+.vp-ui{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .22s}
+.vp.show .vp-ui{opacity:1}
+.vp:not(.show){cursor:none}
+.vp.show .vp-ui button,.vp.show .vp-seek,.vp.show .vp-vol{pointer-events:auto}
+.vp button{color:#fff;-webkit-tap-highlight-color:transparent}
+.vp-top{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:calc(var(--safe-t,0px) + 8px) 10px 30px;background:linear-gradient(rgba(0,0,0,.66),transparent)}
+.vp-title{flex:1;min-width:0;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;opacity:.92}
+.vp-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none}
+.vp-btn:active{background:rgba(255,255,255,.18)}
+.vp-btn .ic,.vp-btn svg{width:24px;height:24px}
+.vp-mid{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:30px}
+.vp-mid .vp-btn{width:54px;height:54px}
+.vp-mid .vp-btn svg{width:34px;height:34px}
+.vp-play{width:74px!important;height:74px!important;background:rgba(30,30,34,.62)}
+.vp-play svg{width:34px!important;height:34px!important}
+.vp-bot{position:absolute;left:0;right:0;bottom:0;padding:38px 16px calc(var(--safe-b,0px) + 10px);background:linear-gradient(transparent,rgba(0,0,0,.74))}
+.vp-seek{position:relative;height:30px;display:flex;align-items:center}
+.vp-track{position:relative;flex:1;height:4px;border-radius:3px;background:rgba(255,255,255,.26);overflow:hidden;transition:height .15s}
+.vp-buf,.vp-prog{position:absolute;left:0;top:0;bottom:0;width:0}
+.vp-buf{background:rgba(255,255,255,.34)}
+.vp-prog{background:linear-gradient(90deg,#e08fc4,#a98be8)}
+.vp-knob{position:absolute;top:50%;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5);transition:transform .15s}
+.vp-seek.drag .vp-track{height:8px}
+.vp-seek.drag .vp-knob{transform:scale(1.55)}
+.vp-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;touch-action:none;-webkit-appearance:none;appearance:none}
+.vp-times{display:flex;justify-content:space-between;font:600 12.5px/1 inherit;font-variant-numeric:tabular-nums;opacity:.9;margin:2px 2px 4px}
+.vp-tools{display:flex;align-items:center;gap:4px}
+.vp-tools .sp{flex:1}
+.vp-rate{height:34px;min-width:52px;padding:0 12px;border-radius:17px;background:rgba(255,255,255,.16);font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.vp-vol{width:90px;display:none;accent-color:#c4adff}
+@media(hover:hover) and (pointer:fine){.vp-vol{display:block}}
+.vp-flash{position:absolute;top:50%;width:96px;height:96px;margin-top:-48px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:15px;font-weight:700;opacity:0;pointer-events:none}
+.vp-flash.l{left:6%}.vp-flash.r{right:6%}
+.vp-flash.go{animation:vpFlash .55s ease-out}
+@keyframes vpFlash{0%{opacity:0;transform:scale(.7)}25%{opacity:1}100%{opacity:0;transform:scale(1.1)}}
+.vp-spin{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;animation:ptrSpin .8s linear infinite;pointer-events:none}
+.vp-err{position:absolute;inset:0;display:grid;place-items:center;padding:30px;text-align:center;font-size:15px;line-height:1.5;color:#ddd;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.vp,.vp-ui,.vp-flash.go{animation:none;transition:none}}
+
+html.restoring .screen{transition:none!important}
+
 </style>
 </head>
 <body><div class="splash" id="splash" aria-hidden="true"><img src="icon-192.png" alt="" width="84" height="84"></div>
@@ -1414,9 +1533,9 @@ body.ms-on #notesGrid,body.ms-on #deletedList{margin-bottom:84px}
             <button class="list-row" id="installBtn" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></span><span class="row-body"><b>Install VOID</b><small id="installSub">Add VOID to your home screen</small></span><svg class="ic row-end" aria-hidden="true"><use href="#i-chev"/></svg></button>
 
       <h3 class="group">About VOID</h3>
-      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.8</b><small>Notes, media and storage</small></span></button>
+      <button class="list-row" id="wnRow" hidden><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-logo"/></svg></span><span class="row-body"><b>What’s new in 0.9</b><small id="wnSub">Writing, selecting and video</small></span></button>
       <button class="list-row" id="tipsRow"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>Feature tips</b><small>Replay a short walkthrough</small></span></button>
-      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.8</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
+      <div class="list-row static"><span class="row-tile"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></span><span class="row-body"><b>VOID Mobile · 0.9</b><small>Offline-first notepad. Notes stay on this device.</small></span></div>
     </div>
   </section>
 
@@ -1463,65 +1582,71 @@ body.ms-on #notesGrid,body.ms-on #deletedList{margin-bottom:84px}
       <svg class="ic" aria-hidden="true"><use href="#i-focus"/></svg>
     </button>
     <div class="editor-top">
-      <button class="back" id="editorBack" aria-label="Back"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg></button>
-      <strong id="editorHeading">New note</strong>
+      <button class="ed-back" id="editorBack" type="button" aria-label="Back to notes"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg><span>Notes</span></button>
+      <strong id="editorHeading" hidden>New note</strong>
       <div class="head-right">
-        <span id="saveState" data-state="editing">EDITING</span>
-        <button class="icon-btn" id="focusBtn" aria-label="Focus mode"><svg class="ic" aria-hidden="true"><use href="#i-focus"/></svg></button>
-        <button class="icon-btn" id="organizeBtn" aria-label="Category, folder and tags" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg></button>
-        <button class="icon-btn on" id="formatToggle" aria-label="Formatting toolbar" aria-pressed="true">Aa</button>
-        <button class="icon-btn danger" id="deleteNote" aria-label="Delete note" hidden><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        <span id="saveState" data-state="editing">Editing</span>
+        <button type="button" class="ed-done" id="doneBtn" hidden>Done</button>
+        <button class="ed-more" id="moreBtn" type="button" aria-label="More options" aria-haspopup="dialog"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18.5" cy="12" r="2"/></svg></button>
       </div>
     </div>
 
     <div class="editor-scroll" id="editorScroll">
-      <input class="editor-title" id="noteTitle" placeholder="Title" maxlength="120" autocomplete="off">
       <div class="editor-meta" id="editorMeta"></div>
+      <input class="editor-title" id="noteTitle" placeholder="Title" maxlength="120" autocomplete="off" autocapitalize="sentences" enterkeyhint="next">
+      <div class="editor-stats" id="editorStats"></div>
 
-      <div class="row-field">
-        <label>Category</label>
-        <button type="button" class="pick-trigger" id="catTrigger" aria-haspopup="dialog"><span class="pt-ic"></span><span class="pt-label">No category</span><svg class="ic pt-chev" aria-hidden="true"><use href="#i-chevd"/></svg></button>
-      </div>
-      <input type="hidden" id="noteCategory" value="">
+      <div class="org-card">
+        <div class="row-field">
+          <label>Category</label>
+          <button type="button" class="pick-trigger" id="catTrigger" aria-haspopup="dialog"><span class="pt-ic"></span><span class="pt-label">No category</span><svg class="ic pt-chev" aria-hidden="true"><use href="#i-chevd"/></svg></button>
+        </div>
+        <input type="hidden" id="noteCategory" value="">
 
-      <div class="row-field">
-        <label>Folder</label>
-        <button type="button" class="pick-trigger" id="folderTrigger" aria-haspopup="dialog"><span class="pt-ic"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg></span><span class="pt-label">No folder</span><svg class="ic pt-chev" aria-hidden="true"><use href="#i-chevd"/></svg></button>
-        <input type="hidden" id="folderSelect" value="">
-      </div>
+        <div class="row-field">
+          <label>Folder</label>
+          <button type="button" class="pick-trigger" id="folderTrigger" aria-haspopup="dialog"><span class="pt-ic"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg></span><span class="pt-label">No folder</span><svg class="ic pt-chev" aria-hidden="true"><use href="#i-chevd"/></svg></button>
+          <input type="hidden" id="folderSelect" value="">
+        </div>
 
-      <div class="row-field">
-        <label>Tags</label>
-        <div class="tag-wrap" id="tagWrap">
-          <input class="tag-input" id="tagInput" placeholder="Add a tag…" autocomplete="off">
+        <div class="row-field">
+          <label>Tags</label>
+          <div class="tag-wrap" id="tagWrap">
+            <input class="tag-input" id="tagInput" placeholder="Add a tag…" autocomplete="off" autocapitalize="off" enterkeyhint="done">
+          </div>
         </div>
       </div>
 
-      <textarea class="editor-body" id="noteBody" placeholder="Start writing…" autocomplete="off" spellcheck="true"></textarea>
+      <textarea class="editor-body" id="noteBody" placeholder="Start writing…" autocomplete="off" autocapitalize="sentences" enterkeyhint="enter" spellcheck="true"></textarea>
     </div>
 
-    <div class="format-bar" id="formatBar" hidden>
-      <button data-act="attach" class="att-btn" aria-label="Add photos or videos"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a3 3 0 0 1 3-3h6M20 12v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V8M4 17l4.5-4.5a1.6 1.6 0 0 1 2.2 0L16 18M18 3v6M15 6h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button data-act="undo" aria-label="Undo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button data-act="redo" aria-label="Redo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button data-act="dup" aria-label="Duplicate note"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9h10v10H9zM5 15V5h10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button data-fmt="h1" aria-label="Heading 1">H1</button>
-      <button data-fmt="h2" aria-label="Heading 2">H2</button>
-      <button data-fmt="b" aria-label="Bold"><b>B</b></button>
-      <button data-fmt="i" aria-label="Italic"><i>I</i></button>
-      <button data-fmt="u" aria-label="Underline"><u>U</u></button>
-      <button data-fmt="ul" aria-label="Bullet list">•</button>
-      <button data-fmt="ol" aria-label="Numbered list">1.</button>
-      <button data-fmt="check" aria-label="Checklist"><svg class="ic" aria-hidden="true"><use href="#i-checklist"/></svg></button>
-      <button data-fmt="link" aria-label="Link"><svg class="ic" aria-hidden="true"><use href="#i-link"/></svg></button>
-    </div>
-
-    <div class="editor-foot">
-      <div class="editor-foot-in">
-        <div class="editor-stats" id="editorStats">0 words · 0 chars · 0 min read</div>
-        <button class="btn" id="pinNote" type="button" aria-pressed="false"></button>
-        <button class="btn primary" id="saveNote" type="button"></button>
+    <div class="format-bar" id="formatBar">
+      <div class="fb-fmt" id="fbFmt" hidden>
+        <button type="button" data-fmt="h1" aria-label="Heading 1">H1</button>
+        <button type="button" data-fmt="h2" aria-label="Heading 2">H2</button>
+        <button type="button" data-fmt="b" aria-label="Bold"><b>B</b></button>
+        <button type="button" data-fmt="i" aria-label="Italic"><i>I</i></button>
+        <button type="button" data-fmt="u" aria-label="Underline"><u>U</u></button>
+        <button type="button" data-fmt="ul" aria-label="Bullet list">•</button>
+        <button type="button" data-fmt="ol" aria-label="Numbered list">1.</button>
+        <button type="button" data-fmt="link" aria-label="Link"><svg class="ic" aria-hidden="true"><use href="#i-link"/></svg></button>
       </div>
+      <div class="fb-main">
+        <button type="button" id="formatToggle" class="fb-aa" aria-label="Text formatting" aria-pressed="false"><span>Aa</span></button>
+        <button type="button" data-fmt="check" aria-label="Checklist"><svg class="ic" aria-hidden="true"><use href="#i-checklist"/></svg></button>
+        <button type="button" data-act="attach" class="att-btn" aria-label="Add photos or videos"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a3 3 0 0 1 3-3h6M20 12v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V8M4 17l4.5-4.5a1.6 1.6 0 0 1 2.2 0L16 18M18 3v6M15 6h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" data-act="undo" aria-label="Undo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" data-act="redo" aria-label="Redo" disabled><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="kbDown" class="fb-kb" aria-label="Hide keyboard"><svg class="ic" aria-hidden="true"><use href="#i-chevd"/></svg></button>
+      </div>
+    </div>
+
+    <div hidden aria-hidden="true">
+      <button type="button" id="focusBtn"></button>
+      <button type="button" id="organizeBtn" aria-pressed="false"></button>
+      <button type="button" id="deleteNote"></button>
+      <button class="btn" id="pinNote" type="button" aria-pressed="false"></button>
+      <button class="btn primary" id="saveNote" type="button"></button>
     </div>
   </section>
 
@@ -1572,11 +1697,12 @@ body.ms-on #notesGrid,body.ms-on #deletedList{margin-bottom:84px}
 
   <!-- ============ PULL TO REFRESH ============ -->
   <div class="wn" id="wn" role="dialog" aria-modal="true" aria-labelledby="wnT" aria-hidden="true"><div class="wn-card">
-  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID Mobile · 0.8</small><h2 id="wnT">A calmer Notes page</h2>
-  <ul><li style="--i:0"><svg class="ic"><use href="#i-note"/></svg><span><b>Compact notes list</b>Slim rows with a title, date and preview.</span></li>
-  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Touch and hold to select</b>A clean top bar and an action bar. Select all, deselect all, pin or delete.</span></li>
-  <li style="--i:2"><svg class="ic"><use href="#i-spark"/></svg><span><b>Photos and videos</b>Attach media to notes. Choose Original, HD or Standard for photos.</span></li>
-  <li style="--i:3"><svg class="ic"><use href="#i-trash"/></svg><span><b>Real permanent delete</b>Deleting for good now removes the note and its attachment files.</span></li></ul>
+  <img class="wn-logo" src="icon-192.png" alt="" width="72" height="72"><small class="wn-k">VOID Mobile · 0.9</small><h2 id="wnT">Write on, right where you left off</h2>
+  <div class="wn-count" role="timer" aria-live="off"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>This notice goes away in</span><b id="wnTime">24:00:00</b></div>
+  <ul><li style="--i:0"><svg class="ic"><use href="#i-pencil"/></svg><span><b>iPhone-style writing page</b>A clean page, a toolbar that sits on top of the keyboard, and a Done button.</span></li>
+  <li style="--i:1"><svg class="ic"><use href="#i-check"/></svg><span><b>Select and delete, fixed</b>Touch and hold a note to select. Select all, deselect, pin or delete. Recently deleted works the same way.</span></li>
+  <li style="--i:2"><svg class="ic"><use href="#i-restore"/></svg><span><b>Picks up where you left off</b>VOID reopens the screen or note you were on, and your back button goes back one step.</span></li>
+  <li style="--i:3"><svg class="ic"><use href="#i-spark"/></svg><span><b>Built-in video player</b>Double-tap to skip, change speed, scrub, picture-in-picture. No more browser controls.</span></li></ul>
   <button type="button" class="btn primary" id="wnGo">Continue</button><span class="wn-mark">VOID</span></div></div>
 
   <div class="ptr" id="ptr" data-state="pull" aria-hidden="true">
@@ -1645,6 +1771,7 @@ const SORTS = {
   alpha:   { label: 'A to Z', icon: 'sort' }
 };
 const TABS = ['notesScreen', 'foldersScreen', 'settingsScreen', 'deletedScreen', 'privacyScreen'];
+const PARENT = { deletedScreen: 'notesScreen', privacyScreen: 'settingsScreen' };
 
 /* ============ STATE ============ */
 let notes = [];
@@ -1665,6 +1792,7 @@ let libFoldersHtml = '';
 let deletedHtml = '';
 let focusMode = false;
 let editingTags = [];
+let needsRefresh = false;
 
 /* ============ STORAGE ============ */
 function ensureNoteFields(n) {
@@ -1785,13 +1913,18 @@ function reduced() {
 
 /* ============ VIEWPORT ============ */
 const vv = window.visualViewport;
-function syncViewport() {
+let vpH = -1, vpT = -1, vpRaf = 0;
+function applyViewport() {
+  vpRaf = 0;
   const h = vv ? vv.height : window.innerHeight;
   const top = vv ? vv.offsetTop : 0;
+  if (h === vpH && top === vpT) return;
+  vpH = h; vpT = top;
   document.documentElement.style.setProperty('--app-h', h + 'px');
   document.documentElement.style.setProperty('--app-top', top + 'px');
 }
-syncViewport();
+function syncViewport() { if (!vpRaf) vpRaf = requestAnimationFrame(applyViewport); }
+applyViewport();
 if (vv) { vv.addEventListener('resize', syncViewport); vv.addEventListener('scroll', syncViewport); }
 window.addEventListener('resize', syncViewport);
 window.addEventListener('orientationchange', () => setTimeout(syncViewport, 100));
@@ -1816,6 +1949,7 @@ function anyTabOpen() { return TABS.find(t => $('#' + t).classList.contains('ope
 
 function syncNav() {
   const open = anyTabOpen();
+  document.body.classList.toggle('tab-open', !!open);
   const cur = open === 'notesScreen' ? 'notes'
            : open === 'foldersScreen' ? 'folders'
            : (open === 'settingsScreen' || open === 'privacyScreen') ? 'settings'
@@ -1837,6 +1971,7 @@ function syncNav() {
   }
 }
 function openScreen(id) {
+  if (id === 'deletedScreen') { const cur = anyTabOpen(); if (cur === 'notesScreen' || cur === 'settingsScreen') PARENT.deletedScreen = cur; }
   TABS.forEach(t => setOpen($('#' + t), t === id));
   $('#' + id).scrollTop = 0;
   syncNav();
@@ -1905,9 +2040,15 @@ function sortedNotes(arr) {
 }
 
 // Archived/starred flags from older data are kept in storage but ignored: every note stays visible.
-function matchesFilter(n, f, q) {
-  const s = q.toLowerCase().trim();
-  if (s && !((n.title || '').toLowerCase().includes(s) || (n.body || '').toLowerCase().includes(s) || n.tags.some(t => t.toLowerCase().includes(s)))) return false;
+const _hay = new Map();
+function hayOf(n) {
+  const k = (n.updated || 0) + ':' + (n.body || '').length + ':' + (n.title || '').length + ':' + n.tags.length;
+  let h = _hay.get(n.id);
+  if (!h || h.k !== k) { h = { k, t: ((n.title || '') + '\n' + (n.body || '') + '\n' + n.tags.join('\n')).toLowerCase() }; _hay.set(n.id, h); }
+  return h.t;
+}
+function matchesFilter(n, f, s) {
+  if (s && !hayOf(n).includes(s)) return false;
   if (f === 'all') return true;
   if (f.startsWith('tag:')) return n.tags.includes(f.slice(4));
   if (f.startsWith('folder:')) return n.folder === f.slice(7);
@@ -1934,7 +2075,8 @@ function openLibrary(filter) {
 function renderNotes(animate = false) {
   syncLibSeg();
   const q = $('#notesSearch').value;
-  const items = sortedNotes(notes.filter(n => matchesFilter(n, activeFilter, q)));
+  const qs = q.toLowerCase().trim();
+  const items = sortedNotes(notes.filter(n => matchesFilter(n, activeFilter, qs)));
   const g = $('#notesGrid');
   g.classList.toggle('is-empty', !items.length);
   let html;
@@ -1964,7 +2106,7 @@ function shortDate(t) {
 }
 function card(n, i) {
   const c = catOf(n), t = n.updated || n.created, na = (n.att || []).length;
-  const preview = String(n.body || '').replace(/\s+/g, ' ').slice(0, 140);
+  const preview = String(n.body || '').slice(0, 400).replace(/\s+/g, ' ').slice(0, 140);
   const meta = []; if (n.folder) meta.push(n.folder); n.tags.slice(0, 2).forEach(x => meta.push('#' + x));
   return `<button class="note-card${n.pinned ? ' pinned' : ''}${n.id === freshId ? ' fresh' : ''}" data-note="${safe(n.id)}" data-cat="${c}" style="--i:${Math.min(i, 8)}"><span class="nc-chk" aria-hidden="true"></span><span class="nc-main">
     <span class="note-head"><span class="note-title">${safe(n.title || 'Untitled')}</span>${n.pinned ? ic('pin', 'pin-mark') : ''}${na ? CLIP : ''}</span>
@@ -2085,8 +2227,11 @@ function paintTags() {
 }
 function paintStats() {
   const stats = wordStats($('#noteBody').value);
-  $('#editorStats').innerHTML = `<b>${stats.words}</b> word${stats.words === 1 ? '' : 's'} · <b>${stats.chars}</b> chars · <b>${stats.min}</b> min read`;
+  $('#editorStats').textContent = stats.words ? `${stats.words} word${stats.words === 1 ? '' : 's'} · ${stats.chars} characters · ${stats.min} min read` : '';
 }
+const paintStatsSoon = debounce(paintStats, 250);
+const FIELD_SIZING = !!(window.CSS && CSS.supports && CSS.supports('field-sizing', 'content'));
+const fullDate = t => new Date(t).toLocaleString([], { dateStyle: 'long', timeStyle: 'short' });
 
 function openEditor(n, originEl) {
   initializing = true;
@@ -2108,12 +2253,13 @@ function openEditor(n, originEl) {
   paintFolders();
   paintTags();
   const t = n ? (n.updated || n.created) : Date.now();
-  $('#editorMeta').textContent = n ? 'Edited ' + timeAgo(t) : 'Just now';
+  $('#editorMeta').textContent = fullDate(t);
   setSaveState(n ? 'SAVED' : 'EDITING');
   $('#deleteNote').hidden = !n;
-  $('#formatBar').hidden = false;
-  $('#formatToggle').classList.add('on');
-  $('#formatToggle').setAttribute('aria-pressed', 'true');
+  $('#fbFmt').hidden = true;
+  $('#formatToggle').classList.remove('on');
+  $('#formatToggle').setAttribute('aria-pressed', 'false');
+  $('#editorScroll').scrollTop = 0;
   resetSaveBtn();
   paintStats();
 
@@ -2128,6 +2274,7 @@ function openEditor(n, originEl) {
 }
 
 function closeEditorScreen() {
+  if (needsRefresh) { needsRefresh = false; try { renderNotes(); renderFolders(); paintHome(); } catch {} }
   setOpen($('#editorScreen'), false);
   document.documentElement.classList.remove('editing');
   document.body.classList.remove('editor-open');
@@ -2148,10 +2295,13 @@ function resetSaveBtn() {
 }
 
 function autoGrow() {
+  if (FIELD_SIZING) return; /* the browser sizes the textarea itself */
   const el = $('#noteBody');
   if (!el) return;
+  const sc = $('#editorScroll'), st = sc.scrollTop;
   el.style.height = 'auto';
   el.style.height = el.scrollHeight + 'px';
+  if (sc.scrollTop !== st) sc.scrollTop = st; /* keep the page from jumping while typing */
 }
 
 function insertFormat(type) {
@@ -2243,9 +2393,7 @@ function saveEditor(opts = {}) {
     dirty = edits !== snap;
     editingId = id;
     freshId = id;
-    renderNotes();
-    renderFolders();
-    paintHome();
+    if (closeAfter) { needsRefresh = false; renderNotes(); renderFolders(); paintHome(); } else needsRefresh = true; /* lists repaint when the editor closes, not on every autosave */
     if (dirty) {
       setSaveState('EDITING');
       if (closeAfter) saveEditor({ closeAfter, silent }); else autosave();
@@ -2268,7 +2416,7 @@ const autosave = debounce(() => {
   const body = $('#noteBody').value.trim();
   if (!title && !body) return;
   saveEditor({ closeAfter: false, silent: true });
-}, 1200);
+}, 1500);
 
 function requestCloseEditor() {
   if (saving) { setTimeout(requestCloseEditor, 200); return; }
@@ -2409,9 +2557,6 @@ function lpStart(e) {
     lp.fired = true;
     suppressClickUntil = Date.now() + 800;
     try { if (navigator.vibrate) navigator.vibrate(12); } catch {}
-    if (menuTarget) menuTarget.classList.remove('menu-selected');
-    menuTarget = lp.el;
-    lp.el.classList.add('menu-selected');
     if (window.__ms) window.__ms(lp.el.hasAttribute('data-note') ? 'notes' : 'deleted', lp.el.dataset.note || lp.el.dataset.deleted);
   }, LONG_PRESS_MS);
 }
@@ -2547,6 +2692,7 @@ $('#openNotesBtn').onclick = () => openLibrary();
 $$('[data-close]').forEach(b => {
   b.onclick = () => {
     const id = b.dataset.close;
+    if (id === 'deletedScreen') { openScreen(PARENT.deletedScreen || 'notesScreen'); return; }
     setOpen($('#' + id), false);
     syncNav();
     if (id === 'notesScreen') { paintHome(); }
@@ -2554,7 +2700,6 @@ $$('[data-close]').forEach(b => {
 });
 
 // Search
-$('#notesSearch').addEventListener('input', () => renderNotes());
 
 // Category selector + active filter chip
 $('#libSeg').addEventListener('click', e => {
@@ -2619,11 +2764,31 @@ $('#deleteNote').onclick = () => {
   });
 };
 $('#formatToggle').onclick = () => {
-  const bar = $('#formatBar');
-  const show = bar.hidden;
-  bar.hidden = !show;
+  const row = $('#fbFmt');
+  const show = row.hidden;
+  row.hidden = !show;
   $('#formatToggle').classList.toggle('on', show);
   $('#formatToggle').setAttribute('aria-pressed', show ? 'true' : 'false');
+};
+$('#moreBtn').onclick = () => {
+  const pinned = !!(editingNote && editingNote.pinned);
+  const opts = [
+    { value: 'organize', label: 'Category, folder & tags', icon: 'folder' },
+    { value: 'pin', label: pinned ? 'Unpin note' : 'Pin note', icon: pinned ? 'pin' : 'pin-o' },
+    { value: 'focus', label: 'Focus mode', icon: 'focus' },
+    { value: 'dup', label: 'Duplicate note', icon: 'note' }
+  ];
+  if (editingId) opts.push({ value: 'delete', label: 'Delete note', icon: 'trash' });
+  openPicker({
+    title: 'Note options', anchor: $('#moreBtn'), value: null, options: opts,
+    onPick: v => {
+      if (v === 'organize') $('#organizeBtn').click();
+      else if (v === 'pin') $('#pinNote').click();
+      else if (v === 'focus') toggleFocusMode();
+      else if (v === 'dup') window.__dup && window.__dup();
+      else if (v === 'delete') $('#deleteNote').click();
+    }
+  });
 };
 $('#formatBar').addEventListener('click', e => {
   const b = e.target.closest('[data-fmt]');
@@ -2696,7 +2861,7 @@ function onEditorInput() {
   dirty = true;
   setSaveState('EDITING');
   autoGrow();
-  paintStats();
+  paintStatsSoon();
   autosave();
 }
 $('#noteTitle').addEventListener('input', onEditorInput);
@@ -2735,7 +2900,7 @@ document.addEventListener('contextmenu', e => {
 
 // Click suppression after long-press
 document.addEventListener('click', e => {
-  if (Date.now() < suppressClickUntil) {
+  if (Date.now() < suppressClickUntil && e.target.closest('[data-note], [data-deleted]')) {
     e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
   }
 }, true);
@@ -2764,6 +2929,7 @@ document.addEventListener('click', e => {
 // Escape
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
+  if (window.__back && window.__back()) return;
   if ($('#picker').classList.contains('open')) { closePicker(); return; }
   if ($('#onboard').classList.contains('open')) { onbFinish(); return; }
   if ($('#actionMenu').classList.contains('open')) { closeActionMenu(); return; }
@@ -3090,24 +3256,34 @@ function refreshFromStorage() {
 /* ============ SEARCH (icon expands into a header bar) ============ */
 (() => {
   const head = $('#notesScreen .screen-head'), inp = $('#notesSearch'), clr = $('#searchClear');
+  let fromHome = false;
   const sync = () => { clr.hidden = !inp.value; };
+  const live = debounce(() => renderNotes(), 90);
   function openSearch() {
     if (!$('#notesScreen').classList.contains('open')) openLibrary();
     head.classList.add('searching'); document.body.classList.add('searching');
     inp.focus({ preventScroll: true });
   }
   function closeSearch() {
+    live.cancel(); fromHome = false;
     head.classList.remove('searching'); document.body.classList.remove('searching');
     const had = inp.value !== '';
     inp.value = ''; sync(); inp.blur();
     if (had) renderNotes();
   }
-  inp.addEventListener('input', () => { sync(); renderNotes(); });
+  /* Cancel: if search was started from Home, go back to Home instead of stranding the person on Notes */
+  function cancelSearch() {
+    const h = fromHome;
+    closeSearch();
+    if (h) { setOpen($('#notesScreen'), false); syncNav(); paintHome(); }
+  }
+  window.__search = { cancel: cancelSearch, active: () => head.classList.contains('searching') };
+  inp.addEventListener('input', () => { sync(); live(); });
   clr.onclick = () => { inp.value = ''; sync(); renderNotes(); inp.focus({ preventScroll: true }); };
-  $('#searchBtn').onclick = openSearch;
-  $('#searchCancel').onclick = closeSearch;
-  $('#homeSearchBtn').onclick = () => { openLibrary(); setTimeout(openSearch, 0); };
-  inp.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); closeSearch(); } else if (e.key === 'Enter') inp.blur(); });
+  $('#searchBtn').onclick = () => { fromHome = false; openSearch(); };
+  $('#searchCancel').onclick = cancelSearch;
+  $('#homeSearchBtn').onclick = () => { openLibrary(); fromHome = true; setTimeout(openSearch, 0); };
+  inp.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); cancelSearch(); } else if (e.key === 'Enter') inp.blur(); });
   $('#notesGrid').addEventListener('click', e => { if (e.target.closest('[data-clr-search]')) { inp.value = ''; sync(); renderNotes(); } });
   $$('#notesScreen [data-close], .bottom-nav .nav-btn').forEach(b => b.addEventListener('click', () => { if (head.classList.contains('searching')) closeSearch(); }));
 })();
@@ -3241,7 +3417,7 @@ function refreshFromStorage() {
     create: { label: 'Create a note', sel: '#navCreateBtn', t: 'Start a note', x: 'Tap the + button to open a blank note. It saves on this device as you type.', enter() { closeAllScreens(); } },
     search: { label: 'Search notes', sel: '#searchBtn', t: 'Search your notes', x: 'Search matches titles, note text and tags as you type.', enter() { openLibrary(); } },
     folders: { label: 'Create folders', sel: '#newFolderBtn', t: 'Make a folder', x: 'Create a folder here, then file notes in it from the note’s organize panel.', enter() { openScreen('foldersScreen'); } },
-    tags: { label: 'Folders and tags', sel: '#organizeBtn', t: 'Organize this note', x: 'Open this panel to choose a category or folder and add tags for this note.', enter() { openEditor(null, null); } },
+    tags: { label: 'Folders and tags', sel: '#moreBtn', t: 'More options', x: 'Tap the three dots for Organize (category, folder, tags), Pin, Focus mode and Delete.', enter() { openEditor(null, null); } },
     pin: { label: 'Pin notes', need: () => notes.length > 0, sel: '#notesGrid .note-card', t: 'Touch and hold a note', x: 'Touch and hold any note for quick actions, including Pin.', enter() { openLibrary(); } },
   };
   const tour = $('#tour'); let tOpen = false, tCleanup = null;
@@ -3343,19 +3519,35 @@ function refreshFromStorage() {
   ($('#app') || document.body).appendChild(bar);
   const items = () => [...document.querySelectorAll(SEL(MS.v))];
   const plural = n => n + ' note' + (n === 1 ? '' : 's');
-  function mark() { items().forEach(e => e.classList.toggle('sel', MS.ids.has(idOf(e)))); const n = MS.ids.size; $('#msCount').textContent = n + ' selected'; $('#msAll').textContent = n && n === items().length ? 'Deselect all' : 'Select all'; bar.querySelectorAll('.ms-act').forEach(b => b.disabled = !n); }
+  function mark() {
+    const all = items(), n = MS.ids.size, cnt = n > 1 ? ' (' + n + ')' : '';
+    all.forEach(e => e.classList.toggle('sel', MS.ids.has(idOf(e))));
+    $('#msCount').textContent = n ? n + ' selected' : 'Select notes';
+    $('#msAll').textContent = n && n === all.length ? 'Deselect all' : 'Select all';
+    const set = (a, label, off) => { const b = bar.querySelector('[data-a="' + a + '"]'); if (!b) return; b.querySelector('span').textContent = label; b.disabled = !!off; };
+    if (MS.v === 'notes') {
+      const sel = notes.filter(x => MS.ids.has(x.id));
+      set('pin', n && sel.every(x => x.pinned) ? 'Unpin' + cnt : 'Pin' + cnt, !n);
+      set('del', 'Delete' + cnt, !n);
+    } else {
+      set('rec', n ? 'Recover' + cnt : 'Recover all', !deleted.length);
+      set('perm', n ? 'Delete' + cnt : 'Delete all', !deleted.length);
+    }
+  }
   function start(v, id) {
     MS.on = true; MS.v = v; MS.ids = new Set(id ? [id] : []);
     $('#msActs').innerHTML = v === 'notes'
-      ? `<button type="button" class="ms-act" data-a="pin">${ic('pin')}Pin</button><button type="button" class="ms-act danger" data-a="del">${ic('trash')}Delete</button>`
-      : `<button type="button" class="ms-act" data-a="rec">${ic('restore')}Recover</button><button type="button" class="ms-act danger" data-a="perm">${ic('trash')}Delete forever</button>`;
+      ? `<button type="button" class="ms-act" data-a="pin">${ic('pin')}<span>Pin</span></button><button type="button" class="ms-act danger" data-a="del">${ic('trash')}<span>Delete</span></button>`
+      : `<button type="button" class="ms-act" data-a="rec">${ic('restore')}<span>Recover</span></button><button type="button" class="ms-act danger" data-a="perm">${ic('trash')}<span>Delete</span></button>`;
     document.body.classList.add('ms-on'); bar.classList.add('open'); mark();
   }
   function stop() { MS.on = false; MS.ids.clear(); document.body.classList.remove('ms-on'); bar.classList.remove('open'); document.querySelectorAll('.sel').forEach(e => e.classList.remove('sel')); }
   window.__ms = start;
+  window.__msStop = stop;
+  window.__msOn = () => MS.on;
   const finish = (msg, k) => { renderNotes(); renderFolders(); paintHome(); renderDeleted(); stop(); toast(msg, k); };
   function bulk(a) {
-    const ids = new Set(MS.ids); if (!ids.size) return;
+    const ids = new Set(MS.ids.size ? MS.ids : (MS.v === 'deleted' ? deleted.map(d => d.id) : [])); if (!ids.size) return;
     const pn = notes, pd = deleted, fail = m => { notes = pn; deleted = pd; persistNotes(); persistDeleted(); toast(m, 'warn'); };
     if (a === 'del') {
       const mv = notes.filter(n => ids.has(n.id)), t = Date.now();
@@ -3373,7 +3565,7 @@ function refreshFromStorage() {
       finish(plural(rec.length) + ' recovered');
     } else {
       const n = deleted.filter(d => ids.has(d.id)).length;
-      openSheet({ title: 'Delete forever?', text: `${plural(n)} will be permanently deleted and can't be recovered. The other ${deleted.length - n} deleted note${deleted.length - n === 1 ? '' : 's'} stay.`, icon: 'trash', confirmLabel: 'Delete ' + n + ' forever', cancelLabel: 'Keep', danger: true,
+      openSheet({ title: 'Delete forever?', text: n === deleted.length ? `${n === 1 ? 'This note' : 'All ' + plural(n)} will be permanently deleted and can't be recovered.` : `${plural(n)} will be permanently deleted and can't be recovered. The other ${deleted.length - n} deleted note${deleted.length - n === 1 ? '' : 's'} stay.`, icon: 'trash', confirmLabel: 'Delete ' + n + ' forever', cancelLabel: 'Keep', danger: true,
         onConfirm: () => { const p = deleted; deleted = deleted.filter(d => !ids.has(d.id)); if (!persistDeleted()) { deleted = p; closeSheet(); return toast('Could not delete', 'warn'); } closeSheet(); window.__mediaGC && window.__mediaGC(); finish(plural(n) + ' permanently deleted', 'danger'); } });
     }
   }
@@ -3396,13 +3588,19 @@ function refreshFromStorage() {
   paintPrefs();
 
   /* What's New: shown once per release, entry in Settings for 24h */
-  const WK = 'void.whatsnew.v1', REL = '0.8', DAY = 864e5, wn = $('#wn');
+  const WK = 'void.whatsnew.v1', REL = '0.9', DAY = 864e5, wn = $('#wn');
   let rec = null; try { rec = JSON.parse(localStorage.getItem(WK)); } catch {}
   const saveRec = () => { try { localStorage.setItem(WK, JSON.stringify(rec)); } catch {} };
-  const paintRow = () => { const live = rec && rec.id === REL && rec.at && Date.now() - rec.at < DAY; $('#wnRow').hidden = !live; };
-  const openWn = () => { wn.classList.add('open'); wn.setAttribute('aria-hidden', 'false'); setTimeout(() => $('#wnGo').focus({ preventScroll: true }), 80); };
-  $('#wnGo').onclick = () => { wn.classList.remove('open'); wn.setAttribute('aria-hidden', 'true'); };
+  const left = () => (rec && rec.id === REL && rec.at) ? rec.at + DAY - Date.now() : 0;
+  const hms = ms => { const t = Math.max(0, Math.ceil(ms / 1000)); return [Math.floor(t / 3600), Math.floor(t % 3600 / 60), t % 60].map(n => String(n).padStart(2, '0')).join(':'); };
+  const rough = ms => { const m = Math.max(1, Math.ceil(ms / 60000)), h = Math.floor(m / 60); return h ? h + 'h ' + (m % 60) + 'm' : m + 'm'; };
+  const paintRow = () => { const ms = left(); $('#wnRow').hidden = ms <= 0; if (ms > 0) $('#wnSub').textContent = 'Goes away in ' + rough(ms); };
+  const closeWn = () => { wn.classList.remove('open'); wn.setAttribute('aria-hidden', 'true'); };
+  const paintCount = () => { const ms = left(); $('#wnTime').textContent = hms(ms); if (ms <= 0) { closeWn(); paintRow(); } };
+  const openWn = () => { if (left() <= 0) { paintRow(); return; } paintCount(); wn.classList.add('open'); wn.setAttribute('aria-hidden', 'false'); setTimeout(() => $('#wnGo').focus({ preventScroll: true }), 80); };
+  $('#wnGo').onclick = closeWn;
   $('#wnRow').onclick = openWn;
+  setInterval(() => { if (document.hidden) return; if (wn.classList.contains('open')) paintCount(); if ($('#settingsScreen').classList.contains('open')) paintRow(); }, 1000);
   if (!rec || rec.id !== REL) {
     if (hasOnboarded()) { rec = { id: REL, at: Date.now() }; saveRec(); setTimeout(() => { if (!document.querySelector('#tour.open') && !$('#onboard').classList.contains('open')) openWn(); }, 900); }
     else { rec = { id: REL, at: 0 }; saveRec(); }
@@ -3466,12 +3664,13 @@ syncNav();
   }, true);
   bar.addEventListener('pointerdown', e => { if (e.target.closest('button')) e.preventDefault(); });
   function dup() {
-    if (!editingNote) { toast('Save the note first, then duplicate it'); return; }
+    if (!$('#noteTitle').value.trim() && !ta.value.trim()) { toast('Write something first, then duplicate it'); return; }
     const now = Date.now(), t = ($('#noteTitle').value.trim() || 'Untitled') + ' copy';
-    const n = ensureNoteFields({ ...editingNote, id: uid(), title: t.slice(0, 120), body: ta.value, tags: [...editingTags], pinned: false, created: now, updated: now });
+    const n = ensureNoteFields({ ...(editingNote || {}), id: uid(), title: t.slice(0, 120), body: ta.value, tags: [...editingTags], pinned: false, created: now, updated: now });
     notes.unshift(n); if (!persistNotes()) { notes.shift(); toast('Could not duplicate. Nothing was changed.', 'warn'); return; }
     try { renderNotes(); paintHome(); } catch {} toast('Duplicated as “' + n.title + '”');
   }
+  window.__dup = dup;
   const ed = $('#editorScreen'); let was = false;
   new MutationObserver(() => { const on = ed.classList.contains('open'); if (on && !was) setTimeout(reset, 0); was = on; }).observe(ed, { attributes: true, attributeFilter: ['class'] });
 })();
@@ -3541,6 +3740,7 @@ syncNav();
   });
   async function view(a) {
     const r = await get(a.id).catch(() => null); if (!r) { toast('This attachment file is missing', 'warn'); return; }
+    if (a.kind === 'video' && window.__vplayer) { window.__vplayer.open(r.blob, { title: a.name, onShare: () => share(a, r.blob) }); return; }
     const u = URL.createObjectURL(r.blob), v = document.createElement('div'); v.className = 'att-view';
     v.innerHTML = '<div class="bar"><button type="button" data-c>Close</button><button type="button" data-s>Share</button></div><div class="stage"></div>';
     const m = document.createElement(a.kind === 'video' ? 'video' : 'img'); m.src = u; if (a.kind === 'video') { m.controls = true; m.playsInline = true; }
@@ -3577,6 +3777,283 @@ syncNav();
     was = on;
   }).observe(ed, { attributes: true, attributeFilter: ['class'] });
   (window.requestIdleCallback || (f => setTimeout(f, 3000)))(() => { if (!ed.classList.contains('open')) window.__mediaGC(); });
+})();
+
+/* ============ v0.9: keyboard-aware editor ============ */
+(() => {
+  const ed = $('#editorScreen'), sc = $('#editorScroll'), done = $('#doneBtn'), body = $('#noteBody'), title = $('#noteTitle');
+  const vvp = window.visualViewport;
+  let maxH = vvp ? vvp.height : innerHeight, raf = 0;
+  const field = () => { const a = document.activeElement; return !!a && ed.contains(a) && (a === body || a === title || a.id === 'tagInput'); };
+  function sync() {
+    raf = 0;
+    const f = field(), h = vvp ? vvp.height : innerHeight;
+    if (!f) maxH = h;                                   /* full height is whatever we see with no editor field focused */
+    ed.classList.toggle('kb', f && h < maxH - 110);     /* keyboard is up: drop the home-bar gap and show the hide-keyboard key */
+    done.hidden = !f;
+  }
+  const q = () => { if (!raf) raf = requestAnimationFrame(sync); };
+  ed.addEventListener('focusin', q);
+  ed.addEventListener('focusout', () => setTimeout(q, 80));
+  if (vvp) vvp.addEventListener('resize', q);
+  addEventListener('resize', q);
+  sync();
+
+  done.onclick = () => { const a = document.activeElement; if (a && a.blur) a.blur(); if (dirty) saveEditor({ closeAfter: false, silent: true }); };
+  $('#kbDown').onclick = () => { const a = document.activeElement; if (a && a.blur) a.blur(); };
+  title.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); body.focus(); } });
+  sc.addEventListener('click', e => { if (e.target === sc) { body.focus(); const l = body.value.length; body.setSelectionRange(l, l); } });
+  sc.addEventListener('scroll', () => ed.classList.toggle('scrolled', sc.scrollTop > 4), { passive: true });
+  /* a quick save when the app is backgrounded so nothing typed is lost */
+  document.addEventListener('visibilitychange', () => { if (document.hidden && dirty && ed.classList.contains('open')) saveEditor({ closeAfter: false, silent: true }); });
+})();
+
+/* ============ v0.9: built-in video player (replaces the browser's own controls) ============ */
+(() => {
+  const PK = 'void.player.v1', RATES = [0.5, 0.75, 1, 1.25, 1.5, 2];
+  const pref = { rate: 1, muted: false, vol: 1 };
+  try { Object.assign(pref, JSON.parse(localStorage.getItem(PK) || '{}')); } catch {}
+  const savePref = () => { try { localStorage.setItem(PK, JSON.stringify(pref)); } catch {} };
+  const tm = s => { s = isFinite(s) && s > 0 ? Math.floor(s) : 0; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0'); };
+  const S = d => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+  const skip = (fwd) => S(`<path d="${fwd ? 'M12 4.6a7.9 7.9 0 1 1-7.9 7.9M12 1.6l3.4 3-3.4 3' : 'M12 4.6a7.9 7.9 0 1 0 7.9 7.9M12 1.6l-3.4 3 3.4 3'}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><text x="12" y="16.1" text-anchor="middle" font-size="7.4" font-weight="700" fill="currentColor" font-family="-apple-system,Helvetica,Arial,sans-serif">10</text>`);
+  const I = {
+    play: S('<path d="M8 5.2v13.6a1 1 0 0 0 1.5.86l11-6.8a1 1 0 0 0 0-1.72l-11-6.8A1 1 0 0 0 8 5.2z" fill="currentColor"/>'),
+    pause: S('<rect x="6.3" y="4.5" width="4.2" height="15" rx="1.5" fill="currentColor"/><rect x="13.5" y="4.5" width="4.2" height="15" rx="1.5" fill="currentColor"/>'),
+    replay: S('<path d="M4.6 12a7.4 7.4 0 1 0 2.3-5.4M4.4 3.8v4.3h4.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'),
+    vol: S('<path d="M4 9.5v5h3.6l4.4 3.6V5.9L7.6 9.5z" fill="currentColor"/><path d="M15.4 9a4.2 4.2 0 0 1 0 6M17.9 6.6a7.6 7.6 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'),
+    mute: S('<path d="M4 9.5v5h3.6l4.4 3.6V5.9L7.6 9.5z" fill="currentColor"/><path d="m15.6 9.4 5 5.2M20.6 9.4l-5 5.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'),
+    pip: S('<rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="11.5" y="11.5" width="7" height="5" rx="1.3" fill="currentColor"/>'),
+    fs: S('<path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'),
+    close: S('<path d="m6.5 6.5 11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>'),
+    share: S('<path d="M12 15.4V4.4M7.4 8.6 12 4l4.6 4.6M5 12.5V18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>')
+  };
+  let cur = null;
+
+  function close() {
+    if (!cur) return;
+    const c = cur; cur = null;
+    c.cleanup();
+    c.root.classList.add('out');
+    setTimeout(() => c.root.remove(), 180);
+  }
+
+  function open(blob, o = {}) {
+    close();
+    const root = document.createElement('div');
+    root.className = 'vp show';
+    root.setAttribute('role', 'dialog'); root.setAttribute('aria-modal', 'true'); root.setAttribute('aria-label', 'Video player');
+    const fsOK = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled), pipOK = !!document.pictureInPictureEnabled;
+    root.innerHTML = `<video class="vp-v" playsinline webkit-playsinline preload="auto"></video><div class="vp-hit"></div>
+      <div class="vp-flash l"></div><div class="vp-flash r"></div><i class="vp-spin" hidden></i><div class="vp-err" hidden>This video can’t be played on this device.</div>
+      <div class="vp-ui">
+        <div class="vp-top"><button type="button" class="vp-btn" data-a="close" aria-label="Close video">${I.close}</button><span class="vp-title"></span>${o.onShare ? `<button type="button" class="vp-btn" data-a="share" aria-label="Share video">${I.share}</button>` : '<span class="vp-btn"></span>'}</div>
+        <div class="vp-mid"><button type="button" class="vp-btn" data-a="back" aria-label="Back 10 seconds">${skip(false)}</button><button type="button" class="vp-btn vp-play" data-a="play" aria-label="Play">${I.play}</button><button type="button" class="vp-btn" data-a="fwd" aria-label="Forward 10 seconds">${skip(true)}</button></div>
+        <div class="vp-bot">
+          <div class="vp-seek"><div class="vp-track"><div class="vp-buf"></div><div class="vp-prog"></div></div><i class="vp-knob"></i><input class="vp-range" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek"></div>
+          <div class="vp-times"><span class="vp-cur">0:00</span><span class="vp-rem">-0:00</span></div>
+          <div class="vp-tools"><button type="button" class="vp-rate" data-a="rate" aria-label="Playback speed">1×</button><span class="sp"></span>
+            <input class="vp-vol" type="range" min="0" max="1" step="0.05" aria-label="Volume">
+            <button type="button" class="vp-btn" data-a="mute" aria-label="Mute">${I.vol}</button>
+            ${pipOK ? `<button type="button" class="vp-btn" data-a="pip" aria-label="Picture in picture">${I.pip}</button>` : ''}
+            ${fsOK ? `<button type="button" class="vp-btn" data-a="fs" aria-label="Full screen">${I.fs}</button>` : ''}</div>
+        </div></div>`;
+    const q = s => root.querySelector(s);
+    const v = q('video'), hit = q('.vp-hit'), spin = q('.vp-spin'), err = q('.vp-err'), playB = q('[data-a=play]'), rng = q('.vp-range'), seek = q('.vp-seek'), vol = q('.vp-vol'), muteB = q('[data-a=mute]'), rateB = q('.vp-rate');
+    q('.vp-title').textContent = o.title || '';
+    const url = URL.createObjectURL(blob);
+    let hideT = 0, dragging = false, sup = 0, lastTap = 0, tapT = 0, g = null;
+
+    const showUi = () => { root.classList.add('show'); sched(); };
+    const sched = () => { clearTimeout(hideT); if (!v.paused && !dragging && !v.ended) hideT = setTimeout(() => root.classList.remove('show'), 3000); };
+    const flash = (side, txt) => { const f = q('.vp-flash.' + side); f.textContent = txt; f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); };
+    const nudge = d => { const dur = v.duration || 0; v.currentTime = Math.max(0, Math.min(dur || 1e9, v.currentTime + d)); flash(d < 0 ? 'l' : 'r', (d < 0 ? '−' : '+') + Math.abs(d) + 's'); };
+    const toggle = () => { if (v.ended) v.currentTime = 0; if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => { err.hidden = false; }); } else v.pause(); };
+    const paintBar = () => { const d = v.duration, p = isFinite(d) && d > 0 ? v.currentTime / d : 0; q('.vp-prog').style.width = p * 100 + '%'; q('.vp-knob').style.left = p * 100 + '%'; if (!dragging) rng.value = Math.round(p * 1000); q('.vp-cur').textContent = tm(v.currentTime); q('.vp-rem').textContent = '-' + tm((v.duration || 0) - v.currentTime); };
+    const paintBuf = () => { const d = v.duration; if (!isFinite(d) || !d || !v.buffered.length) return; q('.vp-buf').style.width = v.buffered.end(v.buffered.length - 1) / d * 100 + '%'; };
+    const paintPlay = () => { const k = v.ended ? 'replay' : v.paused ? 'play' : 'pause'; playB.innerHTML = I[k]; playB.setAttribute('aria-label', k === 'pause' ? 'Pause' : k === 'replay' ? 'Replay' : 'Play'); };
+    const paintMute = () => { const m = v.muted || v.volume === 0; muteB.innerHTML = m ? I.mute : I.vol; muteB.setAttribute('aria-label', m ? 'Unmute' : 'Mute'); vol.value = m ? 0 : v.volume; };
+
+    v.addEventListener('timeupdate', paintBar); v.addEventListener('durationchange', paintBar); v.addEventListener('progress', paintBuf); v.addEventListener('loadedmetadata', () => { paintBar(); paintBuf(); });
+    v.addEventListener('play', () => { paintPlay(); sched(); }); v.addEventListener('pause', () => { paintPlay(); showUi(); });
+    v.addEventListener('ended', () => { paintPlay(); showUi(); });
+    v.addEventListener('waiting', () => { spin.hidden = false; });
+    ['playing', 'canplay', 'seeked', 'pause'].forEach(e => v.addEventListener(e, () => { spin.hidden = true; }));
+    v.addEventListener('error', () => { spin.hidden = true; err.hidden = false; showUi(); });
+    v.addEventListener('volumechange', () => { paintMute(); pref.muted = v.muted; pref.vol = v.volume; savePref(); });
+    v.addEventListener('ratechange', () => { pref.rate = v.playbackRate; rateB.textContent = (v.playbackRate + '').replace(/^0\./, '.') + '×'; savePref(); });
+    v.muted = !!pref.muted; v.volume = Math.max(0, Math.min(1, +pref.vol)); v.defaultPlaybackRate = v.playbackRate = RATES.includes(+pref.rate) ? +pref.rate : 1;
+    paintPlay(); paintMute();
+
+    /* seek bar: native range input drawn invisibly over our own track so touch, mouse and keyboard all work */
+    rng.addEventListener('pointerdown', () => { dragging = true; seek.classList.add('drag'); clearTimeout(hideT); });
+    const endDrag = () => { if (!dragging) return; dragging = false; seek.classList.remove('drag'); if (isFinite(v.duration)) v.currentTime = rng.value / 1000 * v.duration; sched(); };
+    rng.addEventListener('pointerup', endDrag); rng.addEventListener('pointercancel', endDrag); rng.addEventListener('change', endDrag);
+    rng.addEventListener('input', () => { const d = v.duration; if (!isFinite(d) || !d) return; const x = rng.value / 1000 * d; if (dragging && v.fastSeek) v.fastSeek(x); else v.currentTime = x; q('.vp-prog').style.width = rng.value / 10 + '%'; q('.vp-knob').style.left = rng.value / 10 + '%'; q('.vp-cur').textContent = tm(x); q('.vp-rem').textContent = '-' + tm(d - x); });
+    vol.addEventListener('input', () => { v.volume = +vol.value; v.muted = +vol.value === 0; });
+
+    /* taps: one tap shows or hides controls, double tap left/right skips 10s, double tap middle plays or pauses */
+    hit.addEventListener('click', e => {
+      if (Date.now() < sup) return;
+      const now = Date.now(), r = hit.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+      if (now - lastTap < 300) { clearTimeout(tapT); lastTap = 0; if (x < .33) nudge(-10); else if (x > .67) nudge(10); else toggle(); showUi(); }
+      else { lastTap = now; tapT = setTimeout(() => { if (root.classList.contains('show') && !v.paused) root.classList.remove('show'); else showUi(); }, 230); }
+    });
+    /* swipe down to close */
+    hit.addEventListener('pointerdown', e => { g = { x: e.clientX, y: e.clientY, dy: 0, on: false }; });
+    hit.addEventListener('pointermove', e => {
+      if (!g) return; const dx = e.clientX - g.x, dy = e.clientY - g.y;
+      if (!g.on && dy > 14 && dy > Math.abs(dx) * 1.5) { g.on = true; root.style.transition = 'none'; try { hit.setPointerCapture(e.pointerId); } catch {} }
+      if (g.on) { g.dy = dy; root.style.transform = `translateY(${Math.max(0, dy)}px)`; root.style.opacity = String(Math.max(.3, 1 - dy / 520)); }
+    });
+    const gEnd = () => { if (!g) return; const d = g; g = null; if (!d.on) return; sup = Date.now() + 400; root.style.transition = ''; if (d.dy > 130) close(); else { root.style.transform = ''; root.style.opacity = ''; } };
+    hit.addEventListener('pointerup', gEnd); hit.addEventListener('pointercancel', gEnd);
+
+    root.addEventListener('click', e => {
+      const b = e.target.closest('[data-a]'); if (!b) return;
+      const a = b.dataset.a; showUi();
+      if (a === 'close') close();
+      else if (a === 'play') toggle();
+      else if (a === 'back') nudge(-10);
+      else if (a === 'fwd') nudge(10);
+      else if (a === 'mute') { if (v.muted || v.volume === 0) { v.muted = false; if (v.volume === 0) v.volume = 1; } else v.muted = true; }
+      else if (a === 'rate') v.playbackRate = RATES[(RATES.indexOf(v.playbackRate) + 1) % RATES.length] || 1;
+      else if (a === 'share') o.onShare && o.onShare();
+      else if (a === 'pip') { (document.pictureInPictureElement ? document.exitPictureInPicture() : v.requestPictureInPicture()).catch(() => toast('Picture in picture isn’t available here', 'warn')); }
+      else if (a === 'fs') { const d = document; if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d); else (root.requestFullscreen || root.webkitRequestFullscreen).call(root).catch(() => {}); }
+    });
+    const keys = e => {
+      if (!cur || e.target.closest('input[type=text],textarea')) return;
+      const k = e.key;
+      if (k === ' ' || k === 'k') { e.preventDefault(); toggle(); }
+      else if (k === 'ArrowLeft' || k === 'j') { e.preventDefault(); nudge(k === 'j' ? -10 : -5); }
+      else if (k === 'ArrowRight' || k === 'l') { e.preventDefault(); nudge(k === 'l' ? 10 : 5); }
+      else if (k === 'ArrowUp' || k === 'ArrowDown') { if (e.target === vol) return; e.preventDefault(); v.muted = false; v.volume = Math.max(0, Math.min(1, v.volume + (k === 'ArrowUp' ? .1 : -.1))); }
+      else if (k === 'm') { v.muted = !v.muted; }
+      else if (k === 'f') { const f = q('[data-a=fs]'); if (f) f.click(); }
+      else return;
+      showUi();
+    };
+    const vis = () => { if (document.hidden && !v.paused && !document.pictureInPictureElement) v.pause(); };
+    document.addEventListener('keydown', keys); document.addEventListener('visibilitychange', vis);
+
+    cur = { root, cleanup() {
+      clearTimeout(hideT); clearTimeout(tapT);
+      document.removeEventListener('keydown', keys); document.removeEventListener('visibilitychange', vis);
+      try { if (document.pictureInPictureElement === v) document.exitPictureInPicture(); } catch {}
+      try { if (document.fullscreenElement === root) document.exitFullscreen(); } catch {}
+      try { v.pause(); v.removeAttribute('src'); v.load(); } catch {}
+      URL.revokeObjectURL(url);
+    } };
+    document.body.appendChild(root);
+    v.src = url;
+    spin.hidden = false;
+    const p = v.play(); if (p && p.catch) p.catch(() => { spin.hidden = true; showUi(); });
+    sched();
+  }
+  window.__vplayer = { open, close, isOpen: () => !!cur };
+})();
+
+/* ============ v0.9: global navigation ============
+   1. remembers the screen / note you were on and reopens it on launch
+   2. keeps a real back stack so the phone's back button or swipe steps back one level
+      (sheet → editor → sub-screen → tab → Home) instead of leaving the app */
+(() => {
+  const NK = 'void.nav.v1';
+  const ed = $('#editorScreen');
+  let restoring = false, hdepth = 0, ignorePop = 0, rafS = 0, saveT = 0;
+
+  /* ---- remember where I was ---- */
+  function here() {
+    const r = { s: anyTabOpen() || 'home', f: activeFilter, y: Math.round($('#notesScroll').scrollTop), p: PARENT.deletedScreen, ts: Date.now() };
+    if (ed.classList.contains('open') && editingId) r.id = editingId;
+    return r;
+  }
+  const save = () => { if (restoring) return; try { localStorage.setItem(NK, JSON.stringify(here())); } catch {} };
+  const saveSoon = () => { clearTimeout(saveT); saveT = setTimeout(save, 150); };
+  window.__navSave = save;
+
+  function restore() {
+    if (!hasOnboarded()) return;
+    const qp = new URLSearchParams(location.search);
+    if (qp.get('action') || qp.get('note')) return;           /* shortcuts and notification taps win */
+    let r = null; try { r = JSON.parse(localStorage.getItem(NK)); } catch {}
+    if (!r || typeof r !== 'object' || !r.s) return;
+    if (r.s === 'home' && !r.id) return;
+    restoring = true;
+    document.documentElement.classList.add('restoring');
+    try {
+      let f = typeof r.f === 'string' ? r.f : 'all';
+      if (!(LIB_KEYS.includes(f) || /^(tag|folder):./.test(f))) f = 'all';
+      if (f.startsWith('folder:') && !notes.some(n => n.folder === f.slice(7))) f = 'all';
+      if (f.startsWith('tag:') && !notes.some(n => n.tags.includes(f.slice(4)))) f = 'all';
+      activeFilter = f;
+      if (r.p === 'notesScreen' || r.p === 'settingsScreen') PARENT.deletedScreen = r.p;
+      if (r.s === 'notesScreen') { renderNotes(); openScreen('notesScreen'); requestAnimationFrame(() => { $('#notesScroll').scrollTop = +r.y || 0; }); }
+      else if (r.s === 'foldersScreen') { renderFolders(); openScreen('foldersScreen'); }
+      else if (r.s === 'deletedScreen') { renderDeleted(); openScreen('deletedScreen'); }
+      else if (r.s === 'settingsScreen' || r.s === 'privacyScreen') openScreen(r.s);
+      if (r.id) { const n = notes.find(x => x.id === r.id); if (n) openEditor(n, null); }
+    } catch {}
+    setTimeout(() => { restoring = false; document.documentElement.classList.remove('restoring'); save(); sync(); }, 450);
+  }
+
+  /* ---- back stack ---- */
+  const overlayOpen = () => !!document.querySelector('.sheet.open,.picker.open,.action-menu.open,.guide.open,#wn.open,#tour.open,#onboard.open,.ih.open,.att-view,.vp:not(.out)')
+    || document.body.classList.contains('ms-on') || document.body.classList.contains('searching');
+  const depth = () => {
+    const t = anyTabOpen();
+    return (t ? 1 : 0) + ((t === 'deletedScreen' || t === 'privacyScreen') ? 1 : 0) + (ed.classList.contains('open') ? 1 : 0) + (overlayOpen() ? 1 : 0);
+  };
+
+  function back() {
+    if ($('#onboard').classList.contains('open')) { onbFinish(); return true; }
+    if (window.__vplayer && window.__vplayer.isOpen()) { window.__vplayer.close(); return true; }
+    const av = document.querySelector('.att-view'); if (av) { const c = av.querySelector('[data-c]'); if (c) c.click(); else av.remove(); return true; }
+    if ($('#tour').classList.contains('open')) { $('#tSkip').click(); return true; }
+    if ($('#installHero').classList.contains('open')) { $('#ihNo').click(); return true; }
+    const g = document.querySelector('.guide.open'); if (g) { g.click(); return true; }
+    if ($('#wn').classList.contains('open')) { $('#wnGo').click(); return true; }
+    if ($('#picker').classList.contains('open')) { closePicker(); return true; }
+    if ($('#actionMenu').classList.contains('open')) { closeActionMenu(); return true; }
+    if ($('#sheet').classList.contains('open')) { closeSheet(); return true; }
+    if (window.__msOn && window.__msOn()) { window.__msStop(); return true; }
+    if (window.__search && window.__search.active()) { window.__search.cancel(); return true; }
+    if (ed.classList.contains('open')) { requestCloseEditor(); return true; }
+    const t = anyTabOpen();
+    if (t === 'deletedScreen') { openScreen(PARENT.deletedScreen || 'notesScreen'); return true; }
+    if (t === 'privacyScreen') { openScreen('settingsScreen'); return true; }
+    if (t) { closeAllScreens(); paintHome(); return true; }
+    return false;
+  }
+  window.__back = back;
+
+  /* keep the browser history the same height as the app's own depth */
+  function sync() {
+    rafS = 0;
+    if (restoring) return;
+    const want = depth();
+    if (want > hdepth) { try { while (hdepth < want) history.pushState({ void: ++hdepth }, ''); } catch {} }
+    else if (want < hdepth) { const k = hdepth - want; hdepth = want; ignorePop++; try { history.go(-k); } catch { ignorePop--; } }
+  }
+  addEventListener('popstate', () => {
+    if (ignorePop > 0) { ignorePop--; return; }
+    hdepth = Math.max(0, hdepth - 1);
+    if (!back() && hdepth > 0) { hdepth--; history.back(); }
+  });
+
+  const schedule = () => { if (!rafS) rafS = requestAnimationFrame(sync); saveSoon(); };
+  const mo = new MutationObserver(schedule);
+  [...TABS, 'editorScreen', 'sheet', 'picker', 'actionMenu', 'vModal', 'installGuide', 'wn', 'tour', 'onboard', 'installHero'].forEach(id => { const e = document.getElementById(id); if (e) mo.observe(e, { attributes: true, attributeFilter: ['class'] }); });
+  mo.observe(document.body, { attributes: true, attributeFilter: ['class'], childList: true });
+
+  $('#notesScroll').addEventListener('scroll', saveSoon, { passive: true });
+  $('#libSeg').addEventListener('click', saveSoon);
+  $('#notesMeta').addEventListener('click', saveSoon);
+  addEventListener('pagehide', save);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) save(); });
+
+  restore();
 })();
 
 })();

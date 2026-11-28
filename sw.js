@@ -1,5 +1,5 @@
-/* VOID service worker v4. App shell only. Notes live in localStorage and are never touched here. */
-const CACHE = 'void-shell-v7';
+/* VOID service worker v5. App shell only. Notes live in localStorage and are never touched here. */
+const CACHE = 'void-shell-v8';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png'];
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 self.addEventListener('install', e => {
